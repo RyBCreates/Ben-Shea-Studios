@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(142, 60, 60);
+}
+
+.header__title {
+  margin: 0;
+}
+
+.navbar {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}

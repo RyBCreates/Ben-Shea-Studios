@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Lora";
+  font-style: Normal;
+  font-weight: 500;
+  src: url(../vendor/fonts/Lora/Lora-Regular.ttf) format(truetype);
+}
+
+@font-face {
+  font-family: "Lora";
+  font-style: Bold;
+  font-weight: 700;
+  src: url(../vendor/fonts/Lora/Lora-Bold.ttf) format(truetype);
+}
+
+@font-face {
+  font-family: "VictorMono";
+  font-style: Normal;
+  font-weight: 500;
+  src: url(../vendor/fonts/VictorMono/VictorMono-Regular.ttf) format(truetype);
+}
+
+@font-face {
+  font-family: "VictorMono";
+  font-style: Bold;
+  font-weight: 700;
+  src: url(../vendor/fonts/VictorMono/VictorMono-Bold.ttf) format(truetype);
+}
+
+/* CHANGE THE FONTS */
