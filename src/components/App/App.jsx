@@ -1,4 +1,5 @@
 import Header from "../Header/Header";
+import Hero from "../Hero/Hero";
 import "./App.css";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <div className="app">
       <div className="app__content">
         <Header />
+        <Hero />
       </div>
     </div>
   );

@@ -1,0 +1,57 @@
+.hero {
+  background-color: #651717;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px;
+}
+
+.hero__title {
+  margin: 0;
+  font-size: 64px;
+}
+
+.hero__title_bold {
+  font-style: italic;
+  color: white;
+}
+
+.hero__subtitle {
+  font-size: 32px;
+}
+
+.hero__button-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.hero__button {
+  font-size: 24px;
+  padding: 20px;
+}
+
+.hero__button:hover {
+  cursor: pointer;
+}
+
+.hero__button_main {
+  border: none;
+}
+
+.hero__button_main:hover {
+  background-color: transparent;
+  border: 1px solid black;
+}
+
+.hero__button_secondary {
+  background-color: transparent;
+  color: white;
+}
+
+.hero__button_secondary:hover {
+  background-color: white;
+  color: black;
+  border: none;
+}
