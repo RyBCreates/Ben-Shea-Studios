@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="header">
       <div className="header__logo">
-        <img></img>
+        <img className="header__icon"></img>
         <h1 className="header__title">Ben Shea Studios</h1>
       </div>
       <ul className="navbar">

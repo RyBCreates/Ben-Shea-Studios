@@ -1,7 +1,22 @@
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   background-color: rgb(142, 60, 60);
+}
+
+.header__logo {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.header__icon {
+  width: 40px;
+  height: 40px;
+  background-color: black;
 }
 
 .header__title {
@@ -12,4 +27,9 @@
   list-style: none;
   display: flex;
   gap: 30px;
+  margin-right: 20px;
+}
+
+.navbar__link {
+  font-size: 24px;
 }
