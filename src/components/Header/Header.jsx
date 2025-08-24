@@ -11,6 +11,12 @@ function Header() {
         <li className="navbar__link">About</li>
         <li className="navbar__link">Exhibits</li>
         <li className="navbar__link">Contact</li>
+        <li className="navbar__link">
+          <button className="header__cart-button">
+            <img className="header__cart-icon"></img>
+            Cart
+          </button>
+        </li>
       </ul>
     </header>
   );

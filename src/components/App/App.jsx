@@ -1,5 +1,6 @@
 import Header from "../Header/Header";
 import Hero from "../Hero/Hero";
+import Footer from "../Footer/Footer";
 import "./App.css";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <div className="app__content">
         <Header />
         <Hero />
+        <Footer />
       </div>
     </div>
   );
