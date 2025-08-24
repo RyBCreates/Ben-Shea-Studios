@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(142, 60, 60);
+  background-color: rgb(255, 255, 255);
 }
 
 .header__logo {
@@ -11,6 +11,10 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.header__logo:hover {
+  cursor: pointer;
 }
 
 .header__icon {
@@ -26,10 +30,25 @@
 .navbar {
   list-style: none;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
-  margin-right: 20px;
+  margin: 0 20px 0 0;
+  padding: 0;
 }
 
 .navbar__link {
   font-size: 24px;
+}
+
+.navbar__link:hover {
+  cursor: pointer;
+}
+
+.header__cart-button {
+  padding: 5px 10px;
+}
+
+.header__cart-button:hover {
+  cursor: pointer;
 }
