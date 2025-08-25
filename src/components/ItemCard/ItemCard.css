@@ -1,0 +1,9 @@
+.card {
+  display: flex;
+}
+
+.card__content {
+  width: 540px;
+  height: 540px;
+  background-color: teal;
+}

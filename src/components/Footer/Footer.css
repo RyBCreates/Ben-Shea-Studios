@@ -6,12 +6,6 @@
   padding: 20px;
 }
 
-/* .footer__content {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-} */
-
 .footer__navbar {
   display: flex;
   gap: 20px;
