@@ -52,3 +52,9 @@
 .header__cart-button:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 740px) {
+  .navbar__hamburger {
+    display: block;
+  }
+}

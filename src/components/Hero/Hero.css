@@ -1,10 +1,21 @@
 .hero {
-  background-color: #651717;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 80px;
+  margin: 40px;
+  color: white;
+  background: url("../../assets/hero-image.png") no-repeat center center/cover;
+}
+
+.hero__content {
+  width: 100%;
+  background-color: #00000070;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 40px;
+  border-radius: 12px;
 }
 
 .hero__title {
@@ -12,9 +23,18 @@
   font-size: 64px;
 }
 
-.hero__title_bold {
+.hero__title_style {
   font-style: italic;
-  color: white;
+  background: linear-gradient(
+    90deg,
+    rgb(254, 125, 27),
+    rgb(42, 200, 231),
+    rgb(163, 5, 165)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero__subtitle {
