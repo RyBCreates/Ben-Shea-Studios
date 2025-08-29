@@ -1,4 +1,5 @@
 import { useState } from "react";
+import cartIcon from "../../assets/cart-icon.png";
 import "./Header.css";
 
 function Header() {
@@ -61,15 +62,17 @@ function Header() {
         <li className="navbar__link">About</li>
         <li className="navbar__link">Exhibits</li>
         <li className="navbar__link">Contact</li>
-        <li className="navbar__link">
-          <button className="header__cart-button">
-            <img className="header__cart-icon"></img>
-            Cart
-          </button>
-        </li>
       </ul>
+      <button className="header__cart-button">
+        0<img className="header__cart-icon" src={cartIcon}></img>
+      </button>
     </header>
   );
 }
 
 export default Header;
+
+// Cart Icon Link
+{
+  /* <a target="_blank" href="https://icons8.com/icon/P6ZYIof6BwLW/shopping-cart">Cart</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> */
+}

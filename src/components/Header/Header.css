@@ -27,7 +27,7 @@
   transform: rotate(90deg);
   font-size: 32px;
   padding: 10px;
-  margin: 0 40px 0 auto;
+  margin: 0 0 0 auto;
 }
 
 .header__hamburger:hover {
@@ -40,11 +40,20 @@
   display: flex;
   flex-direction: column;
   top: 55px;
-  right: 40px;
+  right: 45px;
+}
+
+.header__hamburger-option {
+  padding: 10px;
+  z-index: 10;
 }
 
 .header__hamburger-option:hover {
   cursor: pointer;
+}
+
+.header__cart-button {
+  margin-right: 20px;
 }
 
 .navbar {
@@ -66,11 +75,20 @@
 }
 
 .header__cart-button {
-  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background-color: transparent;
 }
 
 .header__cart-button:hover {
   cursor: pointer;
+}
+
+.header__cart-icon {
+  width: 20px;
 }
 
 @media screen and (max-width: 740px) {
@@ -81,7 +99,7 @@
 
 @media screen and (max-width: 640px) {
   .header__title {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .header__hamburger {
