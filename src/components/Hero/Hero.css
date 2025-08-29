@@ -81,3 +81,26 @@
   color: black;
   border: 1px solid white;
 }
+
+@media screen and (max-width: 600px) {
+  .hero {
+    margin: 0;
+  }
+
+  .hero__content {
+    padding: 60px;
+  }
+
+  .hero__title {
+    font-size: 24px;
+  }
+
+  .hero__subtitle {
+    font-size: 18px;
+  }
+
+  .hero__button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
