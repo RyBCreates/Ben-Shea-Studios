@@ -2,7 +2,7 @@ import { useState } from "react";
 import cartIcon from "../../assets/cart-icon.png";
 import "./Header.css";
 
-function Header({ cartList }) {
+function Header({ cartList, cartMenuToggle }) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
   const hamburgerToggle = () => {
@@ -63,7 +63,12 @@ function Header({ cartList }) {
         <li className="navbar__link">Exhibits</li>
         <li className="navbar__link">Contact</li>
       </ul>
-      <button className="header__cart-button">
+      <button
+        className="header__cart-button"
+        onClick={() => {
+          cartMenuToggle();
+        }}
+      >
         {cartList.length}
         <img className="header__cart-icon" src={cartIcon}></img>
       </button>
