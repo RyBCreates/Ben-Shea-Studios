@@ -1,5 +1,5 @@
 import { useState } from "react";
-import cartIcon from "../../assets/cart-icon.png";
+import cartIcon from "../../assets/icons/cart-icon.png";
 import "./Header.css";
 
 function Header({ cartList, cartMenuToggle }) {
