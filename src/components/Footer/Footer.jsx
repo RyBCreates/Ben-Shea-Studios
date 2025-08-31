@@ -5,15 +5,25 @@ function Footer() {
     <footer className="footer">
       <ul className="footer__navbar">
         <li className="footer__social">
-          <img className="footer__icon"></img>
-          <p className="footer__link">Instagram</p>
+          <a
+            className="footer__link"
+            href="https://www.instagram.com/bensheastudios/"
+            target="_blank"
+          >
+            <img className="footer__icon" alt="Instagram Icon"></img>Instagram
+          </a>
         </li>
         <li className="footer__social">
-          <img className="footer__icon"></img>
-          <p className="footer__link">Facebook</p>
+          <a
+            className="footer__link"
+            href="https://www.facebook.com/benjamin.shea.608141"
+            target="_blank"
+          >
+            <img className="footer__icon" alt="Facebook Icon"></img>Facebook
+          </a>
         </li>
         <li className="footer__social">
-          <img className="footer__icon"></img>
+          <img className="footer__icon" alt="Venmo Icon"></img>
           <p className="footer__link">Venmo</p>
         </li>
       </ul>

@@ -8,15 +8,23 @@ function ItemCard() {
     <div className="card">
       <div className="card__content">
         <button className="card__arrow">
-          <img className="card__arrow-icon" src={leftArrow}></img>
+          <img
+            className="card__arrow-icon"
+            src={leftArrow}
+            alt="left arrow"
+          ></img>
         </button>
         <img
           className="card__image"
           src="https://drive.google.com/uc?export=view&id=1lFyIh3qHN60iqa8AQyjClXPzyHj2CN3J"
-          alt="Artwork"
+          alt="Artwork name"
         />
         <button className="card__arrow">
-          <img className="card__arrow-icon" src={rightArrow}></img>
+          <img
+            className="card__arrow-icon"
+            src={rightArrow}
+            alt="right arrow"
+          ></img>
         </button>
       </div>
       <div className="card__pages">

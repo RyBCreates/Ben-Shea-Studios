@@ -70,7 +70,7 @@ function Header({ cartList, cartMenuToggle }) {
         }}
       >
         {cartList.length}
-        <img className="header__cart-icon" src={cartIcon}></img>
+        <img className="header__cart-icon" src={cartIcon} alt="cart icon"></img>
       </button>
     </header>
   );
