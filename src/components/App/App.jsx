@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import Header from "../Header/Header";
-import Hero from "../Hero/Hero";
-import Gallery from "../Gallery/Gallery";
+import Home from "../pages/Home/Home";
+import About from "../pages/About/About";
+import Exhibits from "../pages/Exhibits/Exhibits";
+import Contact from "../pages/Contact/Contact";
 import Footer from "../Footer/Footer";
 import CartMenu from "../CartMenu/CartMenu";
 import "./App.css";
@@ -39,8 +43,12 @@ function App() {
     <div className="app">
       <div className="app__content">
         <Header cartList={cartList} cartMenuToggle={cartMenuToggle} />
-        <Hero />
-        <Gallery />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/exhibits" element={<Exhibits />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
         <Footer />
         {isCartMenuOpen ? <CartMenu /> : ""}
       </div>
