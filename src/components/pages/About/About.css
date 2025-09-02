@@ -1,0 +1,28 @@
+.about__hero {
+  background: url("../../../assets/about-bg.png") no-repeat center/cover;
+  text-align: left;
+  color: white;
+  padding: 40px;
+}
+
+.about__hero_title {
+  margin: 40px 0 20px;
+  font-size: 40px;
+}
+
+.about__hero_text {
+  font-size: 24px;
+  margin: 0 0 20px;
+}
+
+.about__content {
+  margin: 30px;
+}
+
+.about__content_title {
+  margin: 20px 0 10px;
+}
+
+.about__content_text {
+  margin: 0;
+}
