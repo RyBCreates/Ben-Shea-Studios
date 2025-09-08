@@ -58,7 +58,11 @@ function App() {
           <Route path="/admin" element={<Admin />} />
         </Routes>
         {!hideLayout && <Footer />}
-        {isCartMenuOpen && !hideLayout ? <CartMenu /> : ""}
+        {isCartMenuOpen && !hideLayout ? (
+          <CartMenu setIsCartMenuOpen={setIsCartMenuOpen} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

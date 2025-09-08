@@ -13,4 +13,26 @@
   right: 0;
   bottom: 0;
   left: 60%;
+  background-color: rgb(255, 255, 255);
+}
+
+.cart-menu__close-button {
+  color: white;
+  font-size: 36px;
+  position: absolute;
+  left: -40px;
+  top: 10px;
+  background-color: transparent;
+  border: none;
+}
+
+.cart-menu__close-button:hover {
+  cursor: pointer;
+  color: rgb(241, 241, 241);
+  transform: scale(1.1);
+}
+
+.cart-menu__title {
+  text-align: left;
+  margin-left: 20px;
 }

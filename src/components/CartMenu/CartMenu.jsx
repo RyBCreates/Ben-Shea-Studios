@@ -1,10 +1,17 @@
 import "./CartMenu.css";
 
-function CartMenu() {
+function CartMenu({ setIsCartMenuOpen }) {
   return (
     <div className="cart-menu">
       <div className="cart-menu__content">
-        <h1>THIS IS THE CART MENU</h1>
+        <button
+          className="cart-menu__close-button"
+          type="button"
+          onClick={() => setIsCartMenuOpen(false)}
+        >
+          x
+        </button>
+        <h1 className="cart-menu__title">Your Cart</h1>
       </div>
     </div>
   );
