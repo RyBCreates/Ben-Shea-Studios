@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px;
-  margin: 0 40px 40px;
+  padding: 60px;
+  margin: 0 20px 30px;
   color: white;
   border-radius: 12px;
   background: url("../../assets/hero-image.png") no-repeat center center/cover;

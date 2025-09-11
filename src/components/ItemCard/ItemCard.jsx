@@ -1,60 +1,90 @@
+import { useState } from "react";
+
 import leftArrow from "../../assets/icons/left-arrow.png";
 import rightArrow from "../../assets/icons/right-arrow.png";
 
 import "./ItemCard.css";
 
-function ItemCard() {
+function ItemCard({ mockArt }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = mockArt.images;
+
+  const goPrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
   return (
     <div className="card">
       <div className="card__content">
-        <button className="card__arrow">
-          <img
-            className="card__arrow-icon"
-            src={leftArrow}
-            alt="left arrow"
-          ></img>
-        </button>
+        {images.length > 1 && (
+          <button className="card__arrow" onClick={goPrev}>
+            <img
+              className="card__arrow-icon"
+              src={leftArrow}
+              alt="left arrow"
+            />
+          </button>
+        )}
         <img
           className="card__image"
-          src="https://drive.google.com/uc?export=view&id=1lFyIh3qHN60iqa8AQyjClXPzyHj2CN3J"
-          alt="Artwork name"
+          src={images[currentIndex]}
+          alt={mockArt.title}
         />
-        <button className="card__arrow">
-          <img
-            className="card__arrow-icon"
-            src={rightArrow}
-            alt="right arrow"
-          ></img>
-        </button>
+        {images.length > 1 && (
+          <button className="card__arrow" onClick={goNext}>
+            <img
+              className="card__arrow-icon"
+              src={rightArrow}
+              alt="right arrow"
+            />
+          </button>
+        )}
       </div>
       <div className="card__pages">
-        <button className="card__pages-indicator card__pages-indicator_active"></button>
-        <button className="card__pages-indicator"></button>
-        <button className="card__pages-indicator"></button>
+        {images.map((_, index) => (
+          <button
+            key={index}
+            className={`card__pages-indicator ${
+              index === currentIndex ? "card__pages-indicator_active" : ""
+            }`}
+            onClick={() => setCurrentIndex(index)}
+          ></button>
+        ))}
       </div>
       <div className="card__info">
-        <h2 className="card__title">The Colors of Humanity</h2>
+        <h2 className="card__title">{mockArt.title}</h2>
         <ul className="card__details">
           <li className="card__detail">
             <p className="card__detail_type">Original -</p>
             <p className="card__detail_price">
-              <strong>$100.00</strong>
+              <strong>${mockArt.original.price}.00</strong>
             </p>
             <p className="card__detail_size">
-              <em>Size 5' x 9'</em>
+              <em>Size {mockArt.original.dimensions}</em>
             </p>
+            {mockArt.original.sold && <p className="card__detail_sold">SOLD</p>}
           </li>
           <li className="card__detail">
             <p className="card__detail_type">Print -</p>
             <p className="card__detail_price">
-              <strong>$80.00</strong>
+              <strong>${mockArt.print.price}.00</strong>
             </p>
             <p className="card__detail_size">
-              <em>Size 4' x 5'</em>
+              <em>Size {mockArt.print.dimensions}</em>
             </p>
           </li>
         </ul>
       </div>
+
       <button className="card__add-button">Add to Cart</button>
     </div>
   );

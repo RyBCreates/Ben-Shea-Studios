@@ -1,14 +1,15 @@
 import ItemCard from "../ItemCard/ItemCard";
+import { mockArt } from "../../utils/mockData/mockArt";
+
 import "./Gallery.css";
 
 function Gallery() {
   return (
     <div className="gallery">
       <div className="gallery__content">
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
-        <ItemCard />
+        {mockArt.map((art) => (
+          <ItemCard key={art.id} mockArt={art} />
+        ))}
       </div>
     </div>
   );
