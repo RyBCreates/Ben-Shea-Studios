@@ -36,11 +36,7 @@ function Footer() {
           </a>
         </li>
         <li className="footer__social">
-          <a
-            className="footer__link"
-            href="https://account.venmo.com/"
-            target="_blank"
-          >
+          <a className="footer__link" href="" target="_blank">
             <img className="footer__icon" src={venmo} alt="Venmo Icon"></img>
             Venmo
           </a>

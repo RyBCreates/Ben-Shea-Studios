@@ -1,4 +1,4 @@
-import downtown from "../../../assets/exhibits-bg.png";
+import { mockExhibit } from "../../../utils/mockExhibits";
 import "./Exhibits.css";
 
 function Exhibits() {
@@ -11,36 +11,19 @@ function Exhibits() {
           artwork.
         </p>
       </div>
-      <div className="exhibit-card">
-        <div className="exhibit-card__info">
-          <h2 className="exhibit-card__title">Downtown</h2>
-          <p className="exhibit-card__subtitle">
-            Our Downtown location features a modern collection of abstract and
-            contemporary art.
-          </p>
+      {mockExhibit.map((exhibit) => (
+        <div className="exhibit-card">
+          <div className="exhibit-card__info">
+            <h2 className="exhibit-card__title">{exhibit.location}</h2>
+            <p className="exhibit-card__subtitle">{exhibit.description}</p>
+          </div>
+          <img
+            className="exhibit-card__image"
+            src={exhibit.image}
+            alt="downtown"
+          />
         </div>
-        <img className="exhibit-card__image" src={downtown} alt="downtown" />
-      </div>
-      <div className="exhibit-card">
-        <div className="exhibit-card__info">
-          <h2 className="exhibit-card__title">Uptown</h2>
-          <p className="exhibit-card__subtitle">
-            The Uptown exhibit showcases colorful and vibrant artworks by local
-            artists.
-          </p>
-        </div>
-        <img className="exhibit-card__image" src={downtown} alt="downtown" />
-      </div>
-      <div className="exhibit-card">
-        <div className="exhibit-card__info">
-          <h2 className="exhibit-card__title">Midtown</h2>
-          <p className="exhibit-card__subtitle">
-            At our Midtown gallery, you'll find classical and traditional
-            pieces, including portraits and landscapes.
-          </p>
-        </div>
-        <img className="exhibit-card__image" src={downtown} alt="downtown" />
-      </div>
+      ))}
     </section>
   );
 }

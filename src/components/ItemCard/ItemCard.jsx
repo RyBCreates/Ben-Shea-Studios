@@ -5,8 +5,12 @@ import rightArrow from "../../assets/icons/right-arrow.png";
 
 import "./ItemCard.css";
 
-function ItemCard({ mockArt }) {
+function ItemCard({ mockArt, onAddToCart }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleClickAdd = () => {
+    onAddToCart(mockArt);
+  };
 
   const images = mockArt.images;
 
@@ -25,6 +29,13 @@ function ItemCard({ mockArt }) {
   return (
     <div className="card">
       <div className="card__content">
+        <img
+          className="card__image"
+          src={images[currentIndex]}
+          alt={mockArt.title}
+        />
+      </div>
+      <div className="card__pages">
         {images.length > 1 && (
           <button className="card__arrow" onClick={goPrev}>
             <img
@@ -34,22 +45,6 @@ function ItemCard({ mockArt }) {
             />
           </button>
         )}
-        <img
-          className="card__image"
-          src={images[currentIndex]}
-          alt={mockArt.title}
-        />
-        {images.length > 1 && (
-          <button className="card__arrow" onClick={goNext}>
-            <img
-              className="card__arrow-icon"
-              src={rightArrow}
-              alt="right arrow"
-            />
-          </button>
-        )}
-      </div>
-      <div className="card__pages">
         {images.map((_, index) => (
           <button
             key={index}
@@ -59,6 +54,15 @@ function ItemCard({ mockArt }) {
             onClick={() => setCurrentIndex(index)}
           ></button>
         ))}
+        {images.length > 1 && (
+          <button className="card__arrow" onClick={goNext}>
+            <img
+              className="card__arrow-icon"
+              src={rightArrow}
+              alt="right arrow"
+            />
+          </button>
+        )}
       </div>
       <div className="card__info">
         <h2 className="card__title">{mockArt.title}</h2>
@@ -85,7 +89,9 @@ function ItemCard({ mockArt }) {
         </ul>
       </div>
 
-      <button className="card__add-button">Add to Cart</button>
+      <button className="card__add-button" onClick={handleClickAdd}>
+        Add to Cart
+      </button>
     </div>
   );
 }

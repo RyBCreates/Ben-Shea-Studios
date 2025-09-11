@@ -16,6 +16,10 @@ function App() {
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
 
+  const onAddToCart = (item) => {
+    setCartList((prev) => [...prev, item]);
+  };
+
   const cartMenuToggle = (prev) => {
     return setIsCartMenuOpen(!prev);
   };
@@ -51,7 +55,7 @@ function App() {
           <Header cartList={cartList} cartMenuToggle={cartMenuToggle} />
         )}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home onAddToCart={onAddToCart} />} />
           <Route path="/about" element={<About />} />
           <Route path="/exhibits" element={<Exhibits />} />
           <Route path="/contact" element={<Contact />} />
@@ -59,7 +63,7 @@ function App() {
         </Routes>
         {!hideLayout && <Footer />}
         {isCartMenuOpen && !hideLayout ? (
-          <CartMenu setIsCartMenuOpen={setIsCartMenuOpen} />
+          <CartMenu setIsCartMenuOpen={setIsCartMenuOpen} cartList={cartList} />
         ) : (
           ""
         )}

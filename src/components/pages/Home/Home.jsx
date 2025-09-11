@@ -3,11 +3,11 @@ import Gallery from "../../Gallery/Gallery";
 
 import "./Home.css";
 
-function Home() {
+function Home({ onAddToCart }) {
   return (
     <section>
       <Hero />
-      <Gallery />
+      <Gallery onAddToCart={onAddToCart} />
     </section>
   );
 }
