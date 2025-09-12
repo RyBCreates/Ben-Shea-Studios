@@ -1,6 +1,9 @@
+import CartItem from "../CartItem/CartItem";
 import "./CartMenu.css";
 
-function CartMenu({ setIsCartMenuOpen }) {
+function CartMenu({ setIsCartMenuOpen, cartList }) {
+  const totalPrice = 200;
+
   return (
     <div className="cart-menu">
       <div className="cart-menu__content">
@@ -12,6 +15,16 @@ function CartMenu({ setIsCartMenuOpen }) {
           x
         </button>
         <h1 className="cart-menu__title">Your Cart</h1>
+        {cartList.length === 0 ? (
+          <p>No Items in cart!</p>
+        ) : (
+          <>
+            {cartList.map((cartItem) => (
+              <CartItem cartItem={cartItem} key={cartItem.id} />
+            ))}
+            <p>Your Total: ${totalPrice}.00</p>
+          </>
+        )}
       </div>
     </div>
   );
