@@ -1,0 +1,38 @@
+.login {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.login__title {
+  color: white;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login__input {
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.login__submit-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+
+  background: linear-gradient(
+    to right,
+    rgb(255, 175, 2) 0%,
+    rgb(240, 74, 255) 100%
+  );
+}
+
+.login__submit-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

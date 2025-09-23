@@ -1,0 +1,58 @@
+.exhibits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.exhibits__hero {
+  background: url("../../../assets/exhibits-bg.png") no-repeat center/cover;
+  height: 200px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+}
+
+.exhibits__title {
+  font-size: 64px;
+  margin: 0 0 20px 0;
+}
+
+.exhibits__subtitle {
+  margin: 0;
+  font-size: 24px;
+  max-width: 500px;
+}
+
+.exhibit-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 20%;
+}
+
+.exhibit-card:nth-child(3) {
+  flex-direction: row-reverse;
+}
+
+.exhibit-card__info {
+  margin: 20px;
+}
+
+.exhibit-card__title {
+  font-size: 32px;
+  margin: 5px 0;
+}
+
+.exhibit-card__subtitle {
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.exhibit-card__image {
+  max-height: 300px;
+  object-fit: cover;
+}

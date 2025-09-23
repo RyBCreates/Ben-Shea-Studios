@@ -1,0 +1,143 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 600px;
+  background-color: rgb(255, 255, 255);
+  padding: 0 0 20px;
+  border-radius: 25px;
+}
+
+.card__content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100%;
+  height: 70%;
+  border-radius: 25px;
+}
+
+.card__arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.card__arrow:hover {
+  cursor: pointer;
+}
+
+.card__arrow-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.card__image {
+  color: white;
+  font-size: 34px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  border-radius: 25px 25px 0 0;
+}
+
+.card__pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 5px 10px;
+}
+
+.card__pages-indicator {
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  width: 15px;
+  height: 15px;
+  background-color: grey;
+  border: none;
+}
+
+.card__pages-indicator:hover {
+  cursor: pointer;
+}
+
+.card__pages-indicator_active {
+  background-color: #000;
+}
+
+.card__info {
+  background-color: rgb(255, 255, 255);
+  overflow-y: scroll;
+  width: 100%;
+  height: 50%;
+}
+
+.card__title {
+  text-align: center;
+  font-size: 30px;
+  margin: 20px;
+}
+
+.card__details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card__detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 20px;
+}
+
+.card__detail_type,
+.card__detail_price,
+.card__detail_size {
+  margin: 0;
+  font-size: 24px;
+}
+
+.card__detail_price {
+  margin: 0 auto 0 5px;
+}
+
+.card__add-button {
+  font-size: 26px;
+  color: white;
+  background-color: #000;
+  border-radius: 10px;
+  padding: 15px 40px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.card__add-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #01c4ff;
+  color: black;
+}
+
+@media screen and (max-width: 750px) {
+  .card {
+    width: 100%;
+    height: 350px;
+  }
+
+  .card__arrow-icon {
+    width: 10px;
+    height: 10px;
+  }
+}
