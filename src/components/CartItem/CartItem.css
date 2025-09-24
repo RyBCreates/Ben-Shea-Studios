@@ -5,7 +5,6 @@
 }
 
 .cart-item__image {
-  background-color: blue;
   width: 100px;
   height: 100px;
   margin-right: 10px;
@@ -32,5 +31,6 @@
 
 .cart-item__price {
   font-size: 24px;
+  font-weight: 700;
   margin: 0 10px 0 auto;
 }

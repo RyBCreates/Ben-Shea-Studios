@@ -23,7 +23,7 @@
   font-size: 24px;
   padding: 5px 20px;
   position: relative;
-  top: 22px;
+  top: 2px;
 }
 
 .gallery__tab-button:hover {
@@ -37,18 +37,20 @@
 }
 
 .gallery__content {
+  padding: 40px 20px;
+  max-width: 1440px;
+  border: 1px solid black;
+  background-color: #dddddd;
+}
+
+.gallery__content-container {
   display: grid;
   justify-items: center;
   align-items: center;
-  padding: 40px 20px;
-  margin: 20px 0;
-  max-width: 1440px;
-  gap: 20px;
   grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
   overflow-y: scroll;
   height: 80vh;
-  border: 1px solid black;
-  background-color: #dddddd;
 }
 
 @media screen and (max-width: 768px) {

@@ -21,9 +21,11 @@ function Gallery({ onAddToCart }) {
         </li>
       </ul>
       <div className="gallery__content">
-        {mockArt.map((art) => (
-          <ItemCard key={art.id} mockArt={art} onAddToCart={onAddToCart} />
-        ))}
+        <div className="gallery__content-container">
+          {mockArt.map((art) => (
+            <ItemCard key={art.id} mockArt={art} onAddToCart={onAddToCart} />
+          ))}
+        </div>
       </div>
     </div>
     // <div className="gallery">

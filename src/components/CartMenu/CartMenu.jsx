@@ -2,8 +2,17 @@ import CartItem from "../CartItem/CartItem";
 import "./CartMenu.css";
 
 function CartMenu({ setIsCartMenuOpen, cartList }) {
-  const totalPrice = 200;
+  const calculateTotal = (cartItems) => {
+    let total = 0;
+    for (const item of cartItems) {
+      total += item.original.price;
+    }
+    return total;
+  };
 
+  const totalPrice = calculateTotal(cartList);
+
+  console.log(totalPrice);
   return (
     <div className="cart-menu">
       <div className="cart-menu__content">
