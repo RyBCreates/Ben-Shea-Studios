@@ -1,3 +1,36 @@
 .cart-item {
-  background-color: red;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.cart-item__image {
+  background-color: blue;
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.cart-item__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cart-item__title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.cart-item__quantity {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.cart-item__price {
+  font-size: 24px;
+  margin: 0 10px 0 auto;
 }
