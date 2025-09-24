@@ -16,14 +16,21 @@ function CartMenu({ setIsCartMenuOpen, cartList }) {
         </button>
         <h1 className="cart-menu__title">Your Cart</h1>
         {cartList.length === 0 ? (
-          <p>No Items in cart!</p>
+          <p className="cart-menu__empty">No items in your cart yet!</p>
         ) : (
-          <>
-            {cartList.map((cartItem) => (
-              <CartItem cartItem={cartItem} key={cartItem.id} />
-            ))}
-            <p>Your Total: ${totalPrice}.00</p>
-          </>
+          <div className="cart-menu__items-list">
+            <ul className="cart-menu__items">
+              {cartList.map((cartItem) => (
+                <CartItem cartItem={cartItem} key={cartItem.id} />
+              ))}
+            </ul>
+            <div className="cart-menu__checkout">
+              <p className="cart-menu__total">Your Total: ${totalPrice}.00</p>
+              <button className="cart-menu__checkout-button" type="button">
+                Checkout
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>

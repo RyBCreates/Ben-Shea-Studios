@@ -80,7 +80,6 @@
 }
 
 .header__cart-button {
-  color: red;
   font-size: 30px;
   display: flex;
   align-items: center;
@@ -94,6 +93,10 @@
 .header__cart-button:hover {
   cursor: pointer;
   transform: translateY(-3px);
+}
+
+.header__cart-button_empty {
+  color: red;
 }
 
 .header__cart-icon {

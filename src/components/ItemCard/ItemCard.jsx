@@ -36,32 +36,38 @@ function ItemCard({ mockArt, onAddToCart }) {
         />
       </div>
       <div className="card__pages">
-        {images.length > 1 && (
-          <button className="card__arrow" onClick={goPrev}>
-            <img
-              className="card__arrow-icon"
-              src={leftArrow}
-              alt="left arrow"
-            />
-          </button>
-        )}
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`card__pages-indicator ${
-              index === currentIndex ? "card__pages-indicator_active" : ""
-            }`}
-            onClick={() => setCurrentIndex(index)}
-          ></button>
-        ))}
-        {images.length > 1 && (
-          <button className="card__arrow" onClick={goNext}>
-            <img
-              className="card__arrow-icon"
-              src={rightArrow}
-              alt="right arrow"
-            />
-          </button>
+        {images.length > 1 ? (
+          <>
+            {images.length > 1 && (
+              <button className="card__arrow" onClick={goPrev}>
+                <img
+                  className="card__arrow-icon"
+                  src={leftArrow}
+                  alt="left arrow"
+                />
+              </button>
+            )}
+            {images.map((_, index) => (
+              <button
+                key={index}
+                className={`card__pages-indicator ${
+                  index === currentIndex ? "card__pages-indicator_active" : ""
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              ></button>
+            ))}
+            {images.length > 1 && (
+              <button className="card__arrow" onClick={goNext}>
+                <img
+                  className="card__arrow-icon"
+                  src={rightArrow}
+                  alt="right arrow"
+                />
+              </button>
+            )}
+          </>
+        ) : (
+          <></>
         )}
       </div>
       <div className="card__info">

@@ -37,7 +37,9 @@ function Header({ cartList, cartMenuToggle }) {
         |||
       </button>
       <button
-        className="header__cart-button"
+        className={`header__cart-button ${
+          cartList.length === 0 ? "header__cart-button_empty" : ""
+        }`}
         onClick={() => {
           cartMenuToggle();
         }}

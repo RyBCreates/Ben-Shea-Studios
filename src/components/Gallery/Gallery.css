@@ -42,7 +42,7 @@
   align-items: center;
   padding: 40px 20px;
   margin: 20px 0;
-  width: 100%;
+  max-width: 1440px;
   gap: 20px;
   grid-template-columns: repeat(2, 1fr);
   overflow-y: scroll;
