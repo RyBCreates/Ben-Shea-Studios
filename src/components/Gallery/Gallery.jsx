@@ -11,7 +11,7 @@ function Gallery({ onAddToCart }) {
     <div className="gallery">
       <ul className="gallery__tabs">
         <li className="gallery__tab">
-          <button className="gallery__tab-button">Tab 1</button>
+          <button className="gallery__tab-button">24 x 18</button>
         </li>
         <li className="gallery__tab">
           <button className="gallery__tab-button">Tab 2</button>
