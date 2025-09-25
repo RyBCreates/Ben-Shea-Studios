@@ -5,14 +5,13 @@ function CartMenu({ setIsCartMenuOpen, cartList }) {
   const calculateTotal = (cartItems) => {
     let total = 0;
     for (const item of cartItems) {
-      total += item.original.price;
+      total += item.price;
     }
     return total;
   };
 
   const totalPrice = calculateTotal(cartList);
 
-  console.log(totalPrice);
   return (
     <div className="cart-menu">
       <div className="cart-menu__content">
@@ -30,7 +29,7 @@ function CartMenu({ setIsCartMenuOpen, cartList }) {
           <div className="cart-menu__items-list">
             <ul className="cart-menu__items">
               {cartList.map((cartItem) => (
-                <CartItem cartItem={cartItem} key={cartItem.id} />
+                <CartItem cartItem={cartItem} key={cartItem._id} />
               ))}
             </ul>
             <div className="cart-menu__checkout">

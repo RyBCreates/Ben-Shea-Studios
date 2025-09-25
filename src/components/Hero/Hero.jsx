@@ -19,7 +19,15 @@ function Hero() {
           <button className="hero__button hero__button_main">
             Get a Discount
           </button>
-          <button className="hero__button hero__button_secondary">
+          <button
+            className="hero__button hero__button_secondary"
+            onClick={() => {
+              const section = document.getElementById("gallery");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
             Start Shopping!
           </button>
         </div>

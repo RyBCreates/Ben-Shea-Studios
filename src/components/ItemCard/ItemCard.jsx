@@ -7,12 +7,21 @@ import "./ItemCard.css";
 
 function ItemCard({ mockArt, onAddToCart }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleClickAdd = () => {
-    onAddToCart(mockArt);
-  };
+  const [selectedVersion, setSelectedVersion] = useState("original");
 
   const images = mockArt.images;
+
+  const handleClickAdd = () => {
+    const selectedItem = {
+      _id: mockArt._id,
+      title: mockArt.title,
+      version: selectedVersion,
+      price: mockArt[selectedVersion].price,
+      dimensions: mockArt[selectedVersion].dimensions,
+      image: images[0],
+    };
+    onAddToCart(selectedItem);
+  };
 
   const goPrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -35,62 +44,87 @@ function ItemCard({ mockArt, onAddToCart }) {
           alt={mockArt.title}
         />
       </div>
-      <div className="card__pages">
-        {images.length > 1 ? (
-          <>
-            {images.length > 1 && (
-              <button className="card__arrow" onClick={goPrev}>
-                <img
-                  className="card__arrow-icon"
-                  src={leftArrow}
-                  alt="left arrow"
-                />
-              </button>
-            )}
-            {images.map((_, index) => (
-              <button
-                key={index}
-                className={`card__pages-indicator ${
-                  index === currentIndex ? "card__pages-indicator_active" : ""
-                }`}
-                onClick={() => setCurrentIndex(index)}
-              ></button>
-            ))}
-            {images.length > 1 && (
-              <button className="card__arrow" onClick={goNext}>
-                <img
-                  className="card__arrow-icon"
-                  src={rightArrow}
-                  alt="right arrow"
-                />
-              </button>
-            )}
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
+
+      {images.length > 1 && (
+        <div className="card__pages">
+          <button className="card__arrow" onClick={goPrev}>
+            <img
+              className="card__arrow-icon"
+              src={leftArrow}
+              alt="left arrow"
+            />
+          </button>
+
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={`card__pages-indicator ${
+                index === currentIndex ? "card__pages-indicator_active" : ""
+              }`}
+              onClick={() => setCurrentIndex(index)}
+            />
+          ))}
+
+          <button className="card__arrow" onClick={goNext}>
+            <img
+              className="card__arrow-icon"
+              src={rightArrow}
+              alt="right arrow"
+            />
+          </button>
+        </div>
+      )}
+
       <div className="card__info">
         <h2 className="card__title">{mockArt.title}</h2>
         <ul className="card__details">
           <li className="card__detail">
-            <p className="card__detail_type">Original -</p>
-            <p className="card__detail_price">
-              <strong>${mockArt.original.price}.00</strong>
-            </p>
-            <p className="card__detail_size">
-              <em>Size {mockArt.original.dimensions}</em>
-            </p>
-            {mockArt.original.sold && <p className="card__detail_sold">SOLD</p>}
+            <label className="card__detail-label">
+              <div className="card__type-container">
+                <input
+                  className="card__radio"
+                  type="radio"
+                  name={`version-${mockArt._id}`}
+                  value="original"
+                  checked={selectedVersion === "original"}
+                  onChange={(e) => setSelectedVersion(e.target.value)}
+                  disabled={mockArt.original.sold}
+                />
+                <h3 className="card__type">Original -</h3>
+                {mockArt.original.sold ? (
+                  <p className="card__type card__type_sold">SOLD OUT</p>
+                ) : (
+                  <strong className="card__type card__type_price">
+                    ${mockArt.original.price}.00
+                  </strong>
+                )}
+              </div>
+              <em className="card__type card__type_size">
+                Size {mockArt.original.dimensions}
+              </em>
+            </label>
           </li>
+
           <li className="card__detail">
-            <p className="card__detail_type">Print -</p>
-            <p className="card__detail_price">
-              <strong>${mockArt.print.price}.00</strong>
-            </p>
-            <p className="card__detail_size">
-              <em>Size {mockArt.print.dimensions}</em>
-            </p>
+            <label className="card__detail-label">
+              <div className="card__type-container">
+                <input
+                  className="card__radio"
+                  type="radio"
+                  name={`version-${mockArt._id}`}
+                  value="print"
+                  checked={selectedVersion === "print"}
+                  onChange={(e) => setSelectedVersion(e.target.value)}
+                />
+                <h3 className="card__type">Print -</h3>
+                <strong className="card__type card__type_price">
+                  ${mockArt.print.price}.00
+                </strong>
+              </div>
+              <em className="card__type card__type_size">
+                Size {mockArt.print.dimensions}
+              </em>
+            </label>
           </li>
         </ul>
       </div>

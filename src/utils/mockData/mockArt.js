@@ -1,6 +1,6 @@
 export const mockArt = [
   {
-    id: 1,
+    _id: 1,
     title: "Sunset Dreams",
     description:
       "A vibrant exploration of color and light inspired by evening skies.",
@@ -20,7 +20,7 @@ export const mockArt = [
     },
   },
   {
-    id: 2,
+    _id: 2,
     title: "Ocean Flow",
     description:
       "Abstract blues and greens that capture the movement of water.",
@@ -36,7 +36,7 @@ export const mockArt = [
     },
   },
   {
-    id: 3,
+    _id: 3,
     title: "Crimson Energy",
     description: "Dynamic reds and textures representing raw emotion.",
     images: ["https://picsum.photos/200", "https://picsum.photos/300/200"],

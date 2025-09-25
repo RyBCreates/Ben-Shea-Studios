@@ -13,6 +13,8 @@
 
 .gallery__tab {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .gallery__tab-button {
@@ -45,9 +47,9 @@
 
 .gallery__content-container {
   display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: repeat(2, 1fr);
+  justify-items: flex-start;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
   gap: 20px;
   overflow-y: scroll;
   height: 80vh;
