@@ -16,6 +16,7 @@ export const mockArt = [
     },
     print: {
       price: 60,
+      sold: false,
       dimensions: "12x18 in",
     },
   },
@@ -32,6 +33,7 @@ export const mockArt = [
     },
     print: {
       price: 75,
+      sold: false,
       dimensions: "16x20 in",
     },
   },
@@ -47,6 +49,7 @@ export const mockArt = [
     },
     print: {
       price: 55,
+      sold: false,
       dimensions: "11x14 in",
     },
   },

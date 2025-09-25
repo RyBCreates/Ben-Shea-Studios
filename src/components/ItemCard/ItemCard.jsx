@@ -16,7 +16,7 @@ function ItemCard({ mockArt, onAddToCart }) {
       _id: mockArt._id,
       title: mockArt.title,
       version: selectedVersion,
-      price: mockArt[selectedVersion].price,
+      price: mockArt[selectedVersion]?.price,
       dimensions: mockArt[selectedVersion].dimensions,
       image: images[0],
     };
@@ -82,7 +82,7 @@ function ItemCard({ mockArt, onAddToCart }) {
             <label className="card__detail-label">
               <div className="card__type-container">
                 <input
-                  className="card__radio"
+                  className="card__radio-button"
                   type="radio"
                   name={`version-${mockArt._id}`}
                   value="original"
@@ -109,7 +109,7 @@ function ItemCard({ mockArt, onAddToCart }) {
             <label className="card__detail-label">
               <div className="card__type-container">
                 <input
-                  className="card__radio"
+                  className="card__radio-button"
                   type="radio"
                   name={`version-${mockArt._id}`}
                   value="print"
@@ -129,7 +129,11 @@ function ItemCard({ mockArt, onAddToCart }) {
         </ul>
       </div>
 
-      <button className="card__add-button" onClick={handleClickAdd}>
+      <button
+        className="card__add-button"
+        onClick={handleClickAdd}
+        disabled={mockArt[selectedVersion]?.sold}
+      >
         Add to Cart
       </button>
     </div>

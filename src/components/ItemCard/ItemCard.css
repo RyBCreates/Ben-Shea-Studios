@@ -117,6 +117,10 @@
   gap: 15px;
 }
 
+.card__radio-button:hover {
+  cursor: pointer;
+}
+
 .card__type,
 .card__type_price,
 .card__type_size {
