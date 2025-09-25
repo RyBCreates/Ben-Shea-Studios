@@ -9,10 +9,14 @@ import Contact from "../pages/Contact/Contact";
 import Admin from "../pages/Admin/Admin";
 import Footer from "../Footer/Footer";
 import CartMenu from "../CartMenu/CartMenu";
+
+import GetDiscountModal from "../modals/GetDiscountModal/GetDiscountModal";
 import "./App.css";
 
 function App() {
   const [cartList, setCartList] = useState([]);
+
+  const [activeModal, setActiveModal] = useState("");
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
 
@@ -24,14 +28,26 @@ function App() {
     return setIsCartMenuOpen(!prev);
   };
 
+  const onGetDiscountClick = () => {
+    setActiveModal("discount");
+    console.log(activeModal);
+  };
+
   useEffect(() => {
     const handleEscClose = (e) => {
-      if (e.key === "Escape") setIsCartMenuOpen(false);
+      if (e.key === "Escape") {
+        setIsCartMenuOpen(false);
+        setActiveModal("");
+      }
     };
 
     const handleClickOutside = (e) => {
-      if (e.target.classList.contains("cart-menu")) {
+      if (
+        e.target.classList.contains("cart-menu") ||
+        e.target.classList.contains("modal")
+      ) {
         setIsCartMenuOpen(false);
+        setActiveModal("");
       }
     };
 
@@ -55,7 +71,15 @@ function App() {
           <Header cartList={cartList} cartMenuToggle={cartMenuToggle} />
         )}
         <Routes>
-          <Route path="/" element={<Home onAddToCart={onAddToCart} />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                onAddToCart={onAddToCart}
+                onGetDiscountClick={onGetDiscountClick}
+              />
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route path="/exhibits" element={<Exhibits />} />
           <Route path="/contact" element={<Contact />} />
@@ -68,6 +92,7 @@ function App() {
           ""
         )}
       </div>
+      <GetDiscountModal activeModal={activeModal} />
     </div>
   );
 }

@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import "./Hero.css";
 
-function Hero() {
-  const navigate = useNavigate();
-
+function Hero({ onGetDiscountClick }) {
   return (
     <section className="hero">
       <div className="hero__content">
@@ -16,7 +13,12 @@ function Hero() {
           </p>
         </div>
         <div className="hero__button-container">
-          <button className="hero__button hero__button_main">
+          <button
+            className="hero__button hero__button_main"
+            onClick={() => {
+              onGetDiscountClick();
+            }}
+          >
             Get a Discount
           </button>
           <button
