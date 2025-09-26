@@ -33,6 +33,10 @@ function App() {
     console.log(activeModal);
   };
 
+  const closeModal = () => {
+    setActiveModal("");
+  };
+
   useEffect(() => {
     const handleEscClose = (e) => {
       if (e.key === "Escape") {
@@ -92,7 +96,7 @@ function App() {
           ""
         )}
       </div>
-      <GetDiscountModal activeModal={activeModal} />
+      <GetDiscountModal activeModal={activeModal} closeModal={closeModal} />
     </div>
   );
 }

@@ -5,6 +5,7 @@
   bottom: 0;
   left: 0;
   background-color: #00000060;
+  z-index: 10;
 }
 
 .cart-menu__content {

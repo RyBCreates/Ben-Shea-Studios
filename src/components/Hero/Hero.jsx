@@ -3,6 +3,7 @@ import "./Hero.css";
 function Hero({ onGetDiscountClick }) {
   return (
     <section className="hero">
+      <div className="hero__background"></div>
       <div className="hero__content">
         <div>
           <h2 className="hero__title">
