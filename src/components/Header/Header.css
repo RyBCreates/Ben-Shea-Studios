@@ -23,8 +23,9 @@
 .header__hamburger {
   display: none;
   position: relative;
-  font-size: 32px;
-  padding: 10px;
+  background-color: transparent;
+  font-size: 28px;
+  padding: 5px;
   transform: rotate(90deg);
   margin: 0 20px 0 0;
 }
@@ -79,6 +80,11 @@
   color: #01c4ff;
 }
 
+.header__mobile-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .header__cart-button {
   font-size: 30px;
   display: flex;
@@ -103,15 +109,15 @@
   width: 40px;
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 830px) {
   .navbar__link {
     font-size: 18px;
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 730px) {
   .header__title {
-    font-size: 19px;
+    font-size: 28px;
   }
 
   .header__hamburger {
