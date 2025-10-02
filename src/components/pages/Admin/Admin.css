@@ -1,22 +1,10 @@
-.admin {
-  background: url("../../../assets/about-bg.png") no-repeat center/cover;
-  padding: 40px;
+.admin__logged-in {
+  background-color: rgb(213, 213, 213);
+  padding: 20px;
 }
 
-.admin__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  background-color: #00000060;
-  border-radius: 15px;
-}
-
-.admin__title {
-  font-size: 60px;
-  color: white;
-  width: 50%;
-  margin: 0 0 20px 0;
-  text-align: center;
+.admin__title_logged-in {
+  width: 100%;
+  color: black;
+  font-size: 32px;
 }

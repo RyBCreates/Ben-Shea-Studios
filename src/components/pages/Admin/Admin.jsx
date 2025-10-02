@@ -1,5 +1,8 @@
 import { useState } from "react";
-import LoginForm from "../../LoginForm/LoginForm";
+
+import DashBoard from "../../DashBoard/DashBoard";
+import AdminLanding from "../../AdminLanding/AdminLanding";
+
 import "./Admin.css";
 
 function Admin() {
@@ -11,14 +14,7 @@ function Admin() {
 
   return (
     <section className="admin">
-      {isLoggedIn ? (
-        <>Currently Logged In</>
-      ) : (
-        <div className="admin__content">
-          <h1 className="admin__title">Admin Dashboard</h1>
-          <LoginForm handleLogin={handleLogin} />
-        </div>
-      )}
+      {isLoggedIn ? <DashBoard /> : <AdminLanding handleLogin={handleLogin} />}
     </section>
   );
 }
