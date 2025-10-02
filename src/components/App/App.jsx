@@ -126,4 +126,19 @@ function App() {
 
 export default App;
 
+// TODO:
+// 1. Add Delete Button to Cart Items
+// 2. Disable add button if the original is in the cart, only 1 exists at a time.
+// 3. Make CartMenu Responsive
+// 4. Make the Header responsive
+// 5. Add ArtItems to the Backend
+// 6. Connect CartMenu to the Backend
+// 7. At smaller Screens fix the grid of the gallery section
+// 8. Style and add Content to Success Page
+// 9. Style and add Content to Cancelled Page
+// 10. Style Checkout page
+// 11. Add Cart Items to Checkout page for more editability for user
+// 12. Add Unfulfilled orders to Admin
+// 13. Add Fulfilled Orders to Admin
+// 14. Add Add Button to Admin
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary
