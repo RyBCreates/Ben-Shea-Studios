@@ -1,16 +1,18 @@
+import { Link } from "react-router-dom";
+
 import CartItem from "../CartItem/CartItem";
 import "./CartMenu.css";
 
 function CartMenu({ setIsCartMenuOpen, cartList }) {
-  const calculateTotal = (cartItems) => {
+  const calculateCartTotal = (cartItems) => {
     let total = 0;
     for (const item of cartItems) {
-      total += item.price;
+      total += item.price * item.quantity;
     }
     return total;
   };
 
-  const totalPrice = calculateTotal(cartList);
+  const cartTotal = calculateCartTotal(cartList);
 
   return (
     <div className="cart-menu">
@@ -33,10 +35,18 @@ function CartMenu({ setIsCartMenuOpen, cartList }) {
               ))}
             </ul>
             <div className="cart-menu__checkout">
-              <p className="cart-menu__total">Your Total: ${totalPrice}.00</p>
-              <button className="cart-menu__checkout-button" type="button">
-                Checkout
-              </button>
+              <p className="cart-menu__total">Your Total: ${cartTotal}.00</p>
+              <Link to="/checkout" className="cart-menu__link-container">
+                <button
+                  className="cart-menu__checkout-button"
+                  type="button"
+                  onClick={() => {
+                    setIsCartMenuOpen(false);
+                  }}
+                >
+                  Checkout
+                </button>
+              </Link>
             </div>
           </div>
         )}

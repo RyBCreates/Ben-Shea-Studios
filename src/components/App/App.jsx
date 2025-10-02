@@ -7,8 +7,11 @@ import About from "../pages/About/About";
 import Exhibits from "../pages/Exhibits/Exhibits";
 import Contact from "../pages/Contact/Contact";
 import Admin from "../pages/Admin/Admin";
+import Checkout from "../pages/Checkout/Checkout";
 import Footer from "../Footer/Footer";
 import CartMenu from "../CartMenu/CartMenu";
+import Success from "../pages/Success/Success";
+import Cancelled from "../pages/Cancelled/Cancelled";
 
 import GetDiscountModal from "../modals/GetDiscountModal/GetDiscountModal";
 import "./App.css";
@@ -20,8 +23,25 @@ function App() {
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
 
+  // Do I handle not allowing multiple originals here?
+  // Or do I disable the button once it was added to cart the first time?
   const onAddToCart = (item) => {
-    setCartList((prev) => [...prev, item]);
+    setCartList((prev) => {
+      const exists = prev.find(
+        (cartItem) =>
+          cartItem._id === item._id && cartItem.version === item.version
+      );
+
+      if (exists) {
+        return prev.map((cartItem) =>
+          cartItem._id === item._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [...prev, { ...item, quantity: 1 }];
+      }
+    });
   };
 
   const cartMenuToggle = (prev) => {
@@ -88,6 +108,9 @@ function App() {
           <Route path="/exhibits" element={<Exhibits />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<Cancelled />} />
         </Routes>
         {!hideLayout && <Footer />}
         {isCartMenuOpen && !hideLayout ? (

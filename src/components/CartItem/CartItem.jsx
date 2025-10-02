@@ -10,9 +10,11 @@ function CartItem({ cartItem }) {
       />
       <div className="cart-item__container">
         <h2 className="cart-item__title">{cartItem.title}</h2>
-        <p className="cart-item__quantity">Qty:{cartItem.quantity ?? 1}</p>
+        <p className="cart-item__quantity">Qty: {cartItem.quantity ?? 1}</p>
       </div>
-      <p className="cart-item__price">${cartItem.price}.00</p>
+      <p className="cart-item__price">
+        ${cartItem.price * cartItem.quantity}.00
+      </p>
     </li>
   );
 }
