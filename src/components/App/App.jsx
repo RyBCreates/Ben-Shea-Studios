@@ -125,3 +125,5 @@ function App() {
 }
 
 export default App;
+
+// For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary
