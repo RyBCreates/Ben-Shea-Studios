@@ -36,7 +36,7 @@ function CartMenu({ setIsCartMenuOpen, cartList }) {
             </ul>
             <div className="cart-menu__checkout">
               <p className="cart-menu__total">Your Total: ${cartTotal}.00</p>
-              <Link to="/checkout" className="cart-menu__link-container">
+              <Link to="checkout" className="cart-menu__link-container">
                 <button
                   className="cart-menu__checkout-button"
                   type="button"

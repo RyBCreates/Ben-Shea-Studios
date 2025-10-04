@@ -20,13 +20,13 @@ function Header({ cartList, cartMenuToggle }) {
         <Link to="/" className="navbar__link-container">
           <li className="navbar__link">Home</li>
         </Link>
-        <Link to="/about" className="navbar__link-container">
+        <Link to="about" className="navbar__link-container">
           <li className="navbar__link">About</li>
         </Link>
-        <Link to="/exhibits" className="navbar__link-container">
+        <Link to="exhibits" className="navbar__link-container">
           <li className="navbar__link">Exhibits</li>
         </Link>
-        <Link to="/contact" className="navbar__link-container">
+        <Link to="contact" className="navbar__link-container">
           <li className="navbar__link">Contact</li>
         </Link>
       </ul>

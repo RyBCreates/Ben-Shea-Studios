@@ -104,13 +104,13 @@ function App() {
               />
             }
           />
-          <Route path="/about" element={<About />} />
-          <Route path="/exhibits" element={<Exhibits />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/success" element={<Success />} />
-          <Route path="/cancel" element={<Cancelled />} />
+          <Route path="about" element={<About />} />
+          <Route path="exhibits" element={<Exhibits />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="success" element={<Success />} />
+          <Route path="cancel" element={<Cancelled />} />
         </Routes>
         {!hideLayout && <Footer />}
         {isCartMenuOpen && !hideLayout ? (
