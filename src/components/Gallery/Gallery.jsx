@@ -1,29 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchArtItems } from "../../utils/api";
 import ItemCard from "../ItemCard/ItemCard";
-import { mockArt } from "../../utils/mockData/mockArt";
 
 import "./Gallery.css";
 
 function Gallery({ onAddToCart }) {
   const [activeTab, setActiveTab] = useState("all");
-  const [filteredArt, setFilteredArt] = useState(mockArt);
+  const [artItems, setArtItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filteredArt, setFilteredArt] = useState(artItems);
+
+  useEffect(() => {
+    fetchArtItems()
+      .then(setArtItems)
+      .catch((err) => console.error("Error fetching art items:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    setFilteredArt(artItems);
+  }, [artItems]);
+
+  if (loading) return <p>Loading artwork...</p>;
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     if (tab === "20x30") {
       setFilteredArt(
-        mockArt.filter((art) => art.original.dimensions === "20x30 in")
+        artItems.filter((art) => art.original.dimensions === "20x30 in")
       );
     } else if (tab === "24x36") {
       setFilteredArt(
-        mockArt.filter((art) => art.original.dimensions === "24x36 in")
+        artItems.filter((art) => art.original.dimensions === "24x36 in")
       );
     } else if (tab === "30x40") {
       setFilteredArt(
-        mockArt.filter((art) => art.original.dimensions === "30x40 in")
+        artItems.filter((art) => art.original.dimensions === "30x40 in")
       );
     } else {
-      setFilteredArt(mockArt);
+      setFilteredArt(artItems);
     }
   };
 
@@ -74,7 +89,7 @@ function Gallery({ onAddToCart }) {
       <div className="gallery__content">
         <div className="gallery__content-container">
           {filteredArt.map((art) => (
-            <ItemCard key={art._id} mockArt={art} onAddToCart={onAddToCart} />
+            <ItemCard key={art._id} artItem={art} onAddToCart={onAddToCart} />
           ))}
         </div>
       </div>

@@ -5,19 +5,19 @@ import rightArrow from "../../assets/icons/right-arrow.png";
 
 import "./ItemCard.css";
 
-function ItemCard({ mockArt, onAddToCart }) {
+function ItemCard({ artItem, onAddToCart }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedVersion, setSelectedVersion] = useState("original");
 
-  const images = mockArt.images;
+  const images = artItem.images;
 
   const handleClickAdd = () => {
     const selectedItem = {
-      _id: mockArt._id,
-      title: mockArt.title,
+      _id: artItem._id,
+      title: artItem.title,
       version: selectedVersion,
-      price: mockArt[selectedVersion]?.price,
-      dimensions: mockArt[selectedVersion].dimensions,
+      price: artItem[selectedVersion]?.price,
+      dimensions: artItem[selectedVersion].dimensions,
       image: images[0],
     };
     onAddToCart(selectedItem);
@@ -41,7 +41,7 @@ function ItemCard({ mockArt, onAddToCart }) {
         <img
           className="card__image"
           src={images[currentIndex]}
-          alt={mockArt.title}
+          alt={artItem.title}
         />
       </div>
 
@@ -76,7 +76,7 @@ function ItemCard({ mockArt, onAddToCart }) {
       )}
 
       <div className="card__info">
-        <h2 className="card__title">{mockArt.title}</h2>
+        <h2 className="card__title">{artItem.title}</h2>
         <ul className="card__details">
           <li className="card__detail">
             <label className="card__detail-label">
@@ -84,23 +84,23 @@ function ItemCard({ mockArt, onAddToCart }) {
                 <input
                   className="card__radio-button"
                   type="radio"
-                  name={`version-${mockArt._id}`}
+                  name={`version-${artItem._id}`}
                   value="original"
                   checked={selectedVersion === "original"}
                   onChange={(e) => setSelectedVersion(e.target.value)}
-                  disabled={mockArt.original.sold}
+                  disabled={artItem.original.sold}
                 />
                 <h3 className="card__type">Original -</h3>
-                {mockArt.original.sold ? (
+                {artItem.original.sold ? (
                   <p className="card__type card__type_sold">SOLD OUT</p>
                 ) : (
                   <strong className="card__type card__type_price">
-                    ${mockArt.original.price}.00
+                    ${artItem.original.price}.00
                   </strong>
                 )}
               </div>
               <em className="card__type card__type_size">
-                Size {mockArt.original.dimensions}
+                Size {artItem.original.dimensions}
               </em>
             </label>
           </li>
@@ -111,18 +111,18 @@ function ItemCard({ mockArt, onAddToCart }) {
                 <input
                   className="card__radio-button"
                   type="radio"
-                  name={`version-${mockArt._id}`}
+                  name={`version-${artItem._id}`}
                   value="print"
                   checked={selectedVersion === "print"}
                   onChange={(e) => setSelectedVersion(e.target.value)}
                 />
                 <h3 className="card__type">Print -</h3>
                 <strong className="card__type card__type_price">
-                  ${mockArt.print.price}.00
+                  ${artItem.print.price}.00
                 </strong>
               </div>
               <em className="card__type card__type_size">
-                Size {mockArt.print.dimensions}
+                Size {artItem.print.dimensions}
               </em>
             </label>
           </li>
@@ -132,7 +132,7 @@ function ItemCard({ mockArt, onAddToCart }) {
       <button
         className="card__add-button"
         onClick={handleClickAdd}
-        disabled={mockArt[selectedVersion]?.sold}
+        disabled={artItem[selectedVersion]?.sold}
       >
         Add to Cart
       </button>

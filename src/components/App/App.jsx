@@ -23,15 +23,13 @@ function App() {
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
 
-  // Do I handle not allowing multiple originals here?
-  // Or do I disable the button once it was added to cart the first time?
   const onAddToCart = (item) => {
     setCartList((prev) => {
       const exists = prev.find(
         (cartItem) =>
           cartItem._id === item._id && cartItem.version === item.version
       );
-
+      // If Item version = original call Mark Original as Sold Out from Backend
       if (exists) {
         return prev.map((cartItem) =>
           cartItem._id === item._id
