@@ -4,7 +4,7 @@ import { createArtItem } from "../../../utils/api";
 
 import DashBoard from "../DashBoard/DashBoard";
 import AdminLanding from "../AdminLanding/AdminLanding";
-import AddArtItemModal from "";
+import AddArtItemModal from "../modals/AddItemModal/AddItemModal";
 
 import "./Admin.css";
 
@@ -18,7 +18,17 @@ function Admin() {
 
   return (
     <section className="admin">
-      {isLoggedIn ? <DashBoard /> : <AdminLanding handleLogin={handleLogin} />}
+      {isLoggedIn ? (
+        <DashBoard />
+      ) : (
+        <>
+          {isAddArtModalOpen ? (
+            <AddArtItemModal />
+          ) : (
+            <AdminLanding handleLogin={handleLogin} />
+          )}
+        </>
+      )}
     </section>
   );
 }

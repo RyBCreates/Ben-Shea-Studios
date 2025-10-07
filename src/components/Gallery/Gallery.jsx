@@ -89,7 +89,12 @@ function Gallery({ onAddToCart }) {
       <div className="gallery__content">
         <div className="gallery__content-container">
           {filteredArt.map((art) => (
-            <ItemCard key={art._id} artItem={art} onAddToCart={onAddToCart} />
+            <ItemCard
+              key={art._id}
+              artItem={art}
+              onAddToCart={onAddToCart}
+              variant="default"
+            />
           ))}
         </div>
       </div>

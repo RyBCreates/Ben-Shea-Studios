@@ -1,0 +1,9 @@
+.editor__gallery {
+  display: grid;
+  justify-items: flex-start;
+  align-items: start;
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
+  gap: 20px;
+  overflow-y: scroll;
+  height: 80vh;
+}

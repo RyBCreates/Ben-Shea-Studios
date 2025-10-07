@@ -5,7 +5,7 @@ import rightArrow from "../../assets/icons/right-arrow.png";
 
 import "./ItemCard.css";
 
-function ItemCard({ artItem, onAddToCart }) {
+function ItemCard({ artItem, onAddToCart, variant }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedVersion, setSelectedVersion] = useState("original");
 
@@ -128,14 +128,20 @@ function ItemCard({ artItem, onAddToCart }) {
           </li>
         </ul>
       </div>
-
-      <button
-        className="card__add-button"
-        onClick={handleClickAdd}
-        disabled={artItem[selectedVersion]?.sold}
-      >
-        Add to Cart
-      </button>
+      {variant === "default" ? (
+        <button
+          className="card__add-button"
+          onClick={handleClickAdd}
+          disabled={artItem[selectedVersion]?.sold}
+        >
+          Add to Cart
+        </button>
+      ) : (
+        <div>
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      )}
     </div>
   );
 }

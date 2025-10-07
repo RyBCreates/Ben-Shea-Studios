@@ -1,5 +1,7 @@
 import SideBar from "../SideBar/SideBar";
 import Orders from "../Orders/Orders";
+import ArtEditor from "../ArtEditor/ArtEditor";
+
 import "./Dashboard.css";
 
 function DashBoard() {
@@ -8,7 +10,8 @@ function DashBoard() {
       <h2 className="dashboard__title">Welcome to the Admin Dashboard</h2>
       <div className="dashboard__content">
         <SideBar />
-        <Orders />
+        {/* <Orders /> */}
+        <ArtEditor />
       </div>
     </section>
   );
