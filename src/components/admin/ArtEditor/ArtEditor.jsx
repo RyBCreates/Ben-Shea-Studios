@@ -27,7 +27,7 @@ function ArtEditor({ handleAddArtItemClick }) {
           handleAddArtItemClick();
         }}
       >
-        Add New Art Item
+        + Add New Art Item
       </button>
       <div className="editor__gallery">
         {artItems.map((art) => (

@@ -57,15 +57,11 @@ function Admin() {
     <section className="admin">
       {isLoggedIn ? (
         <>
-          {isAddArtModalOpen ? (
-            <AddArtItemModal
-              isAddArtModalOpen={isAddArtModalOpen}
-              closeModal={closeModal}
-            />
-          ) : (
-            <></>
-          )}
           <DashBoard handleAddArtItemClick={handleAddArtItemClick} />
+          <AddArtItemModal
+            isAddArtModalOpen={isAddArtModalOpen}
+            closeModal={closeModal}
+          />
         </>
       ) : (
         <AdminLanding handleLogin={handleLogin} />

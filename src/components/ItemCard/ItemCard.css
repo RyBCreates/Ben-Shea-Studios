@@ -137,7 +137,9 @@
   color: red;
 }
 
-.card__add-button {
+.card__add-button,
+.card__edit-button,
+.card__delete-button {
   font-size: 26px;
   color: white;
   background-color: #000;
@@ -153,6 +155,12 @@
   transform: scale(1.1);
   background-color: #01c4ff;
   color: black;
+}
+
+.card__button-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
 }
 
 @media screen and (max-width: 750px) {

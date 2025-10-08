@@ -137,9 +137,9 @@ function ItemCard({ artItem, onAddToCart, variant }) {
           Add to Cart
         </button>
       ) : (
-        <div>
-          <button>Edit</button>
-          <button>Delete</button>
+        <div className="card__button-container">
+          <button className="card__edit-button">Edit</button>
+          <button className="card__delete-button">Delete</button>
         </div>
       )}
     </div>
