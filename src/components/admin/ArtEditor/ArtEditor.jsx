@@ -5,7 +5,7 @@ import ItemCard from "../../ItemCard/ItemCard";
 
 import "./ArtEditor.css";
 
-function ArtEditor() {
+function ArtEditor({ handleAddArtItemClick }) {
   const [artItems, setArtItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +20,13 @@ function ArtEditor() {
 
   return (
     <section className="editor">
-      <button className="editor__add-button" type="button">
+      <button
+        className="editor__add-button"
+        type="button"
+        onClick={() => {
+          handleAddArtItemClick();
+        }}
+      >
         Add New Art Item
       </button>
       <div className="editor__gallery">

@@ -1,0 +1,50 @@
+.add-art-modal {
+  width: 500px;
+  max-width: 90%;
+  padding: 20px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal__form input,
+.modal__form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.image-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-image-btn {
+  align-self: flex-start;
+  padding: 6px 12px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-image-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.modal__submit {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal__submit:hover {
+  background-color: #333;
+}

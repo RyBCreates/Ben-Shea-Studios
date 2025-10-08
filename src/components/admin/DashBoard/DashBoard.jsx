@@ -4,14 +4,14 @@ import ArtEditor from "../ArtEditor/ArtEditor";
 
 import "./Dashboard.css";
 
-function DashBoard() {
+function DashBoard({ handleAddArtItemClick }) {
   return (
     <section className="dashboard">
       <h2 className="dashboard__title">Welcome to the Admin Dashboard</h2>
       <div className="dashboard__content">
         <SideBar />
         {/* <Orders /> */}
-        <ArtEditor />
+        <ArtEditor handleAddArtItemClick={handleAddArtItemClick} />
       </div>
     </section>
   );

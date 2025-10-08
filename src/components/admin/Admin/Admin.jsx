@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { createArtItem } from "../../../utils/api";
 
 import DashBoard from "../DashBoard/DashBoard";
 import AdminLanding from "../AdminLanding/AdminLanding";
-import AddArtItemModal from "../modals/AddItemModal/AddItemModal";
+import AddArtItemModal from "../../modals/AddArtItemModal/AddArtItemModal";
 
 import "./Admin.css";
 
@@ -16,18 +16,59 @@ function Admin() {
     setIsLoggedIn(true);
   };
 
+  const handleAddArtItemClick = () => {
+    setIsAddArtModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsAddArtModalOpen(false);
+  };
+
+  // Repeated from App.jsx (Maybe put in a context)
+  useEffect(() => {
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        setIsAddArtModalOpen(false);
+      }
+    };
+
+    const handleClickOutside = (e) => {
+      if (e.target.classList.contains("modal")) {
+        setIsAddArtModalOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscClose);
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscClose);
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const onAddArt = async (data) => {
+    try {
+      createArtItem(data);
+    } catch {}
+  };
+
   return (
     <section className="admin">
       {isLoggedIn ? (
-        <DashBoard />
-      ) : (
         <>
           {isAddArtModalOpen ? (
-            <AddArtItemModal />
+            <AddArtItemModal
+              isAddArtModalOpen={isAddArtModalOpen}
+              closeModal={closeModal}
+            />
           ) : (
-            <AdminLanding handleLogin={handleLogin} />
+            <></>
           )}
+          <DashBoard handleAddArtItemClick={handleAddArtItemClick} />
         </>
+      ) : (
+        <AdminLanding handleLogin={handleLogin} />
       )}
     </section>
   );
