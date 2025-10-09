@@ -2,8 +2,8 @@ import "./ExhibitEditor.css";
 
 function ExhibitEditor() {
   return (
-    <section>
-      <h2></h2>
+    <section className="exhibit-editor">
+      <h2 className="exhibit-editor__title">Exhibit Editor</h2>
     </section>
   );
 }

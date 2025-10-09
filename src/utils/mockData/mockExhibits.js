@@ -16,7 +16,7 @@ export const mockExhibit = [
   {
     _id: 3,
     location: "gallery",
-    image: "https://images.unsplash.com/photo-1583275070447-9f8a63a5e9fc]",
+    image: "https://picsum.photos/600/400",
     description:
       "At our Midtown gallery, you'll find classical and traditional pieces, including portraits and landscapes.",
   },
