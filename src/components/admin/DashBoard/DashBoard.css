@@ -1,0 +1,16 @@
+.dashboard {
+  padding: 20px;
+  background-color: rgb(213, 213, 213);
+}
+
+.dashboard__content {
+  display: grid;
+  grid-template-columns: 12% 88%;
+}
+
+.dashboard__title {
+  width: 100%;
+  color: black;
+  font-size: 32px;
+  margin: 0 0 10px 0;
+}

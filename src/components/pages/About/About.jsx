@@ -6,7 +6,7 @@ function About() {
       <div className="about__hero">
         <h1 className="about__hero_title">About the Artist</h1>
         <p className="about__hero_text">
-          Ben Shea is a renowned artist based in Boston, MA.
+          Ben Shea is a renowned artist from in Massachusetts.
         </p>
       </div>
       <div className="about__content">

@@ -1,0 +1,163 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #0000005d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  z-index: 100;
+}
+
+.modal__opened {
+  visibility: visible;
+}
+
+.modal__content {
+  border: 1px solid #0000004d;
+  background-color: #ffffff;
+  position: relative;
+  margin: 20px;
+  padding: 28px 28px 36px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  max-width: 600px;
+  width: 100%;
+}
+
+.modal__button_close {
+  position: absolute;
+  font-size: 32px;
+  padding: 0;
+  margin: 0;
+  top: 15px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+}
+
+.modal__button_close:hover {
+  cursor: pointer;
+}
+
+.modal__title {
+  margin: 0 10px 0 0;
+  font-size: 32px;
+}
+
+.modal__description {
+  margin: 20px 0 0 0;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  justify-content: center;
+  margin: 20px 5px 0;
+  gap: 12px;
+}
+
+.modal__name-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 30px;
+}
+
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.modal__label_radio {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.modal__input {
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 4px 10px;
+  width: 100%;
+}
+
+.modal__email-container {
+  width: 100%;
+}
+
+.modal__email-container .modal__input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal__input_radio {
+  width: 15px;
+}
+
+.modal__buttons-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
+  width: 100%;
+}
+
+.modal__button {
+  font-size: 24px;
+  width: 100%;
+  padding: 20px 40px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-wrap: nowrap;
+}
+
+.modal__button:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+}
+
+.modal__button_submit {
+  border: none;
+  color: white;
+  background-color: #0062ff;
+}
+
+.modal__button_submit:hover {
+  background-color: #01c4ff;
+  border: none;
+}
+
+.modal__button_disabled {
+  border: none;
+  color: rgb(125, 125, 125);
+  background-color: #c7c7c7;
+}
+
+.modal__button_cancel {
+  border: none;
+  color: white;
+  background-color: #e42626;
+}
+
+.modal__button_cancel:hover {
+  border: none;
+  background-color: #e05454;
+}
+
+@media screen and (max-width: 600px) {
+  .modal__buttons-container {
+    flex-direction: column;
+  }
+}

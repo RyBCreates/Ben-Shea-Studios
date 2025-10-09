@@ -12,7 +12,7 @@ function Exhibits() {
         </p>
       </div>
       {mockExhibit.map((exhibit) => (
-        <div className="exhibit-card">
+        <div className="exhibit-card" key={exhibit._id}>
           <div className="exhibit-card__info">
             <h2 className="exhibit-card__title">{exhibit.location}</h2>
             <p className="exhibit-card__subtitle">{exhibit.description}</p>

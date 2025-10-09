@@ -1,6 +1,38 @@
+import { useRef } from "react";
+import emailjs from "emailjs-com";
+
 import "./Contact.css";
 
 function Contact() {
+  // HAVE BEN SIGN UP FOR EMAILJS.COM Get his ID's/key
+  const YOUR_SERVICE_ID = "service_axeg2pd";
+  const YOUR_TEMPLATE_ID = "template_kihidjl";
+  const YOUR_PUBLIC_KEY = "yFUuV-y41R3NpC0Nu";
+
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        YOUR_SERVICE_ID,
+        YOUR_TEMPLATE_ID,
+        form.current,
+        YOUR_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          console.log("Message sent:", result.text);
+          alert("Message sent!");
+        },
+        (error) => {
+          console.log("Error:", error.text);
+          alert("Failed to send message.");
+        }
+      );
+  };
+
   return (
     <section className="contact">
       <div className="contact__content">
@@ -9,20 +41,22 @@ function Contact() {
           Have any questions? Fill out the form below and we will get right back
           to you.
         </p>
-        <form className="contact__form">
+        <form ref={form} onSubmit={sendEmail} className="contact__form">
           <input
             className="contact__input"
             type="text"
+            name="name"
             placeholder="Your Name"
           />
           <input
             className="contact__input"
-            type="text"
+            type="email"
+            name="email"
             placeholder="Your Email"
           />
           <textarea
             className="contact__input contact__input_textarea"
-            type="text"
+            name="message"
             placeholder="Your Message"
           />
           <button className="contact__submit-button" type="submit">

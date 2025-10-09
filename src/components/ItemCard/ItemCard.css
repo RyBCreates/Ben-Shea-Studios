@@ -3,8 +3,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   width: 100%;
-  height: 600px;
+  max-height: 100%;
+  height: 550px;
   background-color: rgb(255, 255, 255);
   padding: 0 0 20px;
   border-radius: 25px;
@@ -16,7 +18,7 @@
   align-items: center;
   background-color: #ffffff;
   width: 100%;
-  height: 70%;
+  height: 60%;
   border-radius: 25px;
 }
 
@@ -79,12 +81,11 @@
   background-color: rgb(255, 255, 255);
   overflow-y: scroll;
   width: 100%;
-  height: 50%;
 }
 
 .card__title {
   text-align: center;
-  font-size: 30px;
+  font-size: 24px;
   margin: 20px;
 }
 
@@ -96,23 +97,55 @@
 
 .card__detail {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   margin: 0 20px 20px;
 }
 
-.card__detail_type,
-.card__detail_price,
-.card__detail_size {
-  margin: 0;
-  font-size: 24px;
+.card__detail-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.card__detail_price {
+.card__type-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.card__radio-button:hover {
+  cursor: pointer;
+}
+
+.card__type,
+.card__type_price,
+.card__type_size {
+  margin: 0;
+  font-size: 18px;
+}
+
+.card__type_price {
   margin: 0 auto 0 5px;
 }
 
-.card__add-button {
+.card__type_sold {
+  font-weight: 700;
+  color: red;
+}
+
+.card__button-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.card__add-button,
+.card__edit-button,
+.card__delete-button {
   font-size: 26px;
   color: white;
   background-color: #000;
@@ -123,10 +156,18 @@
   border: none;
 }
 
-.card__add-button:hover {
+.card__add-button:hover,
+.card__edit-button:hover {
   cursor: pointer;
   transform: scale(1.1);
   background-color: #01c4ff;
+  color: black;
+}
+
+.card__delete-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #ff0000;
   color: black;
 }
 

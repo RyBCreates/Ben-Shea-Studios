@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import "./Hero.css";
 
-function Hero() {
-  const navigate = useNavigate();
-
+function Hero({ onGetDiscountClick }) {
   return (
     <section className="hero">
+      <div className="hero__background"></div>
       <div className="hero__content">
         <div>
           <h2 className="hero__title">
@@ -16,10 +14,23 @@ function Hero() {
           </p>
         </div>
         <div className="hero__button-container">
-          <button className="hero__button hero__button_main">
+          <button
+            className="hero__button hero__button_main"
+            onClick={() => {
+              onGetDiscountClick();
+            }}
+          >
             Get a Discount
           </button>
-          <button className="hero__button hero__button_secondary">
+          <button
+            className="hero__button hero__button_secondary"
+            onClick={() => {
+              const section = document.getElementById("gallery");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
             Start Shopping!
           </button>
         </div>

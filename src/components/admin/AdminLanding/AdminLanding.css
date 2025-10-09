@@ -1,9 +1,9 @@
-.admin {
+.landing {
   background: url("../../../assets/about-bg.png") no-repeat center/cover;
   padding: 40px;
 }
 
-.admin__content {
+.landing__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +13,7 @@
   border-radius: 15px;
 }
 
-.admin__title {
+.landing__title {
   font-size: 60px;
   color: white;
   width: 50%;

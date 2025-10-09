@@ -17,34 +17,45 @@ function Header({ cartList, cartMenuToggle }) {
         <h1 className="header__title">Ben Shea Studios</h1>
       </Link>
       <ul className="navbar">
-        <Link to="/about" className="navbar__link-container">
+        <Link to="/" className="navbar__link-container">
+          <li className="navbar__link">Home</li>
+        </Link>
+        <Link to="about" className="navbar__link-container">
           <li className="navbar__link">About</li>
         </Link>
-        <Link to="/exhibits" className="navbar__link-container">
+        <Link to="exhibits" className="navbar__link-container">
           <li className="navbar__link">Exhibits</li>
         </Link>
-        <Link to="/contact" className="navbar__link-container">
+        <Link to="contact" className="navbar__link-container">
           <li className="navbar__link">Contact</li>
         </Link>
       </ul>
-      <button
-        type="button"
-        className="header__hamburger"
-        onClick={() => {
-          hamburgerToggle();
-        }}
-      >
-        |||
-      </button>
-      <button
-        className="header__cart-button"
-        onClick={() => {
-          cartMenuToggle();
-        }}
-      >
-        {cartList.length}
-        <img className="header__cart-icon" src={cartIcon} alt="cart icon"></img>
-      </button>
+      <div className="header__mobile-buttons">
+        <button
+          type="button"
+          className="header__hamburger"
+          onClick={() => {
+            hamburgerToggle();
+          }}
+        >
+          |||
+        </button>
+        <button
+          className={`header__cart-button ${
+            cartList.length === 0 ? "header__cart-button_empty" : ""
+          }`}
+          onClick={() => {
+            cartMenuToggle();
+          }}
+        >
+          {cartList.length}
+          <img
+            className="header__cart-icon"
+            src={cartIcon}
+            alt="cart icon"
+          ></img>
+        </button>
+      </div>
 
       {isHamburgerOpen && (
         <div className="header__hamburger-menu">
