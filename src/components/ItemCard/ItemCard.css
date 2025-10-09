@@ -137,6 +137,12 @@
   color: red;
 }
 
+.card__button-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
 .card__add-button,
 .card__edit-button,
 .card__delete-button {
@@ -150,17 +156,19 @@
   border: none;
 }
 
-.card__add-button:hover {
+.card__add-button:hover,
+.card__edit-button:hover {
   cursor: pointer;
   transform: scale(1.1);
   background-color: #01c4ff;
   color: black;
 }
 
-.card__button-container {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
+.card__delete-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #ff0000;
+  color: black;
 }
 
 @media screen and (max-width: 750px) {

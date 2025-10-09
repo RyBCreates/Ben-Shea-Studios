@@ -20,6 +20,7 @@ function ArtEditor({ handleAddArtItemClick }) {
 
   return (
     <section className="editor">
+      <h2 className="editor__title">Art Editor</h2>
       <button
         className="editor__add-button"
         type="button"

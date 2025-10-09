@@ -1,12 +1,44 @@
 import "./SideBar.css";
 
-function SideBar() {
+function SideBar({ activeTab, onTabChange }) {
   return (
-    <div className="sidebar">
-      <button>Art Gallery</button>
-      <button>Exhibitions</button>
-      <button>Orders</button>
-    </div>
+    <aside className="sidebar" aria-label="Admin sections">
+      <ul className="sidebar__list">
+        <li>
+          <button
+            type="button"
+            className={`sidebar__button ${
+              activeTab === "orders" ? "sidebar__button_active" : ""
+            }`}
+            onClick={() => onTabChange("orders")}
+          >
+            Orders
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            className={`sidebar__button ${
+              activeTab === "gallery" ? "sidebar__button_active" : ""
+            }`}
+            onClick={() => onTabChange("gallery")}
+          >
+            Art Gallery
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            className={`sidebar__button ${
+              activeTab === "exhibitions" ? "sidebar__button_active" : ""
+            }`}
+            onClick={() => onTabChange("exhibits")}
+          >
+            Exhibitions
+          </button>
+        </li>
+      </ul>
+    </aside>
   );
 }
 

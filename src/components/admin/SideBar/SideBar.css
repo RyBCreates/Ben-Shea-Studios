@@ -8,3 +8,27 @@
   border: 1px solid black;
   padding: 20px;
 }
+
+.sidebar__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar__button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+}
+
+.sidebar__button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.51);
+}
+
+.sidebar__button_active {
+  font-weight: bold;
+}
