@@ -5,8 +5,7 @@ import ItemCard from "../../ItemCard/ItemCard";
 
 import "./ArtEditor.css";
 
-function ArtEditor({ handleAddArtItemClick }) {
-  const [artItems, setArtItems] = useState([]);
+function ArtEditor({ handleAddArtItemClick, artItems, setArtItems }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
