@@ -11,6 +11,7 @@ import "./Admin.css";
 function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAddArtModalOpen, setIsAddArtModalOpen] = useState(false);
+  const [artItems, setArtItems] = useState([]);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -50,7 +51,9 @@ function Admin() {
   const onAddArt = async (data) => {
     try {
       createArtItem(data);
-    } catch {}
+    } catch (err) {
+      console.error("Failed to Create art item", err);
+    }
   };
 
   return (
@@ -60,6 +63,7 @@ function Admin() {
           <DashBoard handleAddArtItemClick={handleAddArtItemClick} />
           <AddArtItemModal
             isAddArtModalOpen={isAddArtModalOpen}
+            onAddArt={onAddArt}
             closeModal={closeModal}
           />
         </>

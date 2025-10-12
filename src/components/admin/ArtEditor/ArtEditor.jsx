@@ -5,8 +5,7 @@ import ItemCard from "../../ItemCard/ItemCard";
 
 import "./ArtEditor.css";
 
-function ArtEditor({ handleAddArtItemClick }) {
-  const [artItems, setArtItems] = useState([]);
+function ArtEditor({ handleAddArtItemClick, artItems, setArtItems }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,10 +18,10 @@ function ArtEditor({ handleAddArtItemClick }) {
   if (loading) return <p>Loading artwork...</p>;
 
   return (
-    <section className="editor">
-      <h2 className="editor__title">Art Editor</h2>
+    <section className="art-editor">
+      <h2 className="art-editor__title">Art Editor</h2>
       <button
-        className="editor__add-button"
+        className="art-editor__add-button"
         type="button"
         onClick={() => {
           handleAddArtItemClick();
@@ -30,7 +29,7 @@ function ArtEditor({ handleAddArtItemClick }) {
       >
         + Add New Art Item
       </button>
-      <div className="editor__gallery">
+      <div className="art-editor__gallery">
         {artItems.map((art) => (
           <ItemCard key={art._id} artItem={art} variant="admin" />
         ))}

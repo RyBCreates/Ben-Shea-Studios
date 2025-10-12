@@ -7,7 +7,7 @@ import ExhibitEditor from "../ExhibitEditor/ExhibitEditor";
 
 import "./Dashboard.css";
 
-function DashBoard({ handleAddArtItemClick }) {
+function DashBoard({ handleAddArtItemClick, artItems, setArtItems }) {
   const [activeTab, setActiveTab] = useState("orders");
 
   const onTabChange = (tab) => {
@@ -22,7 +22,11 @@ function DashBoard({ handleAddArtItemClick }) {
         {activeTab === "orders" ? (
           <Orders />
         ) : activeTab === "gallery" ? (
-          <ArtEditor handleAddArtItemClick={handleAddArtItemClick} />
+          <ArtEditor
+            handleAddArtItemClick={handleAddArtItemClick}
+            artItems={artItems}
+            setArtItems={setArtItems}
+          />
         ) : activeTab === "exhibits" ? (
           <ExhibitEditor />
         ) : (

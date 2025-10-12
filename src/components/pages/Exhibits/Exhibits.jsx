@@ -1,4 +1,5 @@
-import { mockExhibit } from "../../../utils/mockExhibits";
+import { mockExhibit } from "../../../utils/mockData/mockExhibits";
+import ExhibitCard from "../../ExhibitCard/ExhibitCard";
 import "./Exhibits.css";
 
 function Exhibits() {
@@ -11,19 +12,11 @@ function Exhibits() {
           artwork.
         </p>
       </div>
-      {mockExhibit.map((exhibit) => (
-        <div className="exhibit-card" key={exhibit._id}>
-          <div className="exhibit-card__info">
-            <h2 className="exhibit-card__title">{exhibit.location}</h2>
-            <p className="exhibit-card__subtitle">{exhibit.description}</p>
-          </div>
-          <img
-            className="exhibit-card__image"
-            src={exhibit.image}
-            alt="downtown"
-          />
-        </div>
-      ))}
+      <ul className="exhibits__list">
+        {mockExhibit.map((exhibit) => (
+          <ExhibitCard exhibit={exhibit} key={exhibit._id} variant="default" />
+        ))}
+      </ul>
     </section>
   );
 }
