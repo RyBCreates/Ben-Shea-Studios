@@ -7,7 +7,15 @@ import ExhibitEditor from "../ExhibitEditor/ExhibitEditor";
 
 import "./Dashboard.css";
 
-function DashBoard({ handleAddArtItemClick, artItems, setArtItems }) {
+function DashBoard({
+  handleAddArtItemClick,
+  artItems,
+  setArtItems,
+  onDeleteArt,
+  closeModal,
+  currentModal,
+  setCurrentModal,
+}) {
   const [activeTab, setActiveTab] = useState("orders");
 
   const onTabChange = (tab) => {
@@ -26,6 +34,10 @@ function DashBoard({ handleAddArtItemClick, artItems, setArtItems }) {
             handleAddArtItemClick={handleAddArtItemClick}
             artItems={artItems}
             setArtItems={setArtItems}
+            onDeleteArt={onDeleteArt}
+            closeModal={closeModal}
+            currentModal={currentModal}
+            setCurrentModal={setCurrentModal}
           />
         ) : activeTab === "exhibits" ? (
           <ExhibitEditor />

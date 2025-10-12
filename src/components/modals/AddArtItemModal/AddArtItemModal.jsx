@@ -54,7 +54,7 @@ function AddArtItemModal({ isAddArtModalOpen, closeModal, onAddArt }) {
   return (
     <div className={`modal ${isAddArtModalOpen ? "modal__opened" : ""}`}>
       <div className="modal__content add-art-modal">
-        <button className="modal__button_close" onClick={closeModal}>
+        <button className="modal__close-button" onClick={closeModal}>
           &times;
         </button>
         <h2 className="modal__title">Add New Art Item</h2>

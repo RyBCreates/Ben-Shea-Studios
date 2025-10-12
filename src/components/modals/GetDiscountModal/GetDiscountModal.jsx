@@ -25,7 +25,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
     >
       <div className="modal__content">
         <button
-          className="modal__button_close"
+          className="modal__close-button"
           onClick={() => {
             closeModal();
           }}
