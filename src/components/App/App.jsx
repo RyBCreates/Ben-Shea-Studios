@@ -23,25 +23,6 @@ function App() {
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
 
-  const onAddToCart = (item) => {
-    setCartList((prev) => {
-      const exists = prev.find(
-        (cartItem) =>
-          cartItem._id === item._id && cartItem.version === item.version
-      );
-      // If Item version = original call Mark Original as Sold Out from Backend
-      if (exists) {
-        return prev.map((cartItem) =>
-          cartItem._id === item._id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
-      } else {
-        return [...prev, { ...item, quantity: 1 }];
-      }
-    });
-  };
-
   const cartMenuToggle = (prev) => {
     return setIsCartMenuOpen(!prev);
   };
@@ -86,6 +67,33 @@ function App() {
   const location = useLocation();
   const hideLayout = location.pathname.startsWith("/admin");
 
+  const onUpdateCart = (updatedCart) => {
+    setCartList(updatedCart);
+  };
+
+  const onAddToCart = (item) => {
+    setCartList((prev) => {
+      const exists = prev.find(
+        (cartItem) =>
+          cartItem._id === item._id && cartItem.version === item.version
+      );
+      // If Item version = original call Mark Original as Sold Out from Backend
+      if (exists) {
+        return prev.map((cartItem) =>
+          cartItem._id === item._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [...prev, { ...item, quantity: 1 }];
+      }
+    });
+  };
+
+  const handleRemove = (id) => {
+    onUpdateCart(cartList.filter((item) => item._id !== id));
+  };
+
   return (
     <div className="app">
       <div className="app__content">
@@ -106,13 +114,27 @@ function App() {
           <Route path="exhibits" element={<Exhibits />} />
           <Route path="contact" element={<Contact />} />
           <Route path="admin" element={<Admin />} />
-          <Route path="checkout" element={<Checkout cartList={cartList} />} />
+          <Route
+            path="checkout"
+            element={
+              <Checkout
+                cartList={cartList}
+                onUpdateCart={onUpdateCart}
+                handleRemove={handleRemove}
+              />
+            }
+          />
           <Route path="success" element={<Success />} />
           <Route path="cancel" element={<Cancelled />} />
         </Routes>
         {!hideLayout && <Footer />}
         {isCartMenuOpen && !hideLayout ? (
-          <CartMenu setIsCartMenuOpen={setIsCartMenuOpen} cartList={cartList} />
+          <CartMenu
+            setIsCartMenuOpen={setIsCartMenuOpen}
+            cartList={cartList}
+            onUpdateCart={onUpdateCart}
+            handleRemove={handleRemove}
+          />
         ) : (
           ""
         )}

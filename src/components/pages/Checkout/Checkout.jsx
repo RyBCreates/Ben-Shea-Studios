@@ -5,7 +5,7 @@ import CheckoutCart from "../../CheckoutCart/CheckoutCart";
 
 import "./Checkout.css";
 
-function Checkout({ cartList, onUpdateCart }) {
+function Checkout({ cartList, onUpdateCart, handleRemove }) {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -24,7 +24,7 @@ function Checkout({ cartList, onUpdateCart }) {
     // Later: integrate with Stripe checkout
   };
 
-  const stripePromise = loadStripe();
+  // const stripePromise = loadStripe();
   // "pk_test_..."
 
   return (
@@ -87,7 +87,11 @@ function Checkout({ cartList, onUpdateCart }) {
             Proceed to Payment
           </button>
         </form>
-        <CheckoutCart cartList={cartList} onUpdateCart={onUpdateCart} />
+        <CheckoutCart
+          cartList={cartList}
+          onUpdateCart={onUpdateCart}
+          handleRemove={handleRemove}
+        />
       </div>
     </section>
   );

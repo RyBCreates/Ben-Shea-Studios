@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import CartItem from "../CartItem/CartItem";
 import "./CartMenu.css";
 
-function CartMenu({ setIsCartMenuOpen, cartList }) {
+function CartMenu({ setIsCartMenuOpen, cartList, onUpdateCart, handleRemove }) {
   const calculateCartTotal = (cartItems) => {
     let total = 0;
     for (const item of cartItems) {
@@ -31,7 +31,13 @@ function CartMenu({ setIsCartMenuOpen, cartList }) {
           <div className="cart-menu__items-list">
             <ul className="cart-menu__items">
               {cartList.map((cartItem) => (
-                <CartItem cartItem={cartItem} key={cartItem._id} />
+                <CartItem
+                  key={cartItem._id}
+                  cartItem={cartItem}
+                  cartList={cartList}
+                  onUpdateCart={onUpdateCart}
+                  handleRemove={handleRemove}
+                />
               ))}
             </ul>
             <div className="cart-menu__checkout">

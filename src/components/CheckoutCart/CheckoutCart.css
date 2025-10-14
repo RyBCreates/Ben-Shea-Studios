@@ -8,7 +8,7 @@
 }
 
 .checkout-cart__title {
-  margin: 0;
+  margin: 0 0 5px 0;
 }
 
 .checkout-cart__empty {
@@ -21,10 +21,15 @@
   margin: 0;
 }
 
-.checkout-cart__item {
+/* .checkout-cart__item {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
+}
+
+.checkout-cart__card-title,
+.checkout-cart__card-price {
+  margin: 0 0 5px 0;
 }
 
 .checkout-cart__item img {
@@ -44,4 +49,4 @@
 .checkout-cart__totals {
   margin-top: auto;
   font-weight: bold;
-}
+} */

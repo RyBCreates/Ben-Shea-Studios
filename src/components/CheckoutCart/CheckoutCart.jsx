@@ -1,10 +1,8 @@
+import CartItem from "../CartItem/CartItem";
+
 import "./CheckoutCart.css";
 
-function CheckoutCart({ cartList, onUpdateCart }) {
-  const handleRemove = (id) => {
-    onUpdateCart(cartList.filter((item) => item.id !== id));
-  };
-
+function CheckoutCart({ cartList, onUpdateCart, handleRemove }) {
   const subtotal = cartList.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -19,44 +17,14 @@ function CheckoutCart({ cartList, onUpdateCart }) {
         <p className="checkout-cart__empty">Your cart is empty.</p>
       ) : (
         <ul className="checkout-cart__list">
-          {cartList.map((item) => (
-            <li key={item.id} className="checkout-cart__item">
-              <img src={item.image} alt={item.title} />
-              <div>
-                <h4>{item.title}</h4>
-                <p>${item.price.toFixed(2)}</p>
-                <div className="checkout-cart__controls">
-                  <button
-                    onClick={() =>
-                      onUpdateCart(
-                        cartList.map((i) =>
-                          i.id === item.id && i.quantity > 1
-                            ? { ...i, quantity: i.quantity - 1 }
-                            : i
-                        )
-                      )
-                    }
-                  >
-                    -
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button
-                    onClick={() =>
-                      onUpdateCart(
-                        cartList.map((i) =>
-                          i.id === item.id
-                            ? { ...i, quantity: i.quantity + 1 }
-                            : i
-                        )
-                      )
-                    }
-                  >
-                    +
-                  </button>
-                  <button onClick={() => handleRemove(item.id)}>Remove</button>
-                </div>
-              </div>
-            </li>
+          {cartList.map((cartItem) => (
+            <CartItem
+              key={cartItem._id}
+              cartItem={cartItem}
+              cartList={cartList}
+              onUpdateCart={onUpdateCart}
+              handleRemove={handleRemove}
+            />
           ))}
         </ul>
       )}
