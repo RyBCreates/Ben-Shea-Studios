@@ -106,7 +106,7 @@ function App() {
           <Route path="exhibits" element={<Exhibits />} />
           <Route path="contact" element={<Contact />} />
           <Route path="admin" element={<Admin />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="checkout" element={<Checkout cartList={cartList} />} />
           <Route path="success" element={<Success />} />
           <Route path="cancel" element={<Cancelled />} />
         </Routes>
