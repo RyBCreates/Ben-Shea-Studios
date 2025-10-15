@@ -1,5 +1,7 @@
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
+
+import { createCheckoutLink } from "../../../utils/api/index";
 
 import CheckoutCart from "../../CheckoutCart/CheckoutCart";
 
@@ -21,11 +23,9 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Later: integrate with Stripe checkout
+    console.log(cartList);
+    createCheckoutLink(cartList);
   };
-
-  // const stripePromise = loadStripe();
-  // "pk_test_..."
 
   return (
     <section className="checkout">

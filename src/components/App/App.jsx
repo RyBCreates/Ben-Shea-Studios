@@ -18,10 +18,27 @@ import "./App.css";
 
 function App() {
   const [cartList, setCartList] = useState([]);
+  const [cartLoaded, setCartLoaded] = useState(false);
 
   const [activeModal, setActiveModal] = useState("");
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
+
+  // Load cart once
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCartList(JSON.parse(savedCart));
+    }
+    setCartLoaded(true);
+  }, []);
+
+  // Save only after loading is done
+  useEffect(() => {
+    if (cartLoaded) {
+      localStorage.setItem("cart", JSON.stringify(cartList));
+    }
+  }, [cartList, cartLoaded]);
 
   const cartMenuToggle = (prev) => {
     return setIsCartMenuOpen(!prev);
@@ -93,7 +110,6 @@ function App() {
   const handleRemove = (id) => {
     onUpdateCart(cartList.filter((item) => item._id !== id));
   };
-
   return (
     <div className="app">
       <div className="app__content">
@@ -147,18 +163,16 @@ function App() {
 export default App;
 
 // TODO:
-// 1. Add Delete Button to Cart Items
-// 2. Disable add button if the original is in the cart, only 1 exists at a time.
-// 3. Make CartMenu Responsive
-// 4. Make the Header responsive
-// 5. Add ArtItems to the Backend
-// 6. Connect CartMenu to the Backend
-// 7. At smaller Screens fix the grid of the gallery section
-// 8. Style and add Content to Success Page
-// 9. Style and add Content to Cancelled Page
-// 10. Style Checkout page
-// 11. Add Cart Items to Checkout page for more editability for user
-// 12. Add Unfulfilled orders to Admin
-// 13. Add Fulfilled Orders to Admin
-// 14. Add Add Button to Admin
+// 1. Disable add button if the original is in the cart, only 1 exists at a time.
+// 2. Make CartMenu Responsive
+// 3. Make the Header responsive
+// 4. Connect CartMenu to the Backend
+// 5. At smaller Screens fix the grid of the gallery section
+// 6. Style and add Content to Success Page
+// 7. Style and add Content to Cancelled Page
+// 8. Add Unfulfilled orders to Admin
+// 9. Add Fulfilled Orders to Admin
+// 10. Change total price when discount code is used
+// 11. Figure out how to create a unique discount code
+// 12. Bug Fix: When removing multiple items from cart: deletes whole list on 2nd or 3rd click
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchArtItems } from "../../../utils/api";
+import { fetchArtItems } from "../../../utils/api/index";
 
 import ItemCard from "../../ItemCard/ItemCard";
 import ConfirmDeleteModal from "../../modals/ConfirmDeleteModal/ConfirmDeleteModal";
