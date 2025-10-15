@@ -14,6 +14,7 @@ function Admin() {
   const [isAddArtModalOpen, setIsAddArtModalOpen] = useState(false);
   const [currentModal, setCurrentModal] = useState("");
   const [artItems, setArtItems] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -85,6 +86,8 @@ function Admin() {
             handleAddArtItemClick={handleAddArtItemClick}
             artItems={artItems}
             setArtItems={setArtItems}
+            orders={orders}
+            setOrders={setOrders}
             onDeleteArt={onDeleteArt}
             closeModal={closeModal}
             currentModal={currentModal}

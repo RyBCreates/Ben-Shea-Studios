@@ -140,7 +140,10 @@ function App() {
               />
             }
           />
-          <Route path="success" element={<Success />} />
+          <Route
+            path="success"
+            element={<Success setCartList={setCartList} />}
+          />
           <Route path="cancel" element={<Cancelled />} />
         </Routes>
         {!hideLayout && <Footer />}
@@ -175,4 +178,5 @@ export default App;
 // 10. Change total price when discount code is used
 // 11. Figure out how to create a unique discount code
 // 12. Bug Fix: When removing multiple items from cart: deletes whole list on 2nd or 3rd click
+// 13. Clear CartList when navigating to success page (remove button from success page)
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary

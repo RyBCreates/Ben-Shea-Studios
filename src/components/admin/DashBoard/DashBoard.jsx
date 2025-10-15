@@ -15,6 +15,8 @@ function DashBoard({
   closeModal,
   currentModal,
   setCurrentModal,
+  orders,
+  setOrders,
 }) {
   const [activeTab, setActiveTab] = useState("orders");
 
@@ -28,7 +30,7 @@ function DashBoard({
       <div className="dashboard__content">
         <SideBar activeTab={activeTab} onTabChange={onTabChange} />
         {activeTab === "orders" ? (
-          <Orders />
+          <Orders orders={orders} setOrders={setOrders} />
         ) : activeTab === "gallery" ? (
           <ArtEditor
             handleAddArtItemClick={handleAddArtItemClick}
