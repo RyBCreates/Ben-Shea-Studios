@@ -1,4 +1,3 @@
-// import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 
 import { createCheckoutLink } from "../../../utils/api/index";
@@ -23,7 +22,6 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(cartList);
     createCheckoutLink(cartList);
   };
 
