@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { createCheckoutLink } from "../../../utils/api/index";
+import { createCheckoutLink, createOrder } from "../../../utils/api/index";
 
 import CheckoutCart from "../../CheckoutCart/CheckoutCart";
 
@@ -22,7 +22,24 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    createCheckoutLink(cartList);
+    try {
+      await createOrder({
+        ...formData,
+        cartList,
+        // items: cartList.map((item) => ({
+        //   id: item._id,
+        //   title: item.title,
+        //   price: item.price,
+        //   quantity: item.quantity,
+        // })),
+      });
+      console.log(formData);
+      console.log("items", cartList);
+
+      await createCheckoutLink(cartList);
+    } catch (error) {
+      console.error("Error submitting Checkout", error);
+    }
   };
 
   return (
