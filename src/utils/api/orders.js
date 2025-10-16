@@ -6,13 +6,17 @@ export const fetchOrders = async () => {
   return res.json();
 };
 
-export const createOrder = async (customerInfo, cartList, totalAmount) => {
+export const createOrder = async (orderData) => {
+  console.log("Sending order data:", orderData);
+
   const response = await fetch(`${BASE_URL}/orders`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ customerInfo, cartList, totalAmount }),
+    body: JSON.stringify(orderData),
   });
 
   if (!response.ok) throw new Error("Failed to create order");
-  return response.json();
+  const data = await response.json();
+  console.log("Order created successfully:", data);
+  return data;
 };

@@ -24,18 +24,13 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
     e.preventDefault();
     try {
       await createOrder({
-        ...formData,
+        customerInfo: formData,
         cartList,
-        // items: cartList.map((item) => ({
-        //   id: item._id,
-        //   title: item.title,
-        //   price: item.price,
-        //   quantity: item.quantity,
-        // })),
+        totalAmount: cartList.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        ),
       });
-      console.log(formData);
-      console.log("items", cartList);
-
       await createCheckoutLink(cartList);
     } catch (error) {
       console.error("Error submitting Checkout", error);
