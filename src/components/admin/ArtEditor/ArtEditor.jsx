@@ -14,9 +14,10 @@ function ArtEditor({
   closeModal,
   currentModal,
   setCurrentModal,
+  selectedArtItem,
+  setSelectedArtItem,
 }) {
   const [loading, setLoading] = useState(true);
-  const [itemToDelete, setItemToDelete] = useState(null);
 
   useEffect(() => {
     fetchArtItems()
@@ -26,20 +27,24 @@ function ArtEditor({
   }, []);
 
   const handleDeleteArtClick = (item) => {
-    console.log(item);
-    setItemToDelete(item);
+    setSelectedArtItem(item);
     setCurrentModal("confirmation");
   };
 
-  const handleDeleteArtConfirm = () => {
-    if (!itemToDelete) return;
+  const handleEditArtClick = (item) => {
+    setSelectedArtItem(item);
+    setCurrentModal("edit-art");
+  };
 
-    onDeleteArt(itemToDelete._id)
+  const handleDeleteArtConfirm = () => {
+    if (!selectedArtItem) return;
+
+    onDeleteArt(selectedArtItem._id)
       .then(() => {
         setArtItems((prevItems) =>
-          prevItems.filter((artItem) => artItem._id !== itemToDelete._id)
+          prevItems.filter((artItem) => artItem._id !== selectedArtItem._id)
         );
-        setItemToDelete(null);
+        setSelectedArtItem(null);
         closeModal();
       })
       .catch((error) => {
@@ -56,6 +61,7 @@ function ArtEditor({
         className="art-editor__add-button"
         type="button"
         onClick={() => {
+          setSelectedArtItem(null);
           handleAddArtItemClick();
         }}
       >
@@ -70,6 +76,7 @@ function ArtEditor({
               artItem={art}
               variant="admin"
               handleDeleteArtClick={handleDeleteArtClick}
+              handleEditArtClick={handleEditArtClick}
             />
           ))}
       </div>

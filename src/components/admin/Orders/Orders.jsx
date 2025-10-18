@@ -45,7 +45,6 @@ function Orders({ orders, setOrders }) {
       <ul className="orders__list_unfulfilled">
         {orders
           .filter((order) => {
-            console.log(order);
             return (
               order.status === "fulfilled" ||
               order.status === "cancelled" ||

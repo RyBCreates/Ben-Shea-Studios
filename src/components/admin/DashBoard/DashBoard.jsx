@@ -17,6 +17,8 @@ function DashBoard({
   setCurrentModal,
   orders,
   setOrders,
+  selectedArtItem,
+  setSelectedArtItem,
 }) {
   const [activeTab, setActiveTab] = useState("orders");
 
@@ -40,6 +42,8 @@ function DashBoard({
             closeModal={closeModal}
             currentModal={currentModal}
             setCurrentModal={setCurrentModal}
+            selectedArtItem={selectedArtItem}
+            setSelectedArtItem={setSelectedArtItem}
           />
         ) : activeTab === "exhibits" ? (
           <ExhibitEditor />
