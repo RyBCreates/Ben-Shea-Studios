@@ -5,3 +5,14 @@
 .orders__title {
   margin: 5px 0 10px;
 }
+
+.orders__list_unfulfilled {
+  padding: 5px 10px;
+  margin: 10px 0;
+  list-style: none;
+  background-color: rgb(203, 203, 203);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}

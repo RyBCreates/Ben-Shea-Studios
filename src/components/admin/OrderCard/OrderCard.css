@@ -1,0 +1,36 @@
+.order-card {
+  background-color: aquamarine;
+  padding: 10px;
+}
+
+.order-card__title {
+  margin: 0;
+}
+
+.order-card__status {
+  margin-left: 10px;
+}
+
+.order-card__dropdown {
+  background-color: transparent;
+  font-size: 18px;
+  border: none;
+}
+
+.order-card__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-card__label {
+  margin: 4px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.order-card__selector {
+  padding: 5px 8px 5px 5px;
+  border-radius: 3px;
+}

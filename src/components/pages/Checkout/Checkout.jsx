@@ -8,8 +8,8 @@ import "./Checkout.css";
 
 function Checkout({ cartList, onUpdateCart, handleRemove }) {
   const [formData, setFormData] = useState({
-    fullName: "",
     email: "",
+    fullName: "",
     phone: "",
     address: "",
     discountCode: "",
