@@ -32,9 +32,9 @@ function GetDiscountModal({ activeModal, closeModal }) {
         >
           X
         </button>
-        <h2 className="modal__title">Sign Up, Receive 30% Off!</h2>
+        <h2 className="modal__title">Sign Up, Receive 25% Off!</h2>
         <p className="modal__description">
-          Sign up for our mailing list to receive 30% off your first order! Stay
+          Sign up for our mailing list to receive 25% off your first order! Stay
           updated with new artwork, exclusive offers, and major updates — you
           won’t want to miss out.
         </p>

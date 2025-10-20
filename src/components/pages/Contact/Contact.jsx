@@ -65,6 +65,7 @@ function Contact() {
         </form>
         <p className="contact__email">email@email.com</p>
         <p className="contact__phone">(123) 456-7890</p>
+        {/* USE BENS NUMBER ^^^ */}
       </div>
     </section>
   );

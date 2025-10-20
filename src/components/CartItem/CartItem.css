@@ -49,3 +49,10 @@
   color: rgb(212, 0, 0);
   transform: scale(1.1);
 }
+
+@media screen and (max-width: 400px) {
+  .cart-item__title,
+  .cart-item__price {
+    font-size: 18px;
+  }
+}
