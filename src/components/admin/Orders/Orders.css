@@ -16,3 +16,9 @@
   justify-content: center;
   gap: 12px;
 }
+
+@media screen and (max-width: 1250px) {
+  .orders {
+    margin: 0 5px 20px;
+  }
+}

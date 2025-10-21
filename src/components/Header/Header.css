@@ -136,6 +136,8 @@
 
   .header__hamburger-menu {
     top: 112px;
-    right: 200px;
+    left: 45%;
+    right: 45%;
+    width: 100px;
   }
 }

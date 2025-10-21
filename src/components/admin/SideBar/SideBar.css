@@ -20,7 +20,8 @@
 .sidebar__button {
   background-color: transparent;
   border: none;
-  font-size: 18px;
+  text-wrap: nowrap;
+  font-size: 16px;
 }
 
 .sidebar__button:hover {
@@ -31,4 +32,17 @@
 
 .sidebar__button_active {
   font-weight: bold;
+}
+
+@media screen and (max-width: 1250px) {
+  .sidebar {
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
+
+  .sidebar__list {
+    flex-direction: row;
+    gap: 10px;
+  }
 }

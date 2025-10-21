@@ -26,6 +26,7 @@
   padding: 5px 20px;
   position: relative;
   top: 2px;
+  text-wrap: nowrap;
 }
 
 .gallery__tab-button:hover {
@@ -53,6 +54,18 @@
   gap: 20px;
   overflow-y: scroll;
   height: 80vh;
+}
+
+@media screen and (max-width: 1165px) {
+  .gallery__tab-button {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 805px) {
+  .gallery__content-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 768px) {

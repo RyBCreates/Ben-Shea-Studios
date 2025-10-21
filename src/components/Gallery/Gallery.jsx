@@ -62,7 +62,7 @@ function Gallery({ onAddToCart }) {
               handleTabClick("20x30");
             }}
           >
-            20 x 30
+            Landscapes
           </button>
         </li>
         <li className="gallery__tab">
@@ -72,7 +72,7 @@ function Gallery({ onAddToCart }) {
               handleTabClick("24x36");
             }}
           >
-            24 x 36
+            Abstracts
           </button>
         </li>
         <li className="gallery__tab">
@@ -82,7 +82,47 @@ function Gallery({ onAddToCart }) {
               handleTabClick("30x40");
             }}
           >
-            30 x 40
+            People
+          </button>
+        </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Pets
+          </button>
+        </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Sketches
+          </button>
+        </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Photography
+          </button>
+        </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Prints
           </button>
         </li>
       </ul>

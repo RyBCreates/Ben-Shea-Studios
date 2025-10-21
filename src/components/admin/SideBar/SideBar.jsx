@@ -30,7 +30,7 @@ function SideBar({ activeTab, onTabChange }) {
           <button
             type="button"
             className={`sidebar__button ${
-              activeTab === "exhibitions" ? "sidebar__button_active" : ""
+              activeTab === "exhibits" ? "sidebar__button_active" : ""
             }`}
             onClick={() => onTabChange("exhibits")}
           >

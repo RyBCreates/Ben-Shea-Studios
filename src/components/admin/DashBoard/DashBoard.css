@@ -14,3 +14,10 @@
   font-size: 32px;
   margin: 0 0 10px 0;
 }
+
+@media screen and (max-width: 1250px) {
+  .dashboard__content {
+    display: flex;
+    flex-direction: column;
+  }
+}
