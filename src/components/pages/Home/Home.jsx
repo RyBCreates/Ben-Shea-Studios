@@ -5,7 +5,7 @@ import "./Home.css";
 
 function Home({ onAddToCart, onGetDiscountClick }) {
   return (
-    <section>
+    <section className="home">
       <Hero onGetDiscountClick={onGetDiscountClick} />
       <Gallery onAddToCart={onAddToCart} />
     </section>
