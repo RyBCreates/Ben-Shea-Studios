@@ -6,49 +6,38 @@ function OrderCard({ order, onStatusChange }) {
   const [isCardShown, setIsCardShown] = useState(false);
   const [status, setStatus] = useState(order.status);
 
-  const toggleCardDetails = () => {
-    setIsCardShown(!isCardShown);
-    console.log(order);
-  };
+  const toggleCardDetails = () => setIsCardShown(!isCardShown);
 
   const handleStatusClick = async (e) => {
+    e.stopPropagation();
     const newStatus = e.target.value;
-    const orderId = order._id;
-
     setStatus(newStatus);
-    const updatedOrder = await handleStatusChange(newStatus, orderId);
 
-    if (updatedOrder) {
-      onStatusChange(updatedOrder);
-    }
+    const updatedOrder = await handleStatusChange(newStatus, order._id);
+    if (updatedOrder) onStatusChange(updatedOrder);
   };
 
   if (!order) return null;
+
   return (
-    <li className="order-card">
-      <div className="order-card__main">
-        <h3 className="order-card__title">
-          {order.fullName || order._id}
-          <span className="order-card__status">({order.status})</span>
-        </h3>
-        <button className="order-card__dropdown" onClick={toggleCardDetails}>
-          v
-        </button>
-      </div>
-      {isCardShown ? (
-        <>
-          <p>{order.email}</p>
-          <p>{order.phone}</p>
-          <p>{order.address}</p>
-          <p>{new Date(order.createdAt).toLocaleString()}</p>
-        </>
-      ) : (
-        <></>
-      )}
-      <label className="order-card__label">
-        Set order status
+    <li className="order-card" onClick={toggleCardDetails}>
+      <div
+        className={`${
+          isCardShown ? "order-card__main_active" : "order-card__main"
+        }`}
+      >
+        <div className="order-card__title-container">
+          <div
+            className={`order-card__indicator order-card__indicator_${order.status}`}
+          ></div>
+          <h3 className="order-card__title" title={order.fullName || order._id}>
+            {order.fullName || order._id}
+          </h3>
+        </div>
+
         <select
           className="order-card__selector"
+          name="status"
           value={status}
           onChange={handleStatusClick}
         >
@@ -59,7 +48,78 @@ function OrderCard({ order, onStatusChange }) {
           <option>cancelled</option>
           <option>refunded</option>
         </select>
-      </label>
+      </div>
+
+      {isCardShown && (
+        <div className="order-card__details">
+          {/* CUSTOMER INFO */}
+          <div className="order-card__section">
+            <h4 className="order-card__section-title">Customer Info</h4>
+            <div className="order-card__info-block">
+              <div>
+                <strong>Email</strong>
+                <p>{order.email}</p>
+              </div>
+              <div>
+                <strong>Phone</strong>
+                <p>{order.phone}</p>
+              </div>
+              <div>
+                <strong>Address</strong>
+                <p className="order-card__address-text">{order.address}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* CART ITEMS */}
+          <div className="order-card__section">
+            <h4 className="order-card__section-title">Items Ordered</h4>
+            <ul className="order-card__cart-list">
+              {order.cartList?.map((item) => (
+                <li key={item._id} className="order-card__cart-item">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="order-card__cart-img"
+                  />
+                  <div className="order-card__cart-info">
+                    <p className="order-card__cart-title">{item.title}</p>
+                    <p className="order-card__cart-qty">
+                      Quantity: {item.quantity}
+                    </p>
+                    <p className="order-card__cart-price">
+                      ${item.price.toFixed(2)}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="order-card__total">
+              <strong>Total:</strong> ${order.totalAmount}
+            </div>
+          </div>
+
+          {/* SPECIAL INSTRUCTIONS */}
+          <div className="order-card__section">
+            <h4 className="order-card__section-title">Special Instructions</h4>
+            <p className="order-card__instructions">
+              {order.specialInstructions || "None provided"}
+            </p>
+          </div>
+
+          {/* DATES */}
+          <div className="order-card__dates">
+            <p>
+              <strong>Created:</strong>{" "}
+              {new Date(order.createdAt).toLocaleString()}
+            </p>
+            <p>
+              <strong>Updated:</strong>{" "}
+              {new Date(order.updatedAt).toLocaleString()}
+            </p>
+          </div>
+        </div>
+      )}
     </li>
   );
 }

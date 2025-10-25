@@ -27,39 +27,43 @@ function Orders({ orders, setOrders }) {
 
   return (
     <div className="orders">
-      <h2 className="orders__title">Unfulfilled Orders</h2>
-      <ul className="orders__list_unfulfilled">
-        {orders
-          .filter(
-            (order) => order.status === "pending" || order.status === "paid"
-          )
-          .map((order) => (
-            <OrderCard
-              key={order._id}
-              order={order}
-              onStatusChange={handleOrderStatusUpdate}
-            />
-          ))}
-      </ul>
-      <h2 className="orders__title">Completed Orders</h2>
-      <ul className="orders__list_unfulfilled">
-        {orders
-          .filter((order) => {
-            return (
-              order.status === "fulfilled" ||
-              order.status === "cancelled" ||
-              order.status === "shipped" ||
-              order.status === "refunded"
-            );
-          })
-          .map((order) => (
-            <OrderCard
-              key={order._id}
-              order={order}
-              onStatusChange={handleOrderStatusUpdate}
-            />
-          ))}
-      </ul>
+      <div className="orders__unfulfilled">
+        <h2 className="orders__title">Unfulfilled Orders</h2>
+        <ul className="orders__list_unfulfilled">
+          {orders
+            .filter(
+              (order) => order.status === "pending" || order.status === "paid"
+            )
+            .map((order) => (
+              <OrderCard
+                key={order._id}
+                order={order}
+                onStatusChange={handleOrderStatusUpdate}
+              />
+            ))}
+        </ul>
+      </div>
+      <div className="orders__fulfilled">
+        <h2 className="orders__title">Completed Orders</h2>
+        <ul className="orders__list_fulfilled">
+          {orders
+            .filter((order) => {
+              return (
+                order.status === "fulfilled" ||
+                order.status === "cancelled" ||
+                order.status === "shipped" ||
+                order.status === "refunded"
+              );
+            })
+            .map((order) => (
+              <OrderCard
+                key={order._id}
+                order={order}
+                onStatusChange={handleOrderStatusUpdate}
+              />
+            ))}
+        </ul>
+      </div>
     </div>
   );
 }
