@@ -93,7 +93,7 @@
 .order-card__section-title {
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin: 0 0 6px 0;
   color: #222;
 }
 
@@ -117,7 +117,6 @@
   white-space: pre-line;
 }
 
-/* CART LIST */
 .order-card__cart-list {
   list-style: none;
   padding: 0;
@@ -162,7 +161,6 @@
   margin-top: 8px;
 }
 
-/* SPECIAL INSTRUCTIONS */
 .order-card__instructions {
   background-color: #f8f8f8;
   border-radius: 6px;
@@ -172,7 +170,6 @@
   margin: 0;
 }
 
-/* DATES */
 .order-card__dates {
   display: flex;
   justify-content: space-between;

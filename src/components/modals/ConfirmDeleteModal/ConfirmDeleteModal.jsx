@@ -23,16 +23,18 @@ function ConfirmDeleteModal({
           X
         </button>
         <h3 className="modal__title">Are you sure you want to delete?</h3>
-        <button
-          className="modal__delete-button"
-          type="button"
-          onClick={() => {
-            handleDeleteArtConfirm();
-          }}
-        >
-          Delete
-        </button>
-        <button className="modal__cancel-button">Cancel</button>
+        <div className="confirmation__button-container">
+          <button
+            className="confirmation__delete-button"
+            type="button"
+            onClick={() => {
+              handleDeleteArtConfirm();
+            }}
+          >
+            Delete
+          </button>
+          <button className="confirmation__cancel-button">Cancel</button>
+        </div>
       </div>
     </div>
   );

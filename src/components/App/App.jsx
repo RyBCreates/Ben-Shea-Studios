@@ -173,10 +173,8 @@ export default App;
 // 5. At smaller Screens fix the grid of the gallery section
 // 6. Style and add Content to Success Page
 // 7. Style and add Content to Cancelled Page
-// 8. Add Unfulfilled orders to Admin
-// 9. Add Fulfilled Orders to Admin
-// 10. Change total price when discount code is used
-// 11. Figure out how to create a unique discount code
-// 12. Bug Fix: When removing multiple items from cart: deletes whole list on 2nd or 3rd click
-// 13. Clear CartList when navigating to success page (remove button from success page)
+// 8. Change total price when discount code is used
+// 9. Figure out how to create a unique discount code
+// 10. Bug Fix: When removing multiple items from cart: deletes whole list on 2nd or 3rd click
+// 11. Clear CartList when navigating to success page (remove button from success page)
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary

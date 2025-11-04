@@ -4,10 +4,19 @@ import emailjs from "emailjs-com";
 import "./Contact.css";
 
 function Contact() {
-  // HAVE BEN SIGN UP FOR EMAILJS.COM Get his ID's/key
+  // MY KEYS
   const YOUR_SERVICE_ID = "service_axeg2pd";
   const YOUR_TEMPLATE_ID = "template_kihidjl";
   const YOUR_PUBLIC_KEY = "yFUuV-y41R3NpC0Nu";
+
+  // BEN'S KEYS
+  // const YOUR_SERVICE_ID = "service_axeg2pd";
+  // Do I need this?? ^^^
+  // const YOUR_TEMPLATE_ID = "template_kihidjl";
+  // Get his Template ID KEY ^^^
+  // const YOUR_PUBLIC_KEY = "oHL03YvyL0ocBTeH6";
+  // const YOUR_PRIVATE_KEY = "LVo2bpW1R1KhM_K6mrEtz";
+  // Figure out what to do with the Private Key
 
   const form = useRef();
 
@@ -63,9 +72,8 @@ function Contact() {
             Send Message
           </button>
         </form>
-        <p className="contact__email">email@email.com</p>
-        <p className="contact__phone">(123) 456-7890</p>
-        {/* USE BENS NUMBER ^^^ */}
+        <p className="contact__email">bensheastudios@gmail.com</p>
+        <p className="contact__phone">(479) 774-4213</p>
       </div>
     </section>
   );

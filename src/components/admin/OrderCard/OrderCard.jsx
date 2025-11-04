@@ -9,7 +9,6 @@ function OrderCard({ order, onStatusChange }) {
   const toggleCardDetails = () => setIsCardShown(!isCardShown);
 
   const handleStatusClick = async (e) => {
-    e.stopPropagation();
     const newStatus = e.target.value;
     setStatus(newStatus);
 
@@ -40,6 +39,9 @@ function OrderCard({ order, onStatusChange }) {
           name="status"
           value={status}
           onChange={handleStatusClick}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           <option>pending</option>
           <option>paid</option>
@@ -52,7 +54,6 @@ function OrderCard({ order, onStatusChange }) {
 
       {isCardShown && (
         <div className="order-card__details">
-          {/* CUSTOMER INFO */}
           <div className="order-card__section">
             <h4 className="order-card__section-title">Customer Info</h4>
             <div className="order-card__info-block">
@@ -70,8 +71,6 @@ function OrderCard({ order, onStatusChange }) {
               </div>
             </div>
           </div>
-
-          {/* CART ITEMS */}
           <div className="order-card__section">
             <h4 className="order-card__section-title">Items Ordered</h4>
             <ul className="order-card__cart-list">
@@ -98,8 +97,6 @@ function OrderCard({ order, onStatusChange }) {
               <strong>Total:</strong> ${order.totalAmount}
             </div>
           </div>
-
-          {/* SPECIAL INSTRUCTIONS */}
           <div className="order-card__section">
             <h4 className="order-card__section-title">Special Instructions</h4>
             <p className="order-card__instructions">
@@ -107,14 +104,13 @@ function OrderCard({ order, onStatusChange }) {
             </p>
           </div>
 
-          {/* DATES */}
           <div className="order-card__dates">
             <p>
-              <strong>Created:</strong>{" "}
+              <strong>Created:</strong>
               {new Date(order.createdAt).toLocaleString()}
             </p>
             <p>
-              <strong>Updated:</strong>{" "}
+              <strong>Updated:</strong>
               {new Date(order.updatedAt).toLocaleString()}
             </p>
           </div>

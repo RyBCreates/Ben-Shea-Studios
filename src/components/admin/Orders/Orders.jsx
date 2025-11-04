@@ -23,6 +23,19 @@ function Orders({ orders, setOrders }) {
     );
   };
 
+  const unfulfilledOrders = orders.filter(
+    (order) => order.status === "pending" || order.status === "paid"
+  );
+
+  const fulfilledOrders = orders.filter((order) => {
+    return (
+      order.status === "fulfilled" ||
+      order.status === "cancelled" ||
+      order.status === "shipped" ||
+      order.status === "refunded"
+    );
+  });
+
   if (loading) return <p>Loading orders...</p>;
 
   return (
@@ -30,38 +43,33 @@ function Orders({ orders, setOrders }) {
       <div className="orders__unfulfilled">
         <h2 className="orders__title">Unfulfilled Orders</h2>
         <ul className="orders__list_unfulfilled">
-          {orders
-            .filter(
-              (order) => order.status === "pending" || order.status === "paid"
-            )
-            .map((order) => (
+          {unfulfilledOrders.length > 0 ? (
+            unfulfilledOrders.map((order) => (
               <OrderCard
                 key={order._id}
                 order={order}
                 onStatusChange={handleOrderStatusUpdate}
               />
-            ))}
+            ))
+          ) : (
+            <p>There are no orders here</p>
+          )}
         </ul>
       </div>
       <div className="orders__fulfilled">
         <h2 className="orders__title">Completed Orders</h2>
         <ul className="orders__list_fulfilled">
-          {orders
-            .filter((order) => {
-              return (
-                order.status === "fulfilled" ||
-                order.status === "cancelled" ||
-                order.status === "shipped" ||
-                order.status === "refunded"
-              );
-            })
-            .map((order) => (
+          {fulfilledOrders.length > 0 ? (
+            fulfilledOrders.map((order) => (
               <OrderCard
                 key={order._id}
                 order={order}
                 onStatusChange={handleOrderStatusUpdate}
               />
-            ))}
+            ))
+          ) : (
+            <p>There are no orders here</p>
+          )}
         </ul>
       </div>
     </div>
