@@ -3,6 +3,7 @@ import "./Success.css";
 function Success({ setCartList }) {
   const handleClearList = () => {
     setCartList([]);
+    localStorage.removeItem("cart");
   };
 
   return (

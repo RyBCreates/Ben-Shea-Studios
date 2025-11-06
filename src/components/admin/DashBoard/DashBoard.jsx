@@ -19,6 +19,7 @@ function DashBoard({
   setOrders,
   selectedArtItem,
   setSelectedArtItem,
+  handleLogOut,
 }) {
   const [activeTab, setActiveTab] = useState("orders");
 
@@ -30,7 +31,11 @@ function DashBoard({
     <section className="dashboard">
       <h2 className="dashboard__title">Welcome to the Admin Dashboard</h2>
       <div className="dashboard__content">
-        <SideBar activeTab={activeTab} onTabChange={onTabChange} />
+        <SideBar
+          activeTab={activeTab}
+          onTabChange={onTabChange}
+          handleLogOut={handleLogOut}
+        />
         {activeTab === "orders" ? (
           <Orders orders={orders} setOrders={setOrders} />
         ) : activeTab === "gallery" ? (

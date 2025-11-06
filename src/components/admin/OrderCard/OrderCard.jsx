@@ -12,6 +12,7 @@ function OrderCard({ order, onStatusChange }) {
     const newStatus = e.target.value;
     setStatus(newStatus);
 
+    console.log(order);
     const updatedOrder = await handleStatusChange(newStatus, order._id);
     if (updatedOrder) onStatusChange(updatedOrder);
   };
@@ -100,7 +101,7 @@ function OrderCard({ order, onStatusChange }) {
           <div className="order-card__section">
             <h4 className="order-card__section-title">Special Instructions</h4>
             <p className="order-card__instructions">
-              {order.specialInstructions || "None provided"}
+              {order.instructions || "None provided"}
             </p>
           </div>
 

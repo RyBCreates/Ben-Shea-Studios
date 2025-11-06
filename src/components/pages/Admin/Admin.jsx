@@ -12,9 +12,17 @@ function Admin() {
     setIsLoggedIn(true);
   };
 
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <section className="admin">
-      {isLoggedIn ? <DashBoard /> : <AdminLanding handleLogin={handleLogin} />}
+      {isLoggedIn ? (
+        <DashBoard handleLogOut={handleLogOut} />
+      ) : (
+        <AdminLanding handleLogin={handleLogin} />
+      )}
     </section>
   );
 }

@@ -4,7 +4,7 @@ import ItemCard from "../ItemCard/ItemCard";
 
 import "./Gallery.css";
 
-function Gallery({ onAddToCart }) {
+function Gallery({ onAddToCart, cartList }) {
   const [activeTab, setActiveTab] = useState("all");
   const [artItems, setArtItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -134,6 +134,7 @@ function Gallery({ onAddToCart }) {
               artItem={art}
               onAddToCart={onAddToCart}
               variant="default"
+              cartList={cartList}
             />
           ))}
         </div>

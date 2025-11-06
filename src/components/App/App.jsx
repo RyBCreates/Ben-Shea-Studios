@@ -40,8 +40,8 @@ function App() {
     }
   }, [cartList, cartLoaded]);
 
-  const cartMenuToggle = (prev) => {
-    return setIsCartMenuOpen(!prev);
+  const cartMenuToggle = () => {
+    setIsCartMenuOpen((prev) => !prev);
   };
 
   const onGetDiscountClick = () => {
@@ -94,6 +94,8 @@ function App() {
         (cartItem) =>
           cartItem._id === item._id && cartItem.version === item.version
       );
+
+      if (item.version === "original" && exists) return prev;
       // If Item version = original call Mark Original as Sold Out from Backend
       if (exists) {
         return prev.map((cartItem) =>
@@ -123,6 +125,7 @@ function App() {
               <Home
                 onAddToCart={onAddToCart}
                 onGetDiscountClick={onGetDiscountClick}
+                cartList={cartList}
               />
             }
           />

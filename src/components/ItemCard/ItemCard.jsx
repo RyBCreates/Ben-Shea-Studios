@@ -6,6 +6,7 @@ import rightArrow from "../../assets/icons/right-arrow.png";
 import "./ItemCard.css";
 
 function ItemCard({
+  cartList,
   artItem,
   onAddToCart,
   variant,
@@ -20,6 +21,8 @@ function ItemCard({
   const images = artItem.images;
 
   const handleClickAdd = () => {
+    if (artItem[selectedVersion]?.sold) return;
+
     const selectedItem = {
       _id: artItem._id,
       title: artItem.title,
@@ -55,12 +58,12 @@ function ItemCard({
 
       {images.length > 1 && (
         <div className="card__pages">
-          <button className="card__arrow" onClick={goPrev}>
-            <img
-              className="card__arrow-icon"
-              src={leftArrow}
-              alt="left arrow"
-            />
+          <button
+            className="card__arrow"
+            onClick={goPrev}
+            aria-label="Previous image"
+          >
+            <img className="card__arrow-icon" src={leftArrow} alt="previous" />
           </button>
 
           {images.map((_, index) => (
@@ -73,12 +76,12 @@ function ItemCard({
             />
           ))}
 
-          <button className="card__arrow" onClick={goNext}>
-            <img
-              className="card__arrow-icon"
-              src={rightArrow}
-              alt="right arrow"
-            />
+          <button
+            className="card__arrow"
+            onClick={goNext}
+            aria-label="Next image"
+          >
+            <img className="card__arrow-icon" src={rightArrow} alt="next" />
           </button>
         </div>
       )}
@@ -140,9 +143,19 @@ function ItemCard({
         <button
           className="card__add-button"
           onClick={handleClickAdd}
-          disabled={artItem[selectedVersion]?.sold}
+          disabled={
+            artItem[selectedVersion]?.sold ||
+            (selectedVersion === "original" &&
+              cartList?.some(
+                (cartItem) =>
+                  cartItem._id === artItem._id &&
+                  cartItem.version === "original"
+              ))
+          }
         >
-          Add to Cart
+          {selectedVersion === "original" && artItem.original.sold
+            ? "SOLD OUT"
+            : "Add to Cart"}
         </button>
       ) : (
         <div className="card__button-container">

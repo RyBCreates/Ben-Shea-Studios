@@ -34,6 +34,10 @@
   font-weight: bold;
 }
 
+.sidebar__button_logout {
+  color: red;
+}
+
 @media screen and (max-width: 1250px) {
   .sidebar {
     align-items: center;
