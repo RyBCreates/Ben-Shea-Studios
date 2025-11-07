@@ -27,3 +27,18 @@
   max-height: 300px;
   object-fit: cover;
 }
+
+.exhibit-card__button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.exhibit-card__edit-button,
+.exhibit-card__delete-button {
+  height: 100%;
+  width: 100%;
+  /* background-color: transparent;
+  border: none; */
+}

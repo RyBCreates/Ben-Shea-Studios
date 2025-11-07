@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./AddArtItemModal.css";
 import "../Modals.css";
 
-function AddArtItemModal({ isAddArtModalOpen, closeModal, onAddArt }) {
+function AddArtItemModal({
+  currentModal,
+  closeModal,
+  onAddArt,
+  artItem,
+  onUpdateArt,
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrls, setImageUrls] = useState([""]);
@@ -21,27 +27,39 @@ function AddArtItemModal({ isAddArtModalOpen, closeModal, onAddArt }) {
     setImageUrls(newImages);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newArtItem = {
+    const artData = {
       title,
       description,
       images: imageUrls.filter((url) => url.trim() !== ""),
       original: {
         price: Number(originalPrice),
-        sold: false,
+        sold: artItem?.original?.sold || false,
         dimensions: originalDimensions,
       },
       print: {
         price: Number(printPrice),
-        sold: false,
+        sold: artItem?.print?.sold || false,
         dimensions: printDimensions,
       },
     };
+    try {
+      if (currentModal === "add-art") {
+        await onAddArt(artData);
+      } else if (currentModal === "edit-art") {
+        await onUpdateArt({ ...artData, _id: artItem._id });
+      }
 
-    onAddArt(newArtItem);
-    closeModal();
+      resetForm();
+      closeModal();
+    } catch (err) {
+      console.error("Error submitting art item", err);
+    }
+  };
+
+  const resetForm = () => {
     setTitle("");
     setDescription("");
     setImageUrls([""]);
@@ -51,13 +69,50 @@ function AddArtItemModal({ isAddArtModalOpen, closeModal, onAddArt }) {
     setPrintDimensions("");
   };
 
+  useEffect(() => {
+    if (currentModal === "edit-art" && artItem) {
+      setTitle(artItem.title || "");
+      setDescription(artItem.description || "");
+      setImageUrls(artItem.images?.length ? artItem.images : [""]);
+      setOriginalPrice(artItem.original?.price || "");
+      setOriginalDimensions(artItem.original?.dimensions || "");
+      setPrintPrice(artItem.print?.price || "");
+      setPrintDimensions(artItem.print?.dimensions || "");
+    } else if (currentModal === "add-art") {
+      setTitle("");
+      setDescription("");
+      setImageUrls([""]);
+      setOriginalPrice("");
+      setOriginalDimensions("");
+      setPrintPrice("");
+      setPrintDimensions("");
+    }
+  }, [artItem, currentModal]);
+
+  let modalTitle = "";
+  let buttonText = "";
+
+  if (currentModal === "add-art") {
+    modalTitle = "Add a new art item";
+    buttonText = "Add Art Item";
+  } else if (currentModal === "edit-art") {
+    modalTitle = "edit an art item";
+    buttonText = "Save Art Item";
+  }
+
   return (
-    <div className={`modal ${isAddArtModalOpen ? "modal__opened" : ""}`}>
+    <div
+      className={`modal ${
+        currentModal === "add-art" || currentModal === "edit-art"
+          ? "modal__opened"
+          : ""
+      }`}
+    >
       <div className="modal__content add-art-modal">
-        <button className="modal__button_close" onClick={closeModal}>
+        <button className="modal__close-button" onClick={closeModal}>
           &times;
         </button>
-        <h2 className="modal__title">Add New Art Item</h2>
+        <h2 className="modal__title">{modalTitle}</h2>
 
         <form className="modal__form" onSubmit={handleSubmit}>
           <label>
@@ -139,9 +194,8 @@ function AddArtItemModal({ isAddArtModalOpen, closeModal, onAddArt }) {
               required
             />
           </label>
-
           <button type="submit" className="modal__submit">
-            Add Art Item
+            {buttonText}
           </button>
         </form>
       </div>

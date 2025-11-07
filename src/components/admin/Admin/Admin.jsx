@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 
-import { createArtItem } from "../../../utils/api";
+import {
+  createArtItem,
+  deleteArtItem,
+  updateArtItem,
+} from "../../../utils/api";
 
 import DashBoard from "../DashBoard/DashBoard";
 import AdminLanding from "../AdminLanding/AdminLanding";
@@ -10,32 +14,34 @@ import "./Admin.css";
 
 function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAddArtModalOpen, setIsAddArtModalOpen] = useState(false);
+  const [currentModal, setCurrentModal] = useState("");
   const [artItems, setArtItems] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [selectedArtItem, setSelectedArtItem] = useState(null);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
   const handleAddArtItemClick = () => {
-    setIsAddArtModalOpen(true);
+    setCurrentModal("add-art");
   };
 
   const closeModal = () => {
-    setIsAddArtModalOpen(false);
+    setCurrentModal("");
   };
 
   // Repeated from App.jsx (Maybe put in a context)
   useEffect(() => {
     const handleEscClose = (e) => {
       if (e.key === "Escape") {
-        setIsAddArtModalOpen(false);
+        setCurrentModal("");
       }
     };
 
     const handleClickOutside = (e) => {
       if (e.target.classList.contains("modal")) {
-        setIsAddArtModalOpen(false);
+        setCurrentModal("");
       }
     };
 
@@ -48,11 +54,40 @@ function Admin() {
     };
   }, []);
 
+  // Add a new Art Item
   const onAddArt = async (data) => {
     try {
-      createArtItem(data);
+      const newArtItem = await createArtItem(data);
+      setArtItems((prevItems) => [...prevItems, newArtItem]);
     } catch (err) {
       console.error("Failed to Create art item", err);
+    }
+  };
+
+  const onUpdateArt = async (data) => {
+    try {
+      const { _id, ...updateFields } = data;
+      const updatedArtItem = await updateArtItem(_id, updateFields);
+      setArtItems((prevItems) =>
+        prevItems.map((item) =>
+          item._id === updatedArtItem._id ? updatedArtItem : item
+        )
+      );
+    } catch (err) {
+      console.error("Failed to Update art item", err);
+    }
+  };
+
+  // Delete an Art Item
+  const onDeleteArt = async (itemId) => {
+    try {
+      const deletedItem = await deleteArtItem(itemId);
+      const filteredList = artItems.filter((item) => {
+        return item._id !== deletedItem._id;
+      });
+      setArtItems(filteredList);
+    } catch (err) {
+      console.error("Failed to delete the selected item", err);
     }
   };
 
@@ -60,11 +95,25 @@ function Admin() {
     <section className="admin">
       {isLoggedIn ? (
         <>
-          <DashBoard handleAddArtItemClick={handleAddArtItemClick} />
-          <AddArtItemModal
-            isAddArtModalOpen={isAddArtModalOpen}
-            onAddArt={onAddArt}
+          <DashBoard
+            handleAddArtItemClick={handleAddArtItemClick}
+            artItems={artItems}
+            setArtItems={setArtItems}
+            orders={orders}
+            setOrders={setOrders}
+            onDeleteArt={onDeleteArt}
             closeModal={closeModal}
+            currentModal={currentModal}
+            setCurrentModal={setCurrentModal}
+            selectedArtItem={selectedArtItem}
+            setSelectedArtItem={setSelectedArtItem}
+          />
+          <AddArtItemModal
+            onAddArt={onAddArt}
+            onUpdateArt={onUpdateArt}
+            currentModal={currentModal}
+            closeModal={closeModal}
+            artItem={selectedArtItem}
           />
         </>
       ) : (

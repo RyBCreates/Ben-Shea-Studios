@@ -1,6 +1,8 @@
 import "./CartItem.css";
 
-function CartItem({ cartItem }) {
+function CartItem({ cartItem, cartList, onUpdateCart, handleRemove }) {
+  const isOriginal = cartItem.version === "original";
+
   return (
     <li className="cart-item">
       <img
@@ -8,13 +10,51 @@ function CartItem({ cartItem }) {
         src={cartItem.image}
         alt={cartItem.title}
       />
-      <div className="cart-item__container">
-        <h2 className="cart-item__title">{cartItem.title}</h2>
-        <p className="cart-item__quantity">Qty: {cartItem.quantity ?? 1}</p>
+      <div>
+        <h4 className="cart-item__title">{cartItem.title}</h4>
+        <p className="cart-item__price">${cartItem.price.toFixed(2)}</p>
+        <div className="cart-item__controls">
+          <button
+            disabled={cartItem.quantity === 1}
+            onClick={() =>
+              onUpdateCart(
+                cartList.map((item) =>
+                  item.cartKey === cartItem.cartKey && item.quantity > 1
+                    ? { ...item, quantity: item.quantity - 1 }
+                    : item
+                )
+              )
+            }
+          >
+            -
+          </button>
+          <span className="cart-item__quantity">{cartItem.quantity}</span>
+          <button
+            disabled={isOriginal}
+            className={`cart-item__add-button ${
+              isOriginal ? "cart-item__add-button--disabled" : ""
+            }`}
+            onClick={() =>
+              !isOriginal &&
+              onUpdateCart(
+                cartList.map((item) =>
+                  item.cartKey === cartItem.cartKey
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+                )
+              )
+            }
+          >
+            +
+          </button>
+          <button
+            className="cart-item__remove-button"
+            onClick={() => handleRemove(cartItem.cartKey)}
+          >
+            Remove
+          </button>
+        </div>
       </div>
-      <p className="cart-item__price">
-        ${cartItem.price * cartItem.quantity}.00
-      </p>
     </li>
   );
 }

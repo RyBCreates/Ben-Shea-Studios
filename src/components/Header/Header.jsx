@@ -63,6 +63,16 @@ function Header({ cartList, cartMenuToggle }) {
             type="button"
             className="header__hamburger-option"
             onClick={() => {
+              navigate("/");
+              setIsHamburgerOpen(false);
+            }}
+          >
+            Home
+          </button>
+          <button
+            type="button"
+            className="header__hamburger-option"
+            onClick={() => {
               navigate("about");
               setIsHamburgerOpen(false);
             }}

@@ -4,7 +4,7 @@ import ItemCard from "../ItemCard/ItemCard";
 
 import "./Gallery.css";
 
-function Gallery({ onAddToCart }) {
+function Gallery({ onAddToCart, cartList }) {
   const [activeTab, setActiveTab] = useState("all");
   const [artItems, setArtItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,26 +25,16 @@ function Gallery({ onAddToCart }) {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    if (tab === "20x30") {
-      setFilteredArt(
-        artItems.filter((art) => art.original.dimensions === "20x30 in")
-      );
-    } else if (tab === "24x36") {
-      setFilteredArt(
-        artItems.filter((art) => art.original.dimensions === "24x36 in")
-      );
-    } else if (tab === "30x40") {
-      setFilteredArt(
-        artItems.filter((art) => art.original.dimensions === "30x40 in")
-      );
-    } else {
+    if (tab === "all") {
       setFilteredArt(artItems);
+    } else {
+      setFilteredArt(artItems.filter((art) => art.category === tab));
     }
   };
 
   return (
     <div className="gallery" id="gallery">
-      <ul className="gallery__tabs">
+      {/* <ul className="gallery__tabs">
         <li className="gallery__tab">
           <button
             className="gallery__tab-button"
@@ -62,7 +52,7 @@ function Gallery({ onAddToCart }) {
               handleTabClick("20x30");
             }}
           >
-            20 x 30
+            Landscapes
           </button>
         </li>
         <li className="gallery__tab">
@@ -72,7 +62,7 @@ function Gallery({ onAddToCart }) {
               handleTabClick("24x36");
             }}
           >
-            24 x 36
+            Abstracts
           </button>
         </li>
         <li className="gallery__tab">
@@ -82,9 +72,74 @@ function Gallery({ onAddToCart }) {
               handleTabClick("30x40");
             }}
           >
-            30 x 40
+            People
           </button>
         </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Pets
+          </button>
+        </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Sketches
+          </button>
+        </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Photography
+          </button>
+        </li>
+        <li className="gallery__tab">
+          <button
+            className="gallery__tab-button"
+            onClick={() => {
+              handleTabClick("30x40");
+            }}
+          >
+            Prints
+          </button>
+        </li>
+      </ul> */}
+      <ul className="gallery__tabs">
+        {[
+          "all",
+          "landscape",
+          "abstract",
+          "people",
+          "pets",
+          "sketch",
+          "photo",
+          "print",
+        ].map((tab) => (
+          <li className="gallery__tab" key={tab}>
+            <button
+              className={`gallery__tab-button ${
+                activeTab === tab ? "active" : ""
+              }`}
+              onClick={() => handleTabClick(tab)}
+            >
+              {tab === "all"
+                ? "All Art"
+                : tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          </li>
+        ))}
       </ul>
       <div className="gallery__content">
         <div className="gallery__content-container">
@@ -94,6 +149,7 @@ function Gallery({ onAddToCart }) {
               artItem={art}
               onAddToCart={onAddToCart}
               variant="default"
+              cartList={cartList}
             />
           ))}
         </div>

@@ -20,3 +20,14 @@
   margin: 0 0 20px 0;
   text-align: center;
 }
+
+@media screen and (max-width: 775px) {
+  .landing__content {
+    padding: 10px;
+  }
+
+  .landing__title {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+  }
+}

@@ -18,32 +18,30 @@ import "./App.css";
 
 function App() {
   const [cartList, setCartList] = useState([]);
+  const [cartLoaded, setCartLoaded] = useState(false);
 
   const [activeModal, setActiveModal] = useState("");
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
 
-  const onAddToCart = (item) => {
-    setCartList((prev) => {
-      const exists = prev.find(
-        (cartItem) =>
-          cartItem._id === item._id && cartItem.version === item.version
-      );
-      // If Item version = original call Mark Original as Sold Out from Backend
-      if (exists) {
-        return prev.map((cartItem) =>
-          cartItem._id === item._id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
-      } else {
-        return [...prev, { ...item, quantity: 1 }];
-      }
-    });
-  };
+  // Load cart once
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCartList(JSON.parse(savedCart));
+    }
+    setCartLoaded(true);
+  }, []);
 
-  const cartMenuToggle = (prev) => {
-    return setIsCartMenuOpen(!prev);
+  // Save only after loading is done
+  useEffect(() => {
+    if (cartLoaded) {
+      localStorage.setItem("cart", JSON.stringify(cartList));
+    }
+  }, [cartList, cartLoaded]);
+
+  const cartMenuToggle = () => {
+    setIsCartMenuOpen((prev) => !prev);
   };
 
   const onGetDiscountClick = () => {
@@ -86,6 +84,38 @@ function App() {
   const location = useLocation();
   const hideLayout = location.pathname.startsWith("/admin");
 
+  const onUpdateCart = (updatedCart) => {
+    setCartList(updatedCart);
+  };
+
+  const onAddToCart = (item) => {
+    setCartList((prev) => {
+      const exists = prev.find(
+        (cartItem) =>
+          cartItem._id === item._id && cartItem.version === item.version
+      );
+
+      if (item.version === "original" && exists) return prev;
+
+      if (exists) {
+        return prev.map((cartItem) =>
+          cartItem._id === item._id && cartItem.version === item.version
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [
+          ...prev,
+          { ...item, quantity: 1, cartKey: `${item._id}-${item.version}` },
+        ];
+      }
+    });
+  };
+
+  const handleRemove = (cartKey) => {
+    onUpdateCart(cartList.filter((item) => item.cartKey !== cartKey));
+  };
+
   return (
     <div className="app">
       <div className="app__content">
@@ -99,6 +129,7 @@ function App() {
               <Home
                 onAddToCart={onAddToCart}
                 onGetDiscountClick={onGetDiscountClick}
+                cartList={cartList}
               />
             }
           />
@@ -106,13 +137,30 @@ function App() {
           <Route path="exhibits" element={<Exhibits />} />
           <Route path="contact" element={<Contact />} />
           <Route path="admin" element={<Admin />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="success" element={<Success />} />
+          <Route
+            path="checkout"
+            element={
+              <Checkout
+                cartList={cartList}
+                onUpdateCart={onUpdateCart}
+                handleRemove={handleRemove}
+              />
+            }
+          />
+          <Route
+            path="success"
+            element={<Success setCartList={setCartList} />}
+          />
           <Route path="cancel" element={<Cancelled />} />
         </Routes>
         {!hideLayout && <Footer />}
         {isCartMenuOpen && !hideLayout ? (
-          <CartMenu setIsCartMenuOpen={setIsCartMenuOpen} cartList={cartList} />
+          <CartMenu
+            setIsCartMenuOpen={setIsCartMenuOpen}
+            cartList={cartList}
+            onUpdateCart={onUpdateCart}
+            handleRemove={handleRemove}
+          />
         ) : (
           ""
         )}
@@ -125,18 +173,13 @@ function App() {
 export default App;
 
 // TODO:
-// 1. Add Delete Button to Cart Items
-// 2. Disable add button if the original is in the cart, only 1 exists at a time.
-// 3. Make CartMenu Responsive
-// 4. Make the Header responsive
-// 5. Add ArtItems to the Backend
-// 6. Connect CartMenu to the Backend
-// 7. At smaller Screens fix the grid of the gallery section
-// 8. Style and add Content to Success Page
-// 9. Style and add Content to Cancelled Page
-// 10. Style Checkout page
-// 11. Add Cart Items to Checkout page for more editability for user
-// 12. Add Unfulfilled orders to Admin
-// 13. Add Fulfilled Orders to Admin
-// 14. Add Add Button to Admin
+// 1. Remove tax calc from Checkout or add it to Stripe page
+// 2. Make CartMenu Responsive
+// 3. Make the Header responsive
+// 4. At smaller Screens fix the grid of the gallery section
+// 5. Style and add Content to Success Page
+// 6. Style and add Content to Cancelled Page
+// 7. Change total price when discount code is used
+// 8. Figure out how to create a unique discount code
+// 9. Clear CartList when navigating to success page (remove button from success page)
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary

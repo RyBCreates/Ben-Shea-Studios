@@ -35,12 +35,6 @@ function Footer() {
             Facebook
           </a>
         </li>
-        <li className="footer__social">
-          <a className="footer__link" href="" target="_blank">
-            <img className="footer__icon" src={venmo} alt="Venmo Icon"></img>
-            Link Tree
-          </a>
-        </li>
       </ul>
       <p className="footer__copyright">
         All art is owned by Ben Shea - Ben Shea Studios - Developed by: Ryan

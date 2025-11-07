@@ -33,7 +33,7 @@ export const updateArtItem = async (id, data) => {
 };
 
 export async function deleteArtItem(id) {
-  const res = await fetch(`${BASE_URL}/${id}`, {
+  const res = await fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
   });
   if (!res.ok) throw new Error("Failed to delete art item");

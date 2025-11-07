@@ -1,0 +1,23 @@
+.confirmation__button-container {
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.confirmation__delete-button,
+.confirmation__cancel-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.confirmation__delete-button:hover,
+.confirmation__cancel-button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.confirmation__delete-button {
+  background-color: rgb(255, 41, 41);
+}

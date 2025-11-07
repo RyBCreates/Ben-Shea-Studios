@@ -1,6 +1,6 @@
 import "./SideBar.css";
 
-function SideBar({ activeTab, onTabChange }) {
+function SideBar({ activeTab, onTabChange, handleLogOut }) {
   return (
     <aside className="sidebar" aria-label="Admin sections">
       <ul className="sidebar__list">
@@ -30,11 +30,20 @@ function SideBar({ activeTab, onTabChange }) {
           <button
             type="button"
             className={`sidebar__button ${
-              activeTab === "exhibitions" ? "sidebar__button_active" : ""
+              activeTab === "exhibits" ? "sidebar__button_active" : ""
             }`}
             onClick={() => onTabChange("exhibits")}
           >
             Exhibitions
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            className="sidebar__button sidebar__button_logout"
+            onClick={() => handleLogOut()}
+          >
+            Log Out
           </button>
         </li>
       </ul>

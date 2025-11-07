@@ -5,13 +5,24 @@ import rightArrow from "../../assets/icons/right-arrow.png";
 
 import "./ItemCard.css";
 
-function ItemCard({ artItem, onAddToCart, variant }) {
+function ItemCard({
+  cartList,
+  artItem,
+  onAddToCart,
+  variant,
+  handleDeleteArtClick,
+  handleEditArtClick,
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedVersion, setSelectedVersion] = useState("original");
+
+  if (!artItem || !artItem.images || artItem.images.length === 0) return null;
 
   const images = artItem.images;
 
   const handleClickAdd = () => {
+    if (artItem[selectedVersion]?.sold) return;
+
     const selectedItem = {
       _id: artItem._id,
       title: artItem.title,
@@ -35,24 +46,41 @@ function ItemCard({ artItem, onAddToCart, variant }) {
     );
   };
 
+  const isOriginalInCart = cartList?.some(
+    (cartItem) =>
+      cartItem._id === artItem._id && cartItem.version === "original"
+  );
+
+  const isDisabled =
+    artItem[selectedVersion]?.sold ||
+    (selectedVersion === "original" && isOriginalInCart);
+
+  const buttonLabel = (() => {
+    if (selectedVersion === "original" && artItem.original.sold)
+      return "SOLD OUT";
+    if (selectedVersion === "original" && isOriginalInCart)
+      return "Already in Cart";
+    return "Add to Cart";
+  })();
+
   return (
     <div className="card">
       <div className="card__content">
         <img
           className="card__image"
-          src={images[currentIndex]}
-          alt={artItem.title}
+          src={images[currentIndex] || ""}
+          alt={artItem.title || "artwork"}
         />
       </div>
 
       {images.length > 1 && (
         <div className="card__pages">
-          <button className="card__arrow" onClick={goPrev}>
-            <img
-              className="card__arrow-icon"
-              src={leftArrow}
-              alt="left arrow"
-            />
+          <button
+            className="card__arrow"
+            onClick={goPrev}
+            aria-label="Previous image"
+          >
+            <img className="card__arrow-icon" src={leftArrow} alt="previous" />
           </button>
 
           {images.map((_, index) => (
@@ -65,12 +93,12 @@ function ItemCard({ artItem, onAddToCart, variant }) {
             />
           ))}
 
-          <button className="card__arrow" onClick={goNext}>
-            <img
-              className="card__arrow-icon"
-              src={rightArrow}
-              alt="right arrow"
-            />
+          <button
+            className="card__arrow"
+            onClick={goNext}
+            aria-label="Next image"
+          >
+            <img className="card__arrow-icon" src={rightArrow} alt="next" />
           </button>
         </div>
       )}
@@ -104,7 +132,6 @@ function ItemCard({ artItem, onAddToCart, variant }) {
               </em>
             </label>
           </li>
-
           <li className="card__detail">
             <label className="card__detail-label">
               <div className="card__type-container">
@@ -130,16 +157,28 @@ function ItemCard({ artItem, onAddToCart, variant }) {
       </div>
       {variant === "default" ? (
         <button
-          className="card__add-button"
+          className={`card__add-button ${
+            isDisabled ? "card__add-button_disabled" : ""
+          }`}
           onClick={handleClickAdd}
-          disabled={artItem[selectedVersion]?.sold}
+          disabled={isDisabled}
         >
-          Add to Cart
+          {buttonLabel}
         </button>
       ) : (
         <div className="card__button-container">
-          <button className="card__edit-button">Edit</button>
-          <button className="card__delete-button">Delete</button>
+          <button
+            className="card__edit-button"
+            onClick={() => handleEditArtClick(artItem)}
+          >
+            Edit
+          </button>
+          <button
+            className="card__delete-button"
+            onClick={() => handleDeleteArtClick(artItem)}
+          >
+            Delete
+          </button>
         </div>
       )}
     </div>

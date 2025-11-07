@@ -1,10 +1,11 @@
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   box-sizing: border-box;
   width: 100%;
+  max-width: 669px;
   max-height: 100%;
   height: 550px;
   background-color: rgb(255, 255, 255);
@@ -126,10 +127,11 @@
 .card__type_size {
   margin: 0;
   font-size: 18px;
+  text-wrap: nowrap;
 }
 
 .card__type_price {
-  margin: 0 auto 0 5px;
+  margin: 0 auto 0 0;
 }
 
 .card__type_sold {
@@ -164,6 +166,15 @@
   color: black;
 }
 
+.card__add-button_disabled {
+  background-color: grey;
+}
+
+.card__add-button_disabled:hover {
+  background-color: rgb(70, 70, 70);
+  color: white;
+}
+
 .card__delete-button:hover {
   cursor: pointer;
   transform: scale(1.1);
@@ -174,11 +185,28 @@
 @media screen and (max-width: 750px) {
   .card {
     width: 100%;
-    height: 350px;
+    height: 600px;
   }
 
   .card__arrow-icon {
     width: 10px;
     height: 10px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .card__title {
+    font-size: 18px;
+    margin: 10px;
+  }
+
+  .card__type-container {
+    gap: 5px;
+  }
+
+  .card__type,
+  .card__type_price,
+  .card__type_size {
+    font-size: 12px;
   }
 }
