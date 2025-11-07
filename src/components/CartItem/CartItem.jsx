@@ -15,6 +15,7 @@ function CartItem({ cartItem, cartList, onUpdateCart, handleRemove }) {
         <p className="cart-item__price">${cartItem.price.toFixed(2)}</p>
         <div className="cart-item__controls">
           <button
+            disabled={cartItem.quantity === 1}
             onClick={() =>
               onUpdateCart(
                 cartList.map((item) =>

@@ -166,6 +166,15 @@
   color: black;
 }
 
+.card__add-button_disabled {
+  background-color: grey;
+}
+
+.card__add-button_disabled:hover {
+  background-color: rgb(70, 70, 70);
+  color: white;
+}
+
 .card__delete-button:hover {
   cursor: pointer;
   transform: scale(1.1);

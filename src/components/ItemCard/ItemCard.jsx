@@ -46,18 +46,15 @@ function ItemCard({
     );
   };
 
-  // 💡 Check if this original is already in the cart
   const isOriginalInCart = cartList?.some(
     (cartItem) =>
       cartItem._id === artItem._id && cartItem.version === "original"
   );
 
-  // 💡 Determine if current selection should be disabled
   const isDisabled =
     artItem[selectedVersion]?.sold ||
     (selectedVersion === "original" && isOriginalInCart);
 
-  // 💡 Determine button label dynamically
   const buttonLabel = (() => {
     if (selectedVersion === "original" && artItem.original.sold)
       return "SOLD OUT";
@@ -109,7 +106,6 @@ function ItemCard({
       <div className="card__info">
         <h2 className="card__title">{artItem.title}</h2>
         <ul className="card__details">
-          {/* Original */}
           <li className="card__detail">
             <label className="card__detail-label">
               <div className="card__type-container">
@@ -136,8 +132,6 @@ function ItemCard({
               </em>
             </label>
           </li>
-
-          {/* Print */}
           <li className="card__detail">
             <label className="card__detail-label">
               <div className="card__type-container">
@@ -161,12 +155,10 @@ function ItemCard({
           </li>
         </ul>
       </div>
-
-      {/* Buttons */}
       {variant === "default" ? (
         <button
           className={`card__add-button ${
-            isDisabled ? "card__add-button--disabled" : ""
+            isDisabled ? "card__add-button_disabled" : ""
           }`}
           onClick={handleClickAdd}
           disabled={isDisabled}
