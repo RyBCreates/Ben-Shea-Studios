@@ -1,6 +1,8 @@
 import "./CartItem.css";
 
 function CartItem({ cartItem, cartList, onUpdateCart, handleRemove }) {
+  const isOriginal = cartItem.version === "original";
+
   return (
     <li className="cart-item">
       <img
@@ -15,10 +17,10 @@ function CartItem({ cartItem, cartList, onUpdateCart, handleRemove }) {
           <button
             onClick={() =>
               onUpdateCart(
-                cartList.map((i) =>
-                  i._id === cartItem._id && i.quantity > 1
-                    ? { ...i, quantity: i.quantity - 1 }
-                    : i
+                cartList.map((item) =>
+                  item.cartKey === cartItem.cartKey && item.quantity > 1
+                    ? { ...item, quantity: item.quantity - 1 }
+                    : item
                 )
               )
             }
@@ -27,12 +29,17 @@ function CartItem({ cartItem, cartList, onUpdateCart, handleRemove }) {
           </button>
           <span className="cart-item__quantity">{cartItem.quantity}</span>
           <button
+            disabled={isOriginal}
+            className={`cart-item__add-button ${
+              isOriginal ? "cart-item__add-button--disabled" : ""
+            }`}
             onClick={() =>
+              !isOriginal &&
               onUpdateCart(
-                cartList.map((i) =>
-                  i._id === cartItem._id
-                    ? { ...i, quantity: i.quantity + 1 }
-                    : i
+                cartList.map((item) =>
+                  item.cartKey === cartItem.cartKey
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
                 )
               )
             }
@@ -41,7 +48,7 @@ function CartItem({ cartItem, cartList, onUpdateCart, handleRemove }) {
           </button>
           <button
             className="cart-item__remove-button"
-            onClick={() => handleRemove(cartItem._id)}
+            onClick={() => handleRemove(cartItem.cartKey)}
           >
             Remove
           </button>

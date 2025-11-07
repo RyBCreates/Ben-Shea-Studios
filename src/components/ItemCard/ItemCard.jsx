@@ -46,6 +46,26 @@ function ItemCard({
     );
   };
 
+  // 💡 Check if this original is already in the cart
+  const isOriginalInCart = cartList?.some(
+    (cartItem) =>
+      cartItem._id === artItem._id && cartItem.version === "original"
+  );
+
+  // 💡 Determine if current selection should be disabled
+  const isDisabled =
+    artItem[selectedVersion]?.sold ||
+    (selectedVersion === "original" && isOriginalInCart);
+
+  // 💡 Determine button label dynamically
+  const buttonLabel = (() => {
+    if (selectedVersion === "original" && artItem.original.sold)
+      return "SOLD OUT";
+    if (selectedVersion === "original" && isOriginalInCart)
+      return "Already in Cart";
+    return "Add to Cart";
+  })();
+
   return (
     <div className="card">
       <div className="card__content">
@@ -89,6 +109,7 @@ function ItemCard({
       <div className="card__info">
         <h2 className="card__title">{artItem.title}</h2>
         <ul className="card__details">
+          {/* Original */}
           <li className="card__detail">
             <label className="card__detail-label">
               <div className="card__type-container">
@@ -116,6 +137,7 @@ function ItemCard({
             </label>
           </li>
 
+          {/* Print */}
           <li className="card__detail">
             <label className="card__detail-label">
               <div className="card__type-container">
@@ -139,39 +161,29 @@ function ItemCard({
           </li>
         </ul>
       </div>
+
+      {/* Buttons */}
       {variant === "default" ? (
         <button
-          className="card__add-button"
+          className={`card__add-button ${
+            isDisabled ? "card__add-button--disabled" : ""
+          }`}
           onClick={handleClickAdd}
-          disabled={
-            artItem[selectedVersion]?.sold ||
-            (selectedVersion === "original" &&
-              cartList?.some(
-                (cartItem) =>
-                  cartItem._id === artItem._id &&
-                  cartItem.version === "original"
-              ))
-          }
+          disabled={isDisabled}
         >
-          {selectedVersion === "original" && artItem.original.sold
-            ? "SOLD OUT"
-            : "Add to Cart"}
+          {buttonLabel}
         </button>
       ) : (
         <div className="card__button-container">
           <button
             className="card__edit-button"
-            onClick={() => {
-              handleEditArtClick(artItem);
-            }}
+            onClick={() => handleEditArtClick(artItem)}
           >
             Edit
           </button>
           <button
             className="card__delete-button"
-            onClick={() => {
-              handleDeleteArtClick(artItem);
-            }}
+            onClick={() => handleDeleteArtClick(artItem)}
           >
             Delete
           </button>

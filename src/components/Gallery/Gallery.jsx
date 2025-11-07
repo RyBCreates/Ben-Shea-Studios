@@ -25,26 +25,16 @@ function Gallery({ onAddToCart, cartList }) {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    if (tab === "20x30") {
-      setFilteredArt(
-        artItems.filter((art) => art.original.dimensions === "20x30 in")
-      );
-    } else if (tab === "24x36") {
-      setFilteredArt(
-        artItems.filter((art) => art.original.dimensions === "24x36 in")
-      );
-    } else if (tab === "30x40") {
-      setFilteredArt(
-        artItems.filter((art) => art.original.dimensions === "30x40 in")
-      );
-    } else {
+    if (tab === "all") {
       setFilteredArt(artItems);
+    } else {
+      setFilteredArt(artItems.filter((art) => art.category === tab));
     }
   };
 
   return (
     <div className="gallery" id="gallery">
-      <ul className="gallery__tabs">
+      {/* <ul className="gallery__tabs">
         <li className="gallery__tab">
           <button
             className="gallery__tab-button"
@@ -125,6 +115,31 @@ function Gallery({ onAddToCart, cartList }) {
             Prints
           </button>
         </li>
+      </ul> */}
+      <ul className="gallery__tabs">
+        {[
+          "all",
+          "landscape",
+          "abstract",
+          "people",
+          "pets",
+          "sketch",
+          "photo",
+          "print",
+        ].map((tab) => (
+          <li className="gallery__tab" key={tab}>
+            <button
+              className={`gallery__tab-button ${
+                activeTab === tab ? "active" : ""
+              }`}
+              onClick={() => handleTabClick(tab)}
+            >
+              {tab === "all"
+                ? "All Art"
+                : tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          </li>
+        ))}
       </ul>
       <div className="gallery__content">
         <div className="gallery__content-container">

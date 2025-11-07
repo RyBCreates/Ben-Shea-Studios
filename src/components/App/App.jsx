@@ -96,22 +96,26 @@ function App() {
       );
 
       if (item.version === "original" && exists) return prev;
-      // If Item version = original call Mark Original as Sold Out from Backend
+
       if (exists) {
         return prev.map((cartItem) =>
-          cartItem._id === item._id
+          cartItem._id === item._id && cartItem.version === item.version
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         );
       } else {
-        return [...prev, { ...item, quantity: 1 }];
+        return [
+          ...prev,
+          { ...item, quantity: 1, cartKey: `${item._id}-${item.version}` },
+        ];
       }
     });
   };
 
-  const handleRemove = (id) => {
-    onUpdateCart(cartList.filter((item) => item._id !== id));
+  const handleRemove = (cartKey) => {
+    onUpdateCart(cartList.filter((item) => item.cartKey !== cartKey));
   };
+
   return (
     <div className="app">
       <div className="app__content">
@@ -169,15 +173,13 @@ function App() {
 export default App;
 
 // TODO:
-// 1. Disable add button if the original is in the cart, only 1 exists at a time.
+// 1. Remove tax calc from Checkout or add it to Stripe page
 // 2. Make CartMenu Responsive
 // 3. Make the Header responsive
-// 4. Connect CartMenu to the Backend
-// 5. At smaller Screens fix the grid of the gallery section
-// 6. Style and add Content to Success Page
-// 7. Style and add Content to Cancelled Page
-// 8. Change total price when discount code is used
-// 9. Figure out how to create a unique discount code
-// 10. Bug Fix: When removing multiple items from cart: deletes whole list on 2nd or 3rd click
-// 11. Clear CartList when navigating to success page (remove button from success page)
+// 4. At smaller Screens fix the grid of the gallery section
+// 5. Style and add Content to Success Page
+// 6. Style and add Content to Cancelled Page
+// 7. Change total price when discount code is used
+// 8. Figure out how to create a unique discount code
+// 9. Clear CartList when navigating to success page (remove button from success page)
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary
