@@ -79,17 +79,17 @@
 }
 
 .modal__label_radio {
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   margin-top: 15px;
+  gap: 12px;
 }
-
 .modal__input {
   box-sizing: border-box;
   border-radius: 5px;
   padding: 4px 10px;
-  width: 100%;
 }
 
 .modal__email-container {
@@ -103,6 +103,7 @@
 
 .modal__input_radio {
   width: 15px;
+  flex-shrink: 10;
 }
 
 .modal__buttons-container {
@@ -157,7 +158,15 @@
 }
 
 @media screen and (max-width: 600px) {
+  .modal__title {
+    font-size: 28px;
+  }
+
   .modal__buttons-container {
     flex-direction: column;
+  }
+
+  .modal__button {
+    font-size: 18px;
   }
 }
