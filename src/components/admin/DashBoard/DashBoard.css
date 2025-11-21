@@ -1,14 +1,14 @@
-.dashboard {
+.Dashboard {
   padding: 20px;
   background-color: rgb(213, 213, 213);
 }
 
-.dashboard__content {
+.Dashboard__content {
   display: grid;
   grid-template-columns: 12% 88%;
 }
 
-.dashboard__title {
+.Dashboard__title {
   width: 100%;
   color: black;
   font-size: 32px;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 1250px) {
-  .dashboard__content {
+  .Dashboard__content {
     display: flex;
     flex-direction: column;
   }

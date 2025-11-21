@@ -5,9 +5,9 @@ import Orders from "../Orders/Orders";
 import ArtEditor from "../ArtEditor/ArtEditor";
 import ExhibitEditor from "../ExhibitEditor/ExhibitEditor";
 
-import "./DashBoard.css";
+import "./Dashboard.css";
 
-function DashBoard({
+function Dashboard({
   handleAddArtItemClick,
   artItems,
   setArtItems,
@@ -28,9 +28,9 @@ function DashBoard({
   };
 
   return (
-    <section className="dashboard">
-      <h2 className="dashboard__title">Welcome to the Admin Dashboard</h2>
-      <div className="dashboard__content">
+    <section className="Dashboard">
+      <h2 className="Dashboard__title">Welcome to the Admin Dashboard</h2>
+      <div className="Dashboard__content">
         <SideBar
           activeTab={activeTab}
           onTabChange={onTabChange}
@@ -60,4 +60,4 @@ function DashBoard({
   );
 }
 
-export default DashBoard;
+export default Dashboard;
