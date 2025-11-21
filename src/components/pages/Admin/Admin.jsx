@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Dashboard from "../Dashboard/Dashboard";
+import AdminDash from "../AdminDash/AdminDash";
 import AdminLanding from "../AdminLanding/AdminLanding";
 
 import "./Admin.css";
@@ -19,7 +19,7 @@ function Admin() {
   return (
     <section className="admin">
       {isLoggedIn ? (
-        <Dashboard handleLogOut={handleLogOut} />
+        <AdminDash handleLogOut={handleLogOut} />
       ) : (
         <AdminLanding handleLogin={handleLogin} />
       )}
