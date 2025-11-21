@@ -6,7 +6,8 @@ import {
   updateArtItem,
 } from "../../../utils/api";
 
-import Dashboard from "../Dashboard/Dashboard";
+import AdminDash from "../AdminDash/AdminDash";
+
 import AdminLanding from "../AdminLanding/AdminLanding";
 import AddArtItemModal from "../../modals/AddArtItemModal/AddArtItemModal";
 
@@ -95,7 +96,7 @@ function Admin() {
     <section className="admin">
       {isLoggedIn ? (
         <>
-          <Dashboard
+          <AdminDash
             handleAddArtItemClick={handleAddArtItemClick}
             artItems={artItems}
             setArtItems={setArtItems}
