@@ -2,6 +2,15 @@
   margin: 0 20px;
 }
 
+.gallery__tab-select {
+  display: none;
+}
+
+.gallery__tabs {
+  display: flex;
+  gap: 12px;
+}
+
 .gallery__tabs {
   display: flex;
   justify-content: flex-start;
@@ -82,6 +91,20 @@
 @media screen and (max-width: 768px) {
   .gallery {
     margin: 5px;
+  }
+
+  .gallery__tabs {
+    display: none;
+  }
+
+  .gallery__tab-select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
   }
 
   .gallery__content {

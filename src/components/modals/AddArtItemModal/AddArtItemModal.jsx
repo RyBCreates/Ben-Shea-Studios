@@ -2,6 +2,16 @@ import { useState, useEffect } from "react";
 import "./AddArtItemModal.css";
 import "../Modals.css";
 
+const CATEGORY_OPTIONS = [
+  "landscape",
+  "abstract",
+  "people",
+  "pets",
+  "sketch",
+  "photo",
+  "print",
+];
+
 function AddArtItemModal({
   currentModal,
   closeModal,
@@ -16,6 +26,7 @@ function AddArtItemModal({
   const [originalDimensions, setOriginalDimensions] = useState("");
   const [printPrice, setPrintPrice] = useState("");
   const [printDimensions, setPrintDimensions] = useState("");
+  const [categories, setCategories] = useState([]);
 
   const handleAddImageField = () => {
     setImageUrls([...imageUrls, ""]);
@@ -27,6 +38,14 @@ function AddArtItemModal({
     setImageUrls(newImages);
   };
 
+  const handleCategoryToggle = (category) => {
+    setCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((categories) => categories !== category)
+        : [...prev, category]
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,6 +53,7 @@ function AddArtItemModal({
       title,
       description,
       images: imageUrls.filter((url) => url.trim() !== ""),
+      categories,
       original: {
         price: Number(originalPrice),
         sold: artItem?.original?.sold || false,
@@ -67,6 +87,7 @@ function AddArtItemModal({
     setOriginalDimensions("");
     setPrintPrice("");
     setPrintDimensions("");
+    setCategories([]);
   };
 
   useEffect(() => {
@@ -78,6 +99,7 @@ function AddArtItemModal({
       setOriginalDimensions(artItem.original?.dimensions || "");
       setPrintPrice(artItem.print?.price || "");
       setPrintDimensions(artItem.print?.dimensions || "");
+      setCategories(artItem.categories || []);
     } else if (currentModal === "add-art") {
       setTitle("");
       setDescription("");
@@ -154,7 +176,19 @@ function AddArtItemModal({
               + Add Another Image
             </button>
           </div>
-
+          <h3>Categories</h3>
+          <div className="categories-container">
+            {CATEGORY_OPTIONS.map((cat) => (
+              <label key={cat} className="category-checkbox">
+                <input
+                  type="checkbox"
+                  checked={categories.includes(cat)}
+                  onChange={() => handleCategoryToggle(cat)}
+                />
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </label>
+            ))}
+          </div>
           <h3>Original</h3>
           <label>
             Price:
