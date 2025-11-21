@@ -5,9 +5,9 @@ import Orders from "../Orders/Orders";
 import ArtEditor from "../ArtEditor/ArtEditor";
 import ExhibitEditor from "../ExhibitEditor/ExhibitEditor";
 
-import "./Dashboard.css";
+import "./AdminDash.css";
 
-function Dashboard({
+function AdminDash({
   handleAddArtItemClick,
   artItems,
   setArtItems,
@@ -60,4 +60,4 @@ function Dashboard({
   );
 }
 
-export default Dashboard;
+export default AdminDash;
