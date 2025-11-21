@@ -19,128 +19,72 @@ function Gallery({ onAddToCart, cartList }) {
 
   useEffect(() => {
     setFilteredArt(artItems);
+    console.log(artItems);
   }, [artItems]);
 
   if (loading) return <p>Loading artwork...</p>;
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+
     if (tab === "all") {
       setFilteredArt(artItems);
     } else {
-      setFilteredArt(artItems.filter((art) => art.category === tab));
+      setFilteredArt(artItems.filter((art) => art.categories?.includes(tab)));
     }
   };
 
   return (
     <div className="gallery" id="gallery">
-      {/* <ul className="gallery__tabs">
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("all");
-            }}
-          >
-            All Art
-          </button>
-        </li>
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("20x30");
-            }}
-          >
-            Landscapes
-          </button>
-        </li>
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("24x36");
-            }}
-          >
-            Abstracts
-          </button>
-        </li>
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("30x40");
-            }}
-          >
-            People
-          </button>
-        </li>
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("30x40");
-            }}
-          >
-            Pets
-          </button>
-        </li>
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("30x40");
-            }}
-          >
-            Sketches
-          </button>
-        </li>
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("30x40");
-            }}
-          >
-            Photography
-          </button>
-        </li>
-        <li className="gallery__tab">
-          <button
-            className="gallery__tab-button"
-            onClick={() => {
-              handleTabClick("30x40");
-            }}
-          >
-            Prints
-          </button>
-        </li>
-      </ul> */}
-      <ul className="gallery__tabs">
-        {[
-          "all",
-          "landscape",
-          "abstract",
-          "people",
-          "pets",
-          "sketch",
-          "photo",
-          "print",
-        ].map((tab) => (
-          <li className="gallery__tab" key={tab}>
-            <button
-              className={`gallery__tab-button ${
-                activeTab === tab ? "active" : ""
-              }`}
-              onClick={() => handleTabClick(tab)}
-            >
+      <div className="gallery__tab-controls">
+        <select
+          className="gallery__tab-select"
+          value={activeTab}
+          onChange={(e) => handleTabClick(e.target.value)}
+        >
+          {[
+            "all",
+            "landscape",
+            "abstract",
+            "people",
+            "pets",
+            "sketch",
+            "photo",
+            "print",
+          ].map((tab) => (
+            <option key={tab} value={tab}>
               {tab === "all"
                 ? "All Art"
                 : tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          </li>
-        ))}
-      </ul>
+            </option>
+          ))}
+        </select>
+        <ul className="gallery__tabs">
+          {[
+            "all",
+            "landscape",
+            "abstract",
+            "people",
+            "pets",
+            "sketch",
+            "photo",
+            "print",
+          ].map((tab) => (
+            <li className="gallery__tab" key={tab}>
+              <button
+                className={`gallery__tab-button ${
+                  activeTab === tab ? "active" : ""
+                }`}
+                onClick={() => handleTabClick(tab)}
+              >
+                {tab === "all"
+                  ? "All Art"
+                  : tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="gallery__content">
         <div className="gallery__content-container">
           {filteredArt.map((art) => (

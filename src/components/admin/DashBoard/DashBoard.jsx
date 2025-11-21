@@ -5,7 +5,7 @@ import Orders from "../Orders/Orders";
 import ArtEditor from "../ArtEditor/ArtEditor";
 import ExhibitEditor from "../ExhibitEditor/ExhibitEditor";
 
-import "./Dashboard.css";
+import "./DashBoard.css";
 
 function DashBoard({
   handleAddArtItemClick,

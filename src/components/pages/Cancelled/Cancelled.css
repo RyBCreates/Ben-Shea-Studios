@@ -1,0 +1,87 @@
+.cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 80vh;
+  background: #f8f8f8;
+}
+
+.cancel__card {
+  background: white;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.cancel__icon {
+  font-size: 64px;
+  color: #e63946;
+  margin-bottom: 10px;
+}
+
+.cancel__title {
+  font-size: 32px;
+  margin: 10px 0;
+  color: #222;
+}
+
+.cancel__message {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.cancel__subtext {
+  margin-top: 18px;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.cancel__buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cancel__button {
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.25s ease;
+}
+
+.cancel__button_retry {
+  background: #0062ff;
+}
+
+.cancel__button_retry:hover {
+  background: #01c4ff;
+}
+
+.cancel__button_home {
+  background: #555;
+}
+
+.cancel__button_home:hover {
+  background: #777;
+}
+
+@media screen and (max-width: 480px) {
+  .cancel__buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cancel__button {
+    width: 100%;
+  }
+}

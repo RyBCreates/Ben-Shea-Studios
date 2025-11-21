@@ -175,8 +175,6 @@ export default App;
 // TODO:
 // 1. Remove tax calc from Checkout or add it to Stripe page
 // 2. Make CartMenu Responsive
-// 3. Make the Header responsive
-// 4. At smaller Screens fix the grid of the gallery section
 // 5. Style and add Content to Success Page
 // 6. Style and add Content to Cancelled Page
 // 7. Change total price when discount code is used
