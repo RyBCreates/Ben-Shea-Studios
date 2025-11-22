@@ -1,6 +1,11 @@
 .landing {
   background: url("../../../assets/about-bg.png") no-repeat center/cover;
   padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .landing__content {

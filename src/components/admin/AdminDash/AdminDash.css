@@ -1,6 +1,7 @@
 .Dashboard {
   padding: 20px;
   background-color: rgb(213, 213, 213);
+  height: 100%;
 }
 
 .Dashboard__content {
