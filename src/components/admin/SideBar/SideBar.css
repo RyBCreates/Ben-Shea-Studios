@@ -50,3 +50,13 @@
     gap: 10px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .sidebar__list {
+    gap: 5px;
+  }
+
+  .sidebar__button {
+    font-size: 12px;
+  }
+}

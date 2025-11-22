@@ -209,4 +209,16 @@
   .card__type_size {
     font-size: 12px;
   }
+
+  .card__button-container {
+    gap: 10px;
+  }
+
+  .card__add-button,
+  .card__edit-button,
+  .card__delete-button {
+    font-size: 20px;
+    padding: 7px 20px;
+    margin-top: 10px;
+  }
 }
