@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { submitDiscountEmail } from "../../../utils/api/discount";
+
 import "./GetDiscountModal.css";
 import "../Modals.css";
 
@@ -9,7 +11,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
   const [email, setEmail] = useState("");
   const [isAccepted, setIsAccepted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newUser = {
@@ -17,6 +19,15 @@ function GetDiscountModal({ activeModal, closeModal }) {
       lastName: lastName,
       email: email,
     };
+
+    const response = await submitDiscountEmail(newUser);
+
+    if (response.message === "Email saved successfully") {
+      alert("Check your email for the discount code!");
+      closeModal();
+    } else {
+      alert(response.message || "Something went wrong.");
+    }
   };
 
   return (

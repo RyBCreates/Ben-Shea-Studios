@@ -176,7 +176,6 @@ export default App;
 // 1. Remove tax calc from Checkout or add it to Stripe page
 // 2. Make CartMenu Responsive
 // 5. Style and add Content to Success Page
-// 6. Style and add Content to Cancelled Page
 // 7. Change total price when discount code is used
 // 8. Figure out how to create a unique discount code
 // 9. Clear CartList when navigating to success page (remove button from success page)
