@@ -1,3 +1,75 @@
 .success {
-  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 80vh;
+  background: #f8f8f8;
+}
+
+.success__card {
+  background: white;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.success__icon {
+  font-size: 64px;
+  color: #28a745; /* green for success */
+  margin-bottom: 10px;
+}
+
+.success__title {
+  font-size: 32px;
+  margin: 10px 0;
+  color: #222;
+}
+
+.success__message {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.success__subtext {
+  margin-top: 18px;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.success__buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.success__button {
+  padding: 12px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+  list-style: none;
+}
+
+.success__button_finish {
+  background: #28a745;
+}
+
+.success__button_finish:hover {
+  background: #20b038;
+}
+
+.success__button_home {
+  background: #555;
 }

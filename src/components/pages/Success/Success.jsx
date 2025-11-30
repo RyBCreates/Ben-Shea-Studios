@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./Success.css";
 
 function Success({ setCartList }) {
@@ -8,12 +10,33 @@ function Success({ setCartList }) {
 
   return (
     <section className="success">
-      <h2 className="success__title">
-        Payment was Successful, Order will be shipped now!
-      </h2>
-      <button className="success__clear-button" onClick={handleClearList}>
-        Finish Transaction!
-      </button>
+      <div className="success__card">
+        <div className="success__icon">✔</div>
+        <h1 className="success__title">Payment Successful!</h1>
+        <p className="success__message">
+          Your transaction was completed successfully. Thank you for your
+          purchase!
+        </p>
+
+        <p className="success__subtext">
+          Your order will be processed and shipped soon.
+        </p>
+
+        <div className="success__buttons">
+          {/* <button
+            onClick={handleClearList}
+            className="success__button success__button_finish"
+          >
+            Finish Transaction
+          </button>
+          <a href="/" className="success__button success__button_finish">
+            Finish Transaction
+          </a> */}
+          <Link to="/" className="success__button success__button_finish">
+            <li>Finish Transaction</li>
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }
