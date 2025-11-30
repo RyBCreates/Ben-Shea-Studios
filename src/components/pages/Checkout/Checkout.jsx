@@ -26,10 +26,6 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
       await createOrder({
         customerInfo: formData,
         cartList,
-        totalAmount: cartList.reduce(
-          (sum, item) => sum + item.price * item.quantity,
-          0
-        ),
       });
       await createCheckoutLink(cartList);
     } catch (error) {
