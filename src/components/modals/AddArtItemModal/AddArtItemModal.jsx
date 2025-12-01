@@ -115,10 +115,10 @@ function AddArtItemModal({
   let buttonText = "";
 
   if (currentModal === "add-art") {
-    modalTitle = "Add a new art item";
+    modalTitle = "Add a New Art Item";
     buttonText = "Add Art Item";
   } else if (currentModal === "edit-art") {
-    modalTitle = "edit an art item";
+    modalTitle = "Edit an Art Item";
     buttonText = "Save Art Item";
   }
 
@@ -136,10 +136,11 @@ function AddArtItemModal({
         </button>
         <h2 className="modal__title">{modalTitle}</h2>
 
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <label>
+        <form className="add-art__form" onSubmit={handleSubmit}>
+          <label className="add-art__input-label">
             Title:
             <input
+              className="add-art__input"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -147,19 +148,21 @@ function AddArtItemModal({
             />
           </label>
 
-          <label>
+          <label className="add-art__input-label">
             Description:
             <textarea
+              className="add-art__textarea"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
             />
           </label>
 
-          <div className="image-inputs">
-            <label>Images:</label>
+          <div className="add-art__image-inputs">
+            <label className="add-art__input-label">Images:</label>
             {imageUrls.map((url, index) => (
               <input
+                className="add-art__input"
                 key={index}
                 type="text"
                 placeholder="Image URL"
@@ -176,11 +179,12 @@ function AddArtItemModal({
               + Add Another Image
             </button>
           </div>
-          <h3>Categories</h3>
-          <div className="categories-container">
+          <h3 className="add-art__section-title">Categories</h3>
+          <div className="add-art__categories-container">
             {CATEGORY_OPTIONS.map((cat) => (
-              <label key={cat} className="category-checkbox">
+              <label key={cat} className="add-art__checkbox-label">
                 <input
+                  className="add-art__checkbox"
                   type="checkbox"
                   checked={categories.includes(cat)}
                   onChange={() => handleCategoryToggle(cat)}
@@ -189,45 +193,59 @@ function AddArtItemModal({
               </label>
             ))}
           </div>
-          <h3>Original</h3>
-          <label>
-            Price:
-            <input
-              type="number"
-              value={originalPrice}
-              onChange={(e) => setOriginalPrice(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Dimensions:
-            <input
-              type="text"
-              value={originalDimensions}
-              onChange={(e) => setOriginalDimensions(e.target.value)}
-              required
-            />
-          </label>
+          <div className="add-art__types">
+            <div className="add-art__type_original">
+              <h4 className="add-art__subsection-title">Original</h4>
+              <div className="add-art__type-details">
+                <label className="add-art__input-label_price">
+                  Price:
+                  <input
+                    className="add-art__input"
+                    type="number"
+                    value={originalPrice}
+                    onChange={(e) => setOriginalPrice(e.target.value)}
+                    required
+                  />
+                </label>
+                <label className="add-art__input-label_dimensions">
+                  Dimensions:
+                  <input
+                    className="add-art__input"
+                    type="text"
+                    value={originalDimensions}
+                    onChange={(e) => setOriginalDimensions(e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
+            </div>
 
-          <h3>Print</h3>
-          <label>
-            Price:
-            <input
-              type="number"
-              value={printPrice}
-              onChange={(e) => setPrintPrice(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Dimensions:
-            <input
-              type="text"
-              value={printDimensions}
-              onChange={(e) => setPrintDimensions(e.target.value)}
-              required
-            />
-          </label>
+            <div className="add-art__type_print">
+              <h4 className="add-art__subsection-title">Print</h4>
+              <div className="add-art__type-details">
+                <label className="add-art__input-label_price">
+                  Price:
+                  <input
+                    className="add-art__input"
+                    type="number"
+                    value={printPrice}
+                    onChange={(e) => setPrintPrice(e.target.value)}
+                    required
+                  />
+                </label>
+                <label className="add-art__input-label_dimensions">
+                  Dimensions:
+                  <input
+                    className="add-art__input"
+                    type="text"
+                    value={printDimensions}
+                    onChange={(e) => setPrintDimensions(e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
           <button type="submit" className="modal__submit">
             {buttonText}
           </button>
