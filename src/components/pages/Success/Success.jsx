@@ -23,16 +23,11 @@ function Success({ setCartList }) {
         </p>
 
         <div className="success__buttons">
-          {/* <button
-            onClick={handleClearList}
+          <Link
+            to="/"
             className="success__button success__button_finish"
+            onClick={handleClearList}
           >
-            Finish Transaction
-          </button>
-          <a href="/" className="success__button success__button_finish">
-            Finish Transaction
-          </a> */}
-          <Link to="/" className="success__button success__button_finish">
             <li>Finish Transaction</li>
           </Link>
         </div>
