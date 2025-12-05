@@ -12,7 +12,6 @@ function OrderCard({ order, onStatusChange }) {
     const newStatus = e.target.value;
     setStatus(newStatus);
 
-    console.log(order);
     const updatedOrder = await handleStatusChange(newStatus, order._id);
     if (updatedOrder) onStatusChange(updatedOrder);
   };

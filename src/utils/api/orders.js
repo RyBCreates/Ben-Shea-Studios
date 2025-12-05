@@ -7,8 +7,6 @@ export const fetchOrders = async () => {
 };
 
 export const createOrder = async (orderData) => {
-  console.log("Sending order data:", orderData);
-
   const res = await fetch(`${BASE_URL}/orders`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -17,7 +15,6 @@ export const createOrder = async (orderData) => {
 
   if (!res.ok) throw new Error("Failed to create order");
   const data = await res.json();
-  console.log("Order created successfully:", data);
   return data;
 };
 

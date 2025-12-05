@@ -46,7 +46,6 @@ function App() {
 
   const onGetDiscountClick = () => {
     setActiveModal("discount");
-    console.log(activeModal);
   };
 
   const closeModal = () => {
@@ -173,10 +172,6 @@ function App() {
 export default App;
 
 // TODO:
-// 1. Remove tax calc from Checkout or add it to Stripe page
-// 2. Make CartMenu Responsive
-// 5. Style and add Content to Success Page
-// 7. Change total price when discount code is used
-// 8. Figure out how to create a unique discount code
-// 9. Clear CartList when navigating to success page (remove button from success page)
+// 1. Change total price when discount code is used
+// 2. Figure out how to create a unique discount code
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary

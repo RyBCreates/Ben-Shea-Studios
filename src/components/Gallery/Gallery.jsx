@@ -19,7 +19,6 @@ function Gallery({ onAddToCart, cartList }) {
 
   useEffect(() => {
     setFilteredArt(artItems);
-    console.log(artItems);
   }, [artItems]);
 
   if (loading) return <p>Loading artwork...</p>;
