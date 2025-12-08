@@ -14,3 +14,20 @@ export async function submitDiscountEmail(data) {
     return { message: "Network error" };
   }
 }
+
+export async function checkDiscountCode(code) {
+  try {
+    const res = await fetch(`${BASE_URL}/discount/validate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code }),
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.error("Discount code validation failed:", error);
+    return { error: "Network error" };
+  }
+}

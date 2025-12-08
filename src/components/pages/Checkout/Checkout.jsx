@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-import { createCheckoutLink, createOrder } from "../../../utils/api/index";
+import {
+  createCheckoutLink,
+  createOrder,
+  checkDiscountCode,
+} from "../../../utils/api/index";
 
 import CheckoutCart from "../../CheckoutCart/CheckoutCart";
 
@@ -15,6 +19,8 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
     discountCode: "",
     instructions: "",
   });
+  const [discountStatus, setDiscountStatus] = useState(null);
+  const [discountValue, setDiscountValue] = useState(0);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,9 +33,26 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
         customerInfo: formData,
         cartList,
       });
-      await createCheckoutLink(cartList);
+      await createCheckoutLink(cartList, discountValue);
     } catch (error) {
       console.error("Error submitting Checkout", error);
+    }
+  };
+
+  const handleApplyDiscount = async () => {
+    if (!formData.discountCode.trim()) {
+      setDiscountStatus("Please enter a code.");
+      return;
+    }
+
+    const result = await checkDiscountCode(formData.discountCode);
+
+    if (result.valid) {
+      setDiscountValue(result.discount);
+      setDiscountStatus(`Discount applied: ${result.discount}% off`);
+    } else {
+      setDiscountValue(0);
+      setDiscountStatus("Invalid or expired code.");
     }
   };
 
@@ -74,13 +97,27 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
             onChange={handleChange}
             required
           />
-          <input
-            type="text"
-            name="discountCode"
-            placeholder="Discount Code (Optional)"
-            value={formData.discountCode}
-            onChange={handleChange}
-          />
+          <div>
+            <input
+              type="text"
+              name="discountCode"
+              placeholder="Discount Code (Optional)"
+              value={formData.discountCode}
+              onChange={handleChange}
+            />
+            <button
+              className="checkout__apply-button"
+              type="button"
+              onClick={handleApplyDiscount}
+            >
+              Apply Discount
+            </button>
+          </div>
+
+          {discountStatus && (
+            <p className="discount-message">{discountStatus}</p>
+          )}
+
           <textarea
             className="checkout__input_textarea"
             name="instructions"

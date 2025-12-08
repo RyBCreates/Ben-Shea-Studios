@@ -5,6 +5,7 @@ export const mockExhibit = [
     image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
     description:
       "Our Downtown location features a modern collection of abstract and contemporary art.",
+    address: "123 Main St. Atlanta, GA 30312",
   },
   {
     _id: 2,
@@ -12,6 +13,7 @@ export const mockExhibit = [
     image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
     description:
       "The Uptown exhibit showcases colorful and vibrant artworks by local artists.",
+    address: "123 Main St. Atlanta, GA 30312",
   },
   {
     _id: 3,
@@ -19,5 +21,6 @@ export const mockExhibit = [
     image: "https://picsum.photos/600/400",
     description:
       "At our Midtown gallery, you'll find classical and traditional pieces, including portraits and landscapes.",
+    address: "123 Main St. Atlanta, GA 30312",
   },
 ];

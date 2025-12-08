@@ -7,8 +7,13 @@ function ExhibitCard({ exhibit, variant = "default" }) {
   return (
     <li className="exhibit-card" key={exhibit._id}>
       <div className="exhibit-card__info">
-        <h2 className="exhibit-card__title">{exhibit.location}</h2>
-        <p className="exhibit-card__subtitle">{exhibit.description}</p>
+        <div>
+          <h2 className="exhibit-card__title">{exhibit.location}</h2>
+          <p className="exhibit-card__subtitle">{exhibit.description}</p>
+        </div>
+        <div className="exhibit-card__address-container">
+          <p className="exhibit-card__address">{exhibit.address}</p>
+        </div>
       </div>
       <img className="exhibit-card__image" src={exhibit.image} alt="downtown" />
       {variant === "admin" ? (
