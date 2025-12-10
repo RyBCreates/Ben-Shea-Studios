@@ -179,3 +179,14 @@
   padding-top: 6px;
   border-top: 1px solid #ccc;
 }
+
+@media screen and (max-width: 450px) {
+  .order-card__title {
+    font-size: 14px;
+    margin: 6px 2px;
+  }
+
+  .order-card__selector {
+    padding: 3px 4px;
+  }
+}
