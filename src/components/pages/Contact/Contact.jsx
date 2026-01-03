@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "emailjs-com";
 
 import "./Contact.css";
@@ -19,6 +19,10 @@ function Contact() {
   // Figure out what to do with the Private Key
 
   const form = useRef();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -56,19 +60,35 @@ function Contact() {
             type="text"
             name="name"
             placeholder="Your Name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
           <input
             className="contact__input"
             type="email"
             name="email"
             placeholder="Your Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <textarea
             className="contact__input contact__input_textarea"
             name="message"
             placeholder="Your Message"
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
           />
-          <button className="contact__submit-button" type="submit">
+          <button
+            className="contact__submit-button"
+            type="submit"
+            disabled={!name.trim() || !email.trim() || !message.trim()}
+          >
             Send Message
           </button>
         </form>

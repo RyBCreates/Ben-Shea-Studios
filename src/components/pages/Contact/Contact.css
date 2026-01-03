@@ -59,9 +59,15 @@
   width: 80%;
   font-size: 24px;
   border-radius: 10px;
+  border: none;
   padding: 20px 30px;
   color: white;
   background: linear-gradient(to right, #ffcd1b 0%, #1378fb 100%);
+}
+
+.contact__submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .contact__submit-button:hover {

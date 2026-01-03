@@ -1,12 +1,13 @@
 .exhibit-card {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 0 10%;
   border: solid black 1px;
   border-radius: 15px;
   overflow: hidden;
+  width: 80vw;
 }
 
 .exhibit-card:nth-child(even) {
