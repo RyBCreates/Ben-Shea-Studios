@@ -24,6 +24,10 @@ function Admin() {
     setIsLoggedIn(true);
   };
 
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+  };
+
   const handleAddArtItemClick = () => {
     setCurrentModal("add-art");
   };
@@ -108,6 +112,7 @@ function Admin() {
             setCurrentModal={setCurrentModal}
             selectedArtItem={selectedArtItem}
             setSelectedArtItem={setSelectedArtItem}
+            handleLogOut={handleLogOut}
           />
           <AddArtItemModal
             onAddArt={onAddArt}
