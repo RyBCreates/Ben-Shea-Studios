@@ -38,7 +38,6 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
       console.error("Error submitting Checkout", error);
     }
   };
-
   const handleApplyDiscount = async () => {
     if (!formData.discountCode.trim()) {
       setDiscountStatus("Please enter a code.");
