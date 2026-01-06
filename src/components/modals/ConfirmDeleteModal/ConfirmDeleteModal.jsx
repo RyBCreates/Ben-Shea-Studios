@@ -33,7 +33,14 @@ function ConfirmDeleteModal({
           >
             Delete
           </button>
-          <button className="confirmation__cancel-button">Cancel</button>
+          <button
+            className="confirmation__cancel-button"
+            onClick={() => {
+              closeModal();
+            }}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
