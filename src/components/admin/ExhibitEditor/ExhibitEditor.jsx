@@ -21,7 +21,6 @@ function ExhibitEditor() {
   const [currentModal, setCurrentModal] = useState(null);
 
   useEffect(() => {
-    // Fetch exhibits and art items in parallel
     Promise.all([fetchExhibits(), fetchArtItems()])
       .then(([exhibitData, artData]) => {
         setExhibits(exhibitData);
@@ -60,26 +59,22 @@ function ExhibitEditor() {
       .catch((err) => console.error("Failed to delete exhibit:", err));
   };
 
-  const handleSaveExhibit = (data) => {
-    const apiCall = selectedExhibit
-      ? updateExhibit(selectedExhibit._id, data)
-      : createExhibit(data);
+  const handleSaveExhibit = async (data) => {
+    try {
+      if (selectedExhibit) {
+        await updateExhibit(selectedExhibit._id, data);
+      } else {
+        await createExhibit(data);
+      }
 
-    apiCall
-      .then((savedExhibit) => {
-        setExhibits((prev) => {
-          if (selectedExhibit) {
-            return prev.map((ex) =>
-              ex._id === savedExhibit._id ? savedExhibit : ex
-            );
-          } else {
-            return [savedExhibit, ...prev];
-          }
-        });
-        setSelectedExhibit(null);
-        setCurrentModal(null);
-      })
-      .catch((err) => console.error("Failed to save exhibit:", err));
+      const refreshedExhibits = await fetchExhibits();
+      setExhibits(refreshedExhibits);
+
+      setSelectedExhibit(null);
+      setCurrentModal(null);
+    } catch (err) {
+      console.error("Failed to save exhibit:", err);
+    }
   };
 
   if (loading) return <p>Loading exhibits...</p>;
@@ -101,7 +96,7 @@ function ExhibitEditor() {
             exhibit={exhibit}
             variant="admin"
             handleEditCardClick={handleEditExhibitClick}
-            handleDeleteCardClick={handleDeleteExhibitClick} // <-- this is the correct prop
+            handleDeleteCardClick={handleDeleteExhibitClick}
           />
         ))}
       </ul>

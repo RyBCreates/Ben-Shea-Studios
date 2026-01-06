@@ -5,6 +5,12 @@
   border-radius: 15px;
   overflow: hidden;
   width: 80vw;
+  transition: transform 0.4s ease;
+}
+
+.exhibit-card:hover {
+  cursor: pointer;
+  transform: scale(1.01);
 }
 
 .exhibit-card__main {
