@@ -6,11 +6,13 @@
   overflow: hidden;
   width: 80vw;
 }
+
 .exhibit-card__main {
   display: flex;
   align-items: stretch;
   min-height: 300px;
   position: relative;
+  background-color: white;
 }
 
 .exhibit-card__main {

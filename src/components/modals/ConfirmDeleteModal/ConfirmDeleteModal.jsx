@@ -1,11 +1,7 @@
 import "./ConfirmDeleteModal.css";
 import "../Modals.css";
 
-function ConfirmDeleteModal({
-  closeModal,
-  currentModal,
-  handleDeleteArtConfirm,
-}) {
+function ConfirmDeleteModal({ closeModal, currentModal, onConfirm }) {
   return (
     <div
       className={`modal ${
@@ -16,9 +12,7 @@ function ConfirmDeleteModal({
         <button
           className="modal__close-button"
           type="button"
-          onClick={() => {
-            closeModal();
-          }}
+          onClick={closeModal}
         >
           X
         </button>
@@ -27,18 +21,11 @@ function ConfirmDeleteModal({
           <button
             className="confirmation__delete-button"
             type="button"
-            onClick={() => {
-              handleDeleteArtConfirm();
-            }}
+            onClick={onConfirm} // <-- call generic confirm function
           >
             Delete
           </button>
-          <button
-            className="confirmation__cancel-button"
-            onClick={() => {
-              closeModal();
-            }}
-          >
+          <button className="confirmation__cancel-button" onClick={closeModal}>
             Cancel
           </button>
         </div>

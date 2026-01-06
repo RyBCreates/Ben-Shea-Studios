@@ -1,15 +1,17 @@
 import { useState } from "react";
 import "./ExhibitCard.css";
 
-function ExhibitCard({ exhibit, variant = "default" }) {
+function ExhibitCard({
+  exhibit,
+  variant = "default",
+  handleEditCardClick, // passed from parent
+  handleDeleteCardClick, // passed from parent
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCardClick = () => {
     setIsOpen((prev) => !prev);
   };
-
-  const handleDeleteCardClick = () => {};
-  const handleEditCardClick = () => {};
 
   return (
     <li
@@ -18,7 +20,6 @@ function ExhibitCard({ exhibit, variant = "default" }) {
       } ${isOpen ? "exhibit-card__open" : ""}`}
       onClick={handleCardClick}
     >
-      {/* TOP ROW (image + info) */}
       <div className="exhibit-card__main">
         {variant === "admin" && (
           <div className="exhibit-card__admin-controls">
@@ -26,7 +27,7 @@ function ExhibitCard({ exhibit, variant = "default" }) {
               className="exhibit-card__icon-btn"
               onClick={(e) => {
                 e.stopPropagation();
-                handleEditCardClick(exhibit);
+                handleEditCardClick(exhibit); // open AddExhibitModal in edit mode
               }}
             >
               ✏️
@@ -35,7 +36,7 @@ function ExhibitCard({ exhibit, variant = "default" }) {
               className="exhibit-card__icon-btn"
               onClick={(e) => {
                 e.stopPropagation();
-                handleDeleteCardClick(exhibit);
+                handleDeleteCardClick(exhibit); // open ConfirmDeleteModal
               }}
             >
               🗑
@@ -60,14 +61,13 @@ function ExhibitCard({ exhibit, variant = "default" }) {
         />
       </div>
 
-      {/* DROPDOWN */}
       <div className="exhibit-card__artwork">
         <div className="exhibit-card__artwork-track">
           {exhibit.artItems.map((art) => (
             <div
               key={art._id}
               className={`exhibit-card__artwork-item ${
-                art.original.sold ? "is-sold" : ""
+                art.original?.sold ? "is-sold" : ""
               }`}
               onClick={(e) => e.stopPropagation()}
             >
@@ -76,7 +76,7 @@ function ExhibitCard({ exhibit, variant = "default" }) {
                 alt={art.title}
                 className="exhibit-card__artwork-image"
               />
-              {art.original.sold && (
+              {art.original?.sold && (
                 <span className="exhibit-card__artwork-badge">
                   Original Sold
                 </span>
