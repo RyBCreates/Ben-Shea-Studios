@@ -2,7 +2,7 @@ import { useState } from "react";
 import { handleStatusChange } from "../../../utils/api/index";
 import "./OrderCard.css";
 
-function OrderCard({ order, onStatusChange }) {
+function OrderCard({ order, onStatusChange, handleDeleteOrderClick }) {
   const [isCardShown, setIsCardShown] = useState(false);
   const [status, setStatus] = useState(order.status);
 
@@ -105,10 +105,21 @@ function OrderCard({ order, onStatusChange }) {
           </div>
 
           <div className="order-card__dates">
-            <p>
-              <strong>Created:</strong>
-              {new Date(order.createdAt).toLocaleString()}
-            </p>
+            <div>
+              <p>
+                <strong>Created:</strong>
+                {new Date(order.createdAt).toLocaleString()}
+              </p>
+              <button
+                className="order-card__delete-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteOrderClick(order);
+                }}
+              >
+                Delete
+              </button>
+            </div>
             <p>
               <strong>Updated:</strong>
               {new Date(order.updatedAt).toLocaleString()}

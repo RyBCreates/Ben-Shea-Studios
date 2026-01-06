@@ -38,3 +38,15 @@ export const handleStatusChange = async (status, orderId) => {
     alert("Failed to update order status");
   }
 };
+
+export const deleteOrder = async (orderId) => {
+  const res = await fetch(`${BASE_URL}/orders/${orderId}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete order");
+  }
+
+  return res.json();
+};

@@ -11,15 +11,18 @@ function AdminDash({
   handleAddArtItemClick,
   artItems,
   setArtItems,
-  onDeleteArt,
+  orders,
+  setOrders,
+  exhibits,
+  setExhibits,
   closeModal,
   currentModal,
   setCurrentModal,
-  orders,
-  setOrders,
-  selectedArtItem,
   setSelectedArtItem,
   handleLogOut,
+  handleDeleteOrderClick,
+  handleDeleteArtClick,
+  handleDeleteExhibitClick,
 }) {
   const [activeTab, setActiveTab] = useState("orders");
 
@@ -37,21 +40,31 @@ function AdminDash({
           handleLogOut={handleLogOut}
         />
         {activeTab === "orders" ? (
-          <Orders orders={orders} setOrders={setOrders} />
+          <Orders
+            orders={orders}
+            setOrders={setOrders}
+            currentModal={currentModal}
+            setCurrentModal={setCurrentModal}
+            handleDeleteOrderClick={handleDeleteOrderClick}
+          />
         ) : activeTab === "gallery" ? (
           <ArtEditor
             handleAddArtItemClick={handleAddArtItemClick}
             artItems={artItems}
             setArtItems={setArtItems}
-            onDeleteArt={onDeleteArt}
             closeModal={closeModal}
-            currentModal={currentModal}
             setCurrentModal={setCurrentModal}
-            selectedArtItem={selectedArtItem}
             setSelectedArtItem={setSelectedArtItem}
+            handleDeleteArtClick={handleDeleteArtClick}
           />
         ) : activeTab === "exhibits" ? (
-          <ExhibitEditor />
+          <ExhibitEditor
+            handleDeleteExhibitClick={handleDeleteExhibitClick}
+            exhibits={exhibits}
+            setExhibits={setExhibits}
+            artItems={artItems}
+            setArtItems={setArtItems}
+          />
         ) : (
           <Orders />
         )}

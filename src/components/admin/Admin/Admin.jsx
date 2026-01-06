@@ -4,12 +4,15 @@ import {
   createArtItem,
   deleteArtItem,
   updateArtItem,
+  deleteOrder,
+  deleteExhibit,
 } from "../../../utils/api";
 
 import AdminDash from "../AdminDash/AdminDash";
 
 import AdminLanding from "../AdminLanding/AdminLanding";
 import AddArtItemModal from "../../modals/AddArtItemModal/AddArtItemModal";
+import ConfirmDeleteModal from "../../modals/ConfirmDeleteModal/ConfirmDeleteModal";
 
 import "./Admin.css";
 
@@ -18,7 +21,13 @@ function Admin() {
   const [currentModal, setCurrentModal] = useState("");
   const [artItems, setArtItems] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [exhibits, setExhibits] = useState([]);
+
+  const [deleteType, setDeleteType] = useState(null);
+
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [selectedArtItem, setSelectedArtItem] = useState(null);
+  const [selectedExhibit, setSelectedExhibit] = useState(null);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -96,6 +105,56 @@ function Admin() {
     }
   };
 
+  const handleDeleteOrderClick = (order) => {
+    setDeleteType("order");
+    setSelectedOrder(order);
+    setCurrentModal("confirmation");
+  };
+
+  const handleDeleteArtClick = (item) => {
+    setSelectedArtItem(item);
+    setDeleteType("art");
+    setCurrentModal("confirmation");
+  };
+
+  const handleDeleteExhibitClick = (exhibit) => {
+    setSelectedExhibit(exhibit);
+    setDeleteType("exhibit");
+    setCurrentModal("confirmation");
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      if (deleteType === "order" && selectedOrder) {
+        await deleteOrder(selectedOrder._id);
+        setOrders((prev) => prev.filter((o) => o._id !== selectedOrder._id));
+        setSelectedOrder(null);
+      }
+
+      if (deleteType === "art" && selectedArtItem) {
+        await deleteArtItem(selectedArtItem._id);
+        setArtItems((prev) =>
+          prev.filter((a) => a._id !== selectedArtItem._id)
+        );
+        setSelectedArtItem(null);
+      }
+
+      if (deleteType === "exhibit" && selectedExhibit) {
+        await deleteExhibit(selectedExhibit._id).then(() => {
+          setExhibits((prev) =>
+            prev.filter((ex) => ex._id !== selectedExhibit._id)
+          );
+          setSelectedExhibit(null);
+          setCurrentModal(null);
+        });
+      }
+      setDeleteType(null);
+      setCurrentModal("");
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
+
   return (
     <section className="admin">
       {isLoggedIn ? (
@@ -106,6 +165,8 @@ function Admin() {
             setArtItems={setArtItems}
             orders={orders}
             setOrders={setOrders}
+            exhibits={exhibits}
+            setExhibits={setExhibits}
             onDeleteArt={onDeleteArt}
             closeModal={closeModal}
             currentModal={currentModal}
@@ -113,6 +174,9 @@ function Admin() {
             selectedArtItem={selectedArtItem}
             setSelectedArtItem={setSelectedArtItem}
             handleLogOut={handleLogOut}
+            handleDeleteOrderClick={handleDeleteOrderClick}
+            handleDeleteArtClick={handleDeleteArtClick}
+            handleDeleteExhibitClick={handleDeleteExhibitClick}
           />
           <AddArtItemModal
             onAddArt={onAddArt}
@@ -120,6 +184,11 @@ function Admin() {
             currentModal={currentModal}
             closeModal={closeModal}
             artItem={selectedArtItem}
+          />
+          <ConfirmDeleteModal
+            currentModal={currentModal}
+            closeModal={closeModal}
+            onConfirm={handleDeleteConfirm}
           />
         </>
       ) : (

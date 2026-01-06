@@ -21,7 +21,7 @@ function ConfirmDeleteModal({ closeModal, currentModal, onConfirm }) {
           <button
             className="confirmation__delete-button"
             type="button"
-            onClick={onConfirm} // <-- call generic confirm function
+            onClick={onConfirm}
           >
             Delete
           </button>

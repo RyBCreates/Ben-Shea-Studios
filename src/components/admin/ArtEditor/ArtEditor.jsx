@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { fetchArtItems } from "../../../utils/api/index";
 
 import ItemCard from "../../ItemCard/ItemCard";
-import ConfirmDeleteModal from "../../modals/ConfirmDeleteModal/ConfirmDeleteModal";
 
 import "./ArtEditor.css";
 
@@ -10,12 +9,9 @@ function ArtEditor({
   handleAddArtItemClick,
   artItems,
   setArtItems,
-  onDeleteArt,
-  closeModal,
-  currentModal,
   setCurrentModal,
-  selectedArtItem,
   setSelectedArtItem,
+  handleDeleteArtClick,
 }) {
   const [loading, setLoading] = useState(true);
 
@@ -26,30 +22,9 @@ function ArtEditor({
       .finally(() => setLoading(false));
   }, []);
 
-  const handleDeleteArtClick = (item) => {
-    setSelectedArtItem(item);
-    setCurrentModal("confirmation");
-  };
-
   const handleEditArtClick = (item) => {
     setSelectedArtItem(item);
     setCurrentModal("edit-art");
-  };
-
-  const handleDeleteArtConfirm = () => {
-    if (!selectedArtItem) return;
-
-    onDeleteArt(selectedArtItem._id)
-      .then(() => {
-        setArtItems((prevItems) =>
-          prevItems.filter((artItem) => artItem._id !== selectedArtItem._id)
-        );
-        setSelectedArtItem(null);
-        closeModal();
-      })
-      .catch((error) => {
-        console.error("Failed to delete Item:", error);
-      });
   };
 
   if (loading) return <p>Loading artwork...</p>;
@@ -80,11 +55,6 @@ function ArtEditor({
             />
           ))}
       </div>
-      <ConfirmDeleteModal
-        closeModal={closeModal}
-        currentModal={currentModal}
-        handleDeleteArtConfirm={handleDeleteArtConfirm}
-      />
     </section>
   );
 }

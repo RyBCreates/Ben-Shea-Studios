@@ -5,7 +5,7 @@ import "./Orders.css";
 import { fetchOrders } from "../../../utils/api/index";
 import OrderCard from "../OrderCard/OrderCard";
 
-function Orders({ orders, setOrders }) {
+function Orders({ orders, setOrders, handleDeleteOrderClick }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,6 +49,7 @@ function Orders({ orders, setOrders }) {
                 key={order._id}
                 order={order}
                 onStatusChange={handleOrderStatusUpdate}
+                handleDeleteOrderClick={() => handleDeleteOrderClick(order)}
               />
             ))
           ) : (
@@ -65,6 +66,7 @@ function Orders({ orders, setOrders }) {
                 key={order._id}
                 order={order}
                 onStatusChange={handleOrderStatusUpdate}
+                handleDeleteOrderClick={() => handleDeleteOrderClick(order)}
               />
             ))
           ) : (
