@@ -5,7 +5,33 @@ function ExhibitCard({ exhibit, variant = "default" }) {
   const handleEditCardClick = () => {};
 
   return (
-    <li className="exhibit-card" key={exhibit._id}>
+    <li
+      className={`exhibit-card ${
+        variant === "admin" ? "exhibit-card--admin" : ""
+      }`}
+    >
+      {variant === "admin" && (
+        <div className="exhibit-card__admin-controls">
+          <button
+            className="exhibit-card__icon-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEditCardClick(exhibit);
+            }}
+          >
+            ✏️
+          </button>
+          <button
+            className="exhibit-card__icon-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDeleteCardClick(exhibit);
+            }}
+          >
+            🗑
+          </button>
+        </div>
+      )}
       <div className="exhibit-card__info">
         <div>
           <h2 className="exhibit-card__title">{exhibit.location}</h2>
@@ -15,29 +41,12 @@ function ExhibitCard({ exhibit, variant = "default" }) {
           <p className="exhibit-card__address">{exhibit.address}</p>
         </div>
       </div>
-      <img className="exhibit-card__image" src={exhibit.image} alt="downtown" />
-      {variant === "admin" ? (
-        <div className="exhibit-card__button-container">
-          <button
-            className="exhibit-card__edit-button"
-            onClick={() => {
-              handleEditCardClick(card);
-            }}
-          >
-            Edit
-          </button>
-          <button
-            className="exhibit-card__delete-button"
-            onClick={() => {
-              handleDeleteCardClick(card);
-            }}
-          >
-            Delete
-          </button>
-        </div>
-      ) : (
-        ""
-      )}
+
+      <img
+        className="exhibit-card__image"
+        src={exhibit.image}
+        alt={exhibit.location}
+      />
     </li>
   );
 }

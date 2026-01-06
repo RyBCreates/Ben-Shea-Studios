@@ -6,6 +6,11 @@ export const mockExhibit = [
     description:
       "Our Downtown location features a modern collection of abstract and contemporary art.",
     address: "123 Main St. Atlanta, GA 30312",
+    artworks: [
+      "https://picsum.photos/300/300?1",
+      "https://picsum.photos/300/300?2",
+      "https://picsum.photos/300/300?3",
+    ],
   },
   {
     _id: 2,
@@ -14,6 +19,11 @@ export const mockExhibit = [
     description:
       "The Uptown exhibit showcases colorful and vibrant artworks by local artists.",
     address: "123 Main St. Atlanta, GA 30312",
+    artworks: [
+      "https://picsum.photos/300/300?1",
+      "https://picsum.photos/300/300?2",
+      "https://picsum.photos/300/300?3",
+    ],
   },
   {
     _id: 3,
@@ -22,5 +32,10 @@ export const mockExhibit = [
     description:
       "At our Midtown gallery, you'll find classical and traditional pieces, including portraits and landscapes.",
     address: "123 Main St. Atlanta, GA 30312",
+    artworks: [
+      "https://picsum.photos/300/300?1",
+      "https://picsum.photos/300/300?2",
+      "https://picsum.photos/300/300?3",
+    ],
   },
 ];
