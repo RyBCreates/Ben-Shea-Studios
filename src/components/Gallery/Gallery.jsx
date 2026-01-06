@@ -1,27 +1,17 @@
 import { useState, useEffect } from "react";
-import { fetchArtItems } from "../../utils/api";
 import ItemCard from "../ItemCard/ItemCard";
 
 import "./Gallery.css";
 
-function Gallery({ onAddToCart, cartList }) {
+function Gallery({ onAddToCart, cartList, artItems, artItemsLoading }) {
   const [activeTab, setActiveTab] = useState("all");
-  const [artItems, setArtItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [filteredArt, setFilteredArt] = useState(artItems);
-
-  useEffect(() => {
-    fetchArtItems()
-      .then(setArtItems)
-      .catch((err) => console.error("Error fetching art items:", err))
-      .finally(() => setLoading(false));
-  }, []);
 
   useEffect(() => {
     setFilteredArt(artItems);
   }, [artItems]);
 
-  if (loading) return <p>Loading artwork...</p>;
+  if (artItemsLoading) return <p>Loading artwork...</p>;
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

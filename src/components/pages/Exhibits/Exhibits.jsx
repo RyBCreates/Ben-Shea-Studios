@@ -7,7 +7,7 @@ import ExhibitCard from "../../ExhibitCard/ExhibitCard";
 
 import "./Exhibits.css";
 
-function Exhibits() {
+function Exhibits({ artItems }) {
   const [upcomingShows, setUpcomingShows] = useState([]);
 
   return (
@@ -21,7 +21,12 @@ function Exhibits() {
       </div>
       <ul className="exhibits__list">
         {mockExhibit.map((exhibit) => (
-          <ExhibitCard exhibit={exhibit} key={exhibit._id} variant="default" />
+          <ExhibitCard
+            exhibit={exhibit}
+            key={exhibit._id}
+            variant="default"
+            artItems={artItems}
+          />
         ))}
       </ul>
       <h3 className="exhibits__section-title">Upcoming Shows</h3>

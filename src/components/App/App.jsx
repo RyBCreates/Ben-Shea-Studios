@@ -14,6 +14,9 @@ import Success from "../pages/Success/Success";
 import Cancelled from "../pages/Cancelled/Cancelled";
 
 import GetDiscountModal from "../modals/GetDiscountModal/GetDiscountModal";
+
+import { fetchArtItems } from "../../utils/api";
+
 import "./App.css";
 
 function App() {
@@ -23,6 +26,16 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
 
   const [isCartMenuOpen, setIsCartMenuOpen] = useState(false);
+
+  const [artItems, setArtItems] = useState([]);
+  const [artItemsLoading, setArtItemsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchArtItems()
+      .then(setArtItems)
+      .catch((err) => console.error("Error fetching art items:", err))
+      .finally(() => setArtItemsLoading(false));
+  }, []);
 
   // Load cart once
   useEffect(() => {
@@ -129,11 +142,13 @@ function App() {
                 onAddToCart={onAddToCart}
                 onGetDiscountClick={onGetDiscountClick}
                 cartList={cartList}
+                artItems={artItems}
+                artItemsLoading={artItemsLoading}
               />
             }
           />
           <Route path="about" element={<About />} />
-          <Route path="exhibits" element={<Exhibits />} />
+          <Route path="exhibits" element={<Exhibits artItems={artItems} />} />
           <Route path="contact" element={<Contact />} />
           <Route path="admin" element={<Admin />} />
           <Route
