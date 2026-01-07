@@ -4,19 +4,9 @@ import emailjs from "emailjs-com";
 import "./Contact.css";
 
 function Contact() {
-  // MY KEYS
-  const YOUR_SERVICE_ID = "service_axeg2pd";
-  const YOUR_TEMPLATE_ID = "template_kihidjl";
-  const YOUR_PUBLIC_KEY = "yFUuV-y41R3NpC0Nu";
-
-  // BEN'S KEYS
-  // const YOUR_SERVICE_ID = "service_axeg2pd";
-  // Do I need this?? ^^^
-  // const YOUR_TEMPLATE_ID = "template_kihidjl";
-  // Get his Template ID KEY ^^^
-  // const YOUR_PUBLIC_KEY = "oHL03YvyL0ocBTeH6";
-  // const YOUR_PRIVATE_KEY = "LVo2bpW1R1KhM_K6mrEtz";
-  // Figure out what to do with the Private Key
+  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   const form = useRef();
 
@@ -27,23 +17,16 @@ function Contact() {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        YOUR_SERVICE_ID,
-        YOUR_TEMPLATE_ID,
-        form.current,
-        YOUR_PUBLIC_KEY
-      )
-      .then(
-        (result) => {
-          console.log("Message sent:", result.text);
-          alert("Message sent!");
-        },
-        (error) => {
-          console.log("Error:", error.text);
-          alert("Failed to send message.");
-        }
-      );
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY).then(
+      (result) => {
+        console.log("Message sent:", result.text);
+        alert("Message sent!");
+      },
+      (error) => {
+        console.log("Error:", error.text);
+        alert("Failed to send message.");
+      }
+    );
   };
 
   return (
