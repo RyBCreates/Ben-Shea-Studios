@@ -11,8 +11,6 @@ function Gallery({ onAddToCart, cartList, artItems, artItemsLoading }) {
     setFilteredArt(artItems);
   }, [artItems]);
 
-  if (artItemsLoading) return <p>Loading artwork...</p>;
-
   const handleTabClick = (tab) => {
     setActiveTab(tab);
 
@@ -22,6 +20,13 @@ function Gallery({ onAddToCart, cartList, artItems, artItemsLoading }) {
       setFilteredArt(artItems.filter((art) => art.categories?.includes(tab)));
     }
   };
+
+  if (artItemsLoading)
+    return (
+      <p className="gallery__loading">
+        Loading artwork, this might take a minute!
+      </p>
+    );
 
   return (
     <div className="gallery" id="gallery">

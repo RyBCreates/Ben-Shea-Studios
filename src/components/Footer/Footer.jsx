@@ -1,6 +1,5 @@
 import facebook from "../../assets/icons/socials/facebook-dark.png";
 import instagram from "../../assets/icons/socials/instagram-dark.png";
-import venmo from "../../assets/icons/socials/venmo-dark.png";
 import "./Footer.css";
 
 function Footer() {
