@@ -115,11 +115,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .card__radio-button:hover {
   cursor: pointer;
+}
+
+.card__type_size {
+  font-style: italic;
+  text-align: right;
 }
 
 .card__type,

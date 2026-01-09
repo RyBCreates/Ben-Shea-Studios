@@ -15,53 +15,59 @@ function ItemCard({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedVersion, setSelectedVersion] = useState("original");
+  const [selectedPrintIndex, setSelectedPrintIndex] = useState(0);
 
   if (!artItem || !artItem.images || artItem.images.length === 0) return null;
 
   const images = artItem.images;
 
   const handleClickAdd = () => {
-    if (artItem[selectedVersion]?.sold) return;
-
-    const selectedItem = {
-      _id: artItem._id,
-      title: artItem.title,
-      version: selectedVersion,
-      price: artItem[selectedVersion]?.price,
-      dimensions: artItem[selectedVersion].dimensions,
-      image: images[0],
-    };
-    onAddToCart(selectedItem);
+    let itemToAdd;
+    if (selectedVersion === "original") {
+      if (artItem.original.sold) return;
+      itemToAdd = {
+        _id: artItem._id,
+        title: artItem.title,
+        version: "original",
+        price: artItem.original.price,
+        dimensions: artItem.original.dimensions,
+        image: images[0],
+      };
+    } else {
+      const printOption = artItem.prints[selectedPrintIndex];
+      itemToAdd = {
+        _id: artItem._id,
+        title: artItem.title,
+        version: "print",
+        price: printOption.price,
+        dimensions: printOption.size,
+        image: images[0],
+      };
+    }
+    onAddToCart(itemToAdd);
   };
 
-  const goPrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
+  const goPrev = () =>
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  const goNext = () =>
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
-  const goNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
+  // Disable Add button if original sold or already in cart
   const isOriginalInCart = cartList?.some(
-    (cartItem) =>
-      cartItem._id === artItem._id && cartItem.version === "original"
+    (item) => item._id === artItem._id && item.version === "original"
   );
-
   const isDisabled =
-    artItem[selectedVersion]?.sold ||
-    (selectedVersion === "original" && isOriginalInCart);
+    selectedVersion === "original" &&
+    (artItem.original.sold || isOriginalInCart);
 
-  const buttonLabel = (() => {
-    if (selectedVersion === "original" && artItem.original.sold)
-      return "SOLD OUT";
-    if (selectedVersion === "original" && isOriginalInCart)
-      return "Already in Cart";
-    return "Add to Cart";
-  })();
+  const buttonLabel =
+    selectedVersion === "original"
+      ? artItem.original.sold
+        ? "SOLD OUT"
+        : isOriginalInCart
+        ? "Already in Cart"
+        : "Add to Cart"
+      : "Add to Cart";
 
   return (
     <div className="card">
@@ -69,20 +75,15 @@ function ItemCard({
         <img
           className="card__image"
           src={images[currentIndex] || ""}
-          alt={artItem.title || "artwork"}
+          alt={artItem.title}
         />
       </div>
 
       {images.length > 1 && (
         <div className="card__pages">
-          <button
-            className="card__arrow"
-            onClick={goPrev}
-            aria-label="Previous image"
-          >
+          <button className="card__arrow" onClick={goPrev}>
             <img className="card__arrow-icon" src={leftArrow} alt="previous" />
           </button>
-
           {images.map((_, index) => (
             <button
               key={index}
@@ -92,12 +93,7 @@ function ItemCard({
               onClick={() => setCurrentIndex(index)}
             />
           ))}
-
-          <button
-            className="card__arrow"
-            onClick={goNext}
-            aria-label="Next image"
-          >
+          <button className="card__arrow" onClick={goNext}>
             <img className="card__arrow-icon" src={rightArrow} alt="next" />
           </button>
         </div>
@@ -110,15 +106,14 @@ function ItemCard({
             <label className="card__detail-label">
               <div className="card__type-container">
                 <input
-                  className="card__radio-button"
                   type="radio"
                   name={`version-${artItem._id}`}
                   value="original"
                   checked={selectedVersion === "original"}
-                  onChange={(e) => setSelectedVersion(e.target.value)}
+                  onChange={() => setSelectedVersion("original")}
                   disabled={artItem.original.sold}
                 />
-                <h3 className="card__type">Original -</h3>
+                <h3 className="card__type">Original - </h3>
                 {artItem.original.sold ? (
                   <p className="card__type card__type_sold">SOLD OUT</p>
                 ) : (
@@ -132,29 +127,38 @@ function ItemCard({
               </em>
             </label>
           </li>
-          <li className="card__detail">
-            <label className="card__detail-label">
-              <div className="card__type-container">
-                <input
-                  className="card__radio-button"
-                  type="radio"
-                  name={`version-${artItem._id}`}
-                  value="print"
-                  checked={selectedVersion === "print"}
-                  onChange={(e) => setSelectedVersion(e.target.value)}
-                />
-                <h3 className="card__type">Print -</h3>
-                <strong className="card__type card__type_price">
-                  ${artItem.print.price}.00
-                </strong>
-              </div>
-              <em className="card__type card__type_size">
-                Size {artItem.print.dimensions}
-              </em>
-            </label>
-          </li>
+
+          {artItem.prints.map((print, index) => (
+            <li key={index} className="card__detail">
+              <label className="card__detail-label">
+                <div className="card__type-container">
+                  <input
+                    type="radio"
+                    name={`version-${artItem._id}`}
+                    value="print"
+                    checked={
+                      selectedVersion === "print" &&
+                      selectedPrintIndex === index
+                    }
+                    onChange={() => {
+                      setSelectedVersion("print");
+                      setSelectedPrintIndex(index);
+                    }}
+                  />
+                  <h3 className="card__type">Print - </h3>
+                  <strong className="card__type card__type_price">
+                    ${print.price}.00
+                  </strong>
+                </div>
+                <em className="card__type card__type_size">
+                  Size {print.size}
+                </em>
+              </label>
+            </li>
+          ))}
         </ul>
       </div>
+
       {variant === "default" ? (
         <button
           className={`card__add-button ${
