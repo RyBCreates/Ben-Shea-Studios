@@ -8,20 +8,24 @@ import ExhibitEditor from "../ExhibitEditor/ExhibitEditor";
 import "./AdminDash.css";
 
 function AdminDash({
-  handleAddArtItemClick,
   artItems,
   setArtItems,
   orders,
   setOrders,
   exhibits,
   setExhibits,
+  selectedExhibit,
+  setSelectedExhibit,
   closeModal,
   currentModal,
   setCurrentModal,
   setSelectedArtItem,
   handleLogOut,
-  handleDeleteOrderClick,
+  handleAddArtItemClick,
   handleDeleteArtClick,
+  handleDeleteOrderClick,
+  handleAddExhibitClick,
+  handleEditExhibitClick,
   handleDeleteExhibitClick,
 }) {
   const [activeTab, setActiveTab] = useState("orders");
@@ -60,10 +64,16 @@ function AdminDash({
         ) : activeTab === "exhibits" ? (
           <ExhibitEditor
             handleDeleteExhibitClick={handleDeleteExhibitClick}
+            handleAddExhibitClick={handleAddExhibitClick}
+            handleEditExhibitClick={handleEditExhibitClick}
             exhibits={exhibits}
             setExhibits={setExhibits}
             artItems={artItems}
             setArtItems={setArtItems}
+            currentModal={currentModal}
+            closeModal={closeModal}
+            selectedExhibit={selectedExhibit}
+            setSelectedExhibit={setSelectedExhibit}
           />
         ) : (
           <Orders />

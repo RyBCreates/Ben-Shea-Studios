@@ -18,7 +18,9 @@ import "./Admin.css";
 
 function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [currentModal, setCurrentModal] = useState("");
+
   const [artItems, setArtItems] = useState([]);
   const [orders, setOrders] = useState([]);
   const [exhibits, setExhibits] = useState([]);
@@ -39,6 +41,16 @@ function Admin() {
 
   const handleAddArtItemClick = () => {
     setCurrentModal("add-art");
+  };
+
+  const handleAddExhibitClick = () => {
+    setSelectedExhibit(null);
+    setCurrentModal("add-exhibit");
+  };
+
+  const handleEditExhibitClick = (exhibit) => {
+    setSelectedExhibit(exhibit);
+    setCurrentModal("edit-exhibit");
   };
 
   const closeModal = () => {
@@ -89,19 +101,6 @@ function Admin() {
       );
     } catch (err) {
       console.error("Failed to Update art item", err);
-    }
-  };
-
-  // Delete an Art Item
-  const onDeleteArt = async (itemId) => {
-    try {
-      const deletedItem = await deleteArtItem(itemId);
-      const filteredList = artItems.filter((item) => {
-        return item._id !== deletedItem._id;
-      });
-      setArtItems(filteredList);
-    } catch (err) {
-      console.error("Failed to delete the selected item", err);
     }
   };
 
@@ -160,22 +159,25 @@ function Admin() {
       {isLoggedIn ? (
         <>
           <AdminDash
-            handleAddArtItemClick={handleAddArtItemClick}
             artItems={artItems}
             setArtItems={setArtItems}
             orders={orders}
             setOrders={setOrders}
             exhibits={exhibits}
             setExhibits={setExhibits}
-            onDeleteArt={onDeleteArt}
+            selectedExhibit={selectedExhibit}
+            setSelectedExhibit={setSelectedExhibit}
             closeModal={closeModal}
             currentModal={currentModal}
             setCurrentModal={setCurrentModal}
             selectedArtItem={selectedArtItem}
             setSelectedArtItem={setSelectedArtItem}
             handleLogOut={handleLogOut}
-            handleDeleteOrderClick={handleDeleteOrderClick}
+            handleAddArtItemClick={handleAddArtItemClick}
             handleDeleteArtClick={handleDeleteArtClick}
+            handleDeleteOrderClick={handleDeleteOrderClick}
+            handleAddExhibitClick={handleAddExhibitClick}
+            handleEditExhibitClick={handleEditExhibitClick}
             handleDeleteExhibitClick={handleDeleteExhibitClick}
           />
           <AddArtItemModal

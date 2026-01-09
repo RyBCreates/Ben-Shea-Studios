@@ -8,11 +8,9 @@ export const createCheckoutLink = async (cartList, discountValue = 0) => {
   });
 
   const data = await response.json();
-
   if (!data.url) {
     console.error("Stripe session URL missing:", data);
     return;
   }
-
   window.location.href = data.url;
 };

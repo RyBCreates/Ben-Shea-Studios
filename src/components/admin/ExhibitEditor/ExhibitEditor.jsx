@@ -13,14 +13,19 @@ import "./ExhibitEditor.css";
 
 function ExhibitEditor({
   handleDeleteExhibitClick,
+  handleAddExhibitClick,
+  handleEditExhibitClick,
   exhibits,
   setExhibits,
   artItems,
   setArtItems,
+  closeModal,
+  currentModal,
+  setCurrentModal,
+  selectedExhibit,
+  setSelectedExhibit,
 }) {
   const [loading, setLoading] = useState(true);
-  const [selectedExhibit, setSelectedExhibit] = useState(null);
-  const [currentModal, setCurrentModal] = useState(null);
 
   useEffect(() => {
     Promise.all([fetchExhibits(), fetchArtItems()])
@@ -31,16 +36,6 @@ function ExhibitEditor({
       .catch((err) => console.error("Error fetching data:", err))
       .finally(() => setLoading(false));
   }, []);
-
-  const handleAddExhibitClick = () => {
-    setSelectedExhibit(null);
-    setCurrentModal("add-exhibit");
-  };
-
-  const handleEditExhibitClick = (exhibit) => {
-    setSelectedExhibit(exhibit);
-    setCurrentModal("edit-exhibit");
-  };
 
   const handleSaveExhibit = async (data) => {
     try {
@@ -88,7 +83,7 @@ function ExhibitEditor({
           exhibit={selectedExhibit}
           artItems={artItems}
           onSaveExhibit={handleSaveExhibit}
-          closeModal={() => setCurrentModal(null)}
+          closeModal={closeModal}
           currentModal={currentModal}
         />
       )}
