@@ -1,12 +1,10 @@
 import { useState } from "react";
-
+import CheckoutCart from "../../CheckoutCart/CheckoutCart";
 import {
   createCheckoutLink,
   createOrder,
   checkDiscountCode,
 } from "../../../utils/api/index";
-
-import CheckoutCart from "../../CheckoutCart/CheckoutCart";
 
 import "./Checkout.css";
 
@@ -26,32 +24,57 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await createOrder({
-        customerInfo: formData,
-        cartList,
-      });
-      await createCheckoutLink(cartList, discountValue);
-    } catch (error) {
-      console.error("Error submitting Checkout", error);
-    }
-  };
   const handleApplyDiscount = async () => {
     if (!formData.discountCode.trim()) {
       setDiscountStatus("Please enter a code.");
+      setDiscountValue(0);
       return;
     }
 
-    const result = await checkDiscountCode(formData.discountCode);
+    try {
+      const result = await checkDiscountCode(formData.discountCode);
 
-    if (result.valid) {
-      setDiscountValue(result.discount);
-      setDiscountStatus(`Discount applied: ${result.discount}% off`);
-    } else {
+      if (result.valid) {
+        setDiscountValue(result.discount);
+        setDiscountStatus(`Discount applied: ${result.discount}% off`);
+      } else {
+        setDiscountValue(0);
+        setDiscountStatus("Invalid or expired code.");
+      }
+    } catch (err) {
+      console.error("Error validating discount code:", err);
       setDiscountValue(0);
-      setDiscountStatus("Invalid or expired code.");
+      setDiscountStatus("Error checking discount code.");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!cartList || cartList.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    try {
+      // Save order to backend
+      await createOrder({
+        customerInfo: formData,
+        cartList,
+        discountValue,
+      });
+
+      // Create Stripe checkout session
+      const { url } = await createCheckoutLink(cartList, discountValue);
+
+      if (url) {
+        window.location.href = url; // redirect to Stripe checkout
+      } else {
+        console.error("Stripe session URL missing");
+      }
+    } catch (err) {
+      console.error("Error submitting checkout:", err);
+      alert("Checkout failed. Please try again.");
     }
   };
 
@@ -96,7 +119,8 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
             onChange={handleChange}
             required
           />
-          <div>
+
+          <div className="checkout__discount-container">
             <input
               type="text"
               name="discountCode"
@@ -105,14 +129,13 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
               onChange={handleChange}
             />
             <button
-              className="checkout__apply-button"
               type="button"
+              className="checkout__apply-button"
               onClick={handleApplyDiscount}
             >
               Apply Discount
             </button>
           </div>
-
           {discountStatus && (
             <p className="discount-message">{discountStatus}</p>
           )}
@@ -129,8 +152,10 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
             Proceed to Payment
           </button>
         </form>
+
         <CheckoutCart
           cartList={cartList}
+          discountValue={discountValue} // pass discount
           onUpdateCart={onUpdateCart}
           handleRemove={handleRemove}
         />

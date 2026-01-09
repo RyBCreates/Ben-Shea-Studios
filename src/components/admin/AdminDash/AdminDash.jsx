@@ -35,9 +35,18 @@ function AdminDash({
   };
 
   return (
-    <section className="Dashboard">
-      <h2 className="Dashboard__title">Welcome to the Admin Dashboard</h2>
-      <div className="Dashboard__content">
+    <section className="dashboard">
+      <div className="dashboard__header">
+        <h2 className="dashboard__title">Welcome to the Admin Dashboard</h2>
+        <button
+          type="button"
+          className="dashboard__button dashboard__button_logout"
+          onClick={() => handleLogOut()}
+        >
+          Log Out
+        </button>
+      </div>
+      <div className="dashboard__content">
         <SideBar
           activeTab={activeTab}
           onTabChange={onTabChange}
