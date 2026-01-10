@@ -195,3 +195,5 @@ export default App;
 // TODO:
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary
 // Mark Order as paid when transaction succeeds with webhook
+// Fix CartItem's on Checkout page at smaller screens
+// Add Sizes/versions of items on to itemcard in Orders
