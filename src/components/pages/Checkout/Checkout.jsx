@@ -1,10 +1,12 @@
 import { useState } from "react";
-import CheckoutCart from "../../CheckoutCart/CheckoutCart";
+
 import {
   createCheckoutLink,
   createOrder,
   checkDiscountCode,
 } from "../../../utils/api/index";
+
+import CheckoutCart from "../../CheckoutCart/CheckoutCart";
 
 import "./Checkout.css";
 
@@ -33,7 +35,6 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
 
     try {
       const result = await checkDiscountCode(formData.discountCode);
-
       if (result.valid) {
         setDiscountValue(result.discount);
         setDiscountStatus(`Discount applied: ${result.discount}% off`);
@@ -57,21 +58,20 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
     }
 
     try {
-      // Save order to backend
       await createOrder({
         customerInfo: formData,
         cartList,
         discountValue,
       });
 
-      // Create Stripe checkout session
-      const { url } = await createCheckoutLink(cartList, discountValue);
+      const response = await createCheckoutLink(cartList, discountValue);
 
-      if (url) {
-        window.location.href = url; // redirect to Stripe checkout
-      } else {
-        console.error("Stripe session URL missing");
+      if (!response || !response.url) {
+        alert("Failed to start checkout. Please try again.");
+        return;
       }
+
+      window.location.href = response.url;
     } catch (err) {
       console.error("Error submitting checkout:", err);
       alert("Checkout failed. Please try again.");
@@ -112,7 +112,6 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
             required
           />
           <textarea
-            className="checkout__input_textarea"
             name="address"
             placeholder="Shipping Address"
             value={formData.address}
@@ -141,7 +140,6 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
           )}
 
           <textarea
-            className="checkout__input_textarea"
             name="instructions"
             placeholder="Special Instructions"
             value={formData.instructions}
@@ -155,7 +153,7 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
 
         <CheckoutCart
           cartList={cartList}
-          discountValue={discountValue} // pass discount
+          discountValue={discountValue}
           onUpdateCart={onUpdateCart}
           handleRemove={handleRemove}
         />

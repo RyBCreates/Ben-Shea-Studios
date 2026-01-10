@@ -1,12 +1,17 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./Success.css";
 
 function Success({ setCartList }) {
-  const handleClearList = () => {
+  useEffect(() => {
     setCartList([]);
     localStorage.removeItem("cart");
-  };
+  }, []);
+
+  // const handleClearList = () => {
+  // TODO: Navigate User to home page
+  // };
 
   return (
     <section className="success">
@@ -26,7 +31,7 @@ function Success({ setCartList }) {
           <Link
             to="/"
             className="success__button success__button_finish"
-            onClick={handleClearList}
+            // onClick={handleClearList}
           >
             <li>Finish Transaction</li>
           </Link>

@@ -7,19 +7,12 @@ function CheckoutCart({
   onUpdateCart,
   handleRemove,
 }) {
-  // Subtotal
   const subtotal = cartList.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-
-  // Discounted subtotal
   const discountedSubtotal = subtotal * (1 - discountValue / 100);
-
-  // Tax (7%)
   const tax = parseFloat((discountedSubtotal * 0.07).toFixed(2));
-
-  // Total
   const total = discountedSubtotal + tax;
 
   return (
@@ -43,7 +36,6 @@ function CheckoutCart({
       )}
 
       <div className="checkout-cart__totals">
-        {discountValue > 0 && <p>Discount: -{discountValue}%</p>}
         <p>Subtotal: ${discountedSubtotal.toFixed(2)}</p>
         <p>Tax (7%): ${tax.toFixed(2)}</p>
         <h4>Total: ${total.toFixed(2)}</h4>

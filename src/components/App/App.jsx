@@ -187,6 +187,5 @@ function App() {
 export default App;
 
 // TODO:
-// 1. Change total price when discount code is used
-// 2. Figure out how to create a unique discount code
 // For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary
+// Mark Order as paid when transaction succeeds with webhook
