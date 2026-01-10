@@ -6,6 +6,11 @@ import "./Header.css";
 function Header({ cartList, cartMenuToggle }) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
+  const cartItemCount = cartList.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   const navigate = useNavigate();
 
   const hamburgerToggle = () => {
@@ -48,7 +53,7 @@ function Header({ cartList, cartMenuToggle }) {
             cartMenuToggle();
           }}
         >
-          {cartList.length}
+          {cartItemCount}
           <img
             className="header__cart-icon"
             src={cartIcon}

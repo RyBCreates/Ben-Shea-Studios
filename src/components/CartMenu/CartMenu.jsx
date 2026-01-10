@@ -32,7 +32,7 @@ function CartMenu({ setIsCartMenuOpen, cartList, onUpdateCart, handleRemove }) {
             <ul className="cart-menu__items">
               {cartList.map((cartItem) => (
                 <CartItem
-                  key={cartItem._id}
+                  key={cartItem.cartKey}
                   cartItem={cartItem}
                   cartList={cartList}
                   onUpdateCart={onUpdateCart}

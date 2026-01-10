@@ -112,6 +112,7 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
             required
           />
           <textarea
+            className="checkout__input_textarea"
             name="address"
             placeholder="Shipping Address"
             value={formData.address}
@@ -136,10 +137,11 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
             </button>
           </div>
           {discountStatus && (
-            <p className="discount-message">{discountStatus}</p>
+            <p className="checkout__discount-message">{discountStatus}</p>
           )}
 
           <textarea
+            className="checkout__input_textarea"
             name="instructions"
             placeholder="Special Instructions"
             value={formData.instructions}

@@ -25,7 +25,7 @@ function CheckoutCart({
         <ul className="checkout-cart__list">
           {cartList.map((cartItem) => (
             <CartItem
-              key={cartItem._id}
+              key={cartItem.cartKey}
               cartItem={cartItem}
               cartList={cartList}
               onUpdateCart={onUpdateCart}

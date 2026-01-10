@@ -104,23 +104,29 @@ function App() {
     setCartList((prev) => {
       const exists = prev.find(
         (cartItem) =>
-          cartItem._id === item._id && cartItem.version === item.version
+          cartItem._id === item._id &&
+          cartItem.version === item.version &&
+          cartItem.variantId === item.variantId
       );
 
       if (item.version === "original" && exists) return prev;
 
       if (exists) {
         return prev.map((cartItem) =>
-          cartItem._id === item._id && cartItem.version === item.version
+          cartItem.cartKey === exists.cartKey
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         );
-      } else {
-        return [
-          ...prev,
-          { ...item, quantity: 1, cartKey: `${item._id}-${item.version}` },
-        ];
       }
+
+      return [
+        ...prev,
+        {
+          ...item,
+          quantity: 1,
+          cartKey: `${item._id}-${item.version}-${item.variantId}`,
+        },
+      ];
     });
   };
 
