@@ -61,7 +61,7 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
       const response = await createCheckoutLink(
         formData,
         cartList,
-        discountValue,
+        discountValue
       );
 
       if (!response || !response.url) {

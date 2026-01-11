@@ -82,7 +82,12 @@ function OrderCard({ order, onStatusChange, handleDeleteOrderClick }) {
                     className="order-card__cart-img"
                   />
                   <div className="order-card__cart-info">
+                    {console.log(item)}
                     <p className="order-card__cart-title">{item.title}</p>
+                    <p className="order-card__cart-version">
+                      {item.version === "original" ? "Original" : "Print"} -{" "}
+                      {item.dimensions}
+                    </p>
                     <p className="order-card__cart-qty">
                       Quantity: {item.quantity}
                     </p>
