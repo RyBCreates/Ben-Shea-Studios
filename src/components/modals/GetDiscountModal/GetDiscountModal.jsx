@@ -74,7 +74,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
     <div
       className={`modal ${activeModal === "discount" ? "modal__opened" : ""}`}
     >
-      <div className="modal__content">
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <button className="modal__close-button" onClick={closeModal}>
           X
         </button>
@@ -92,6 +92,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
               <input
                 className="modal__input"
                 value={firstName}
+                placeholder="First Name"
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </label>
@@ -101,6 +102,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
               <input
                 className="modal__input"
                 value={lastName}
+                placeholder="Last Name"
                 onChange={(e) => setLastName(e.target.value)}
               />
             </label>
@@ -112,6 +114,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
               className="modal__input"
               type="email"
               required
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

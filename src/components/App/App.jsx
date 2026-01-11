@@ -76,7 +76,7 @@ function App() {
     const handleClickOutside = (e) => {
       if (
         e.target.classList.contains("cart-menu") ||
-        e.target.classList.contains("modal")
+        e.target.classList.contains("modal__opened")
       ) {
         setIsCartMenuOpen(false);
         setActiveModal("");
@@ -185,7 +185,9 @@ function App() {
           ""
         )}
       </div>
-      <GetDiscountModal activeModal={activeModal} closeModal={closeModal} />
+      {activeModal === "discount" && (
+        <GetDiscountModal activeModal={activeModal} closeModal={closeModal} />
+      )}{" "}
     </div>
   );
 }

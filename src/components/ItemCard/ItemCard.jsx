@@ -14,7 +14,7 @@ function ItemCard({
   handleEditArtClick,
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedVersion, setSelectedVersion] = useState("original");
+  const [selectedVersion, setSelectedVersion] = useState("print");
   const [selectedPrintIndex, setSelectedPrintIndex] = useState(0);
 
   if (!artItem || !artItem.images || artItem.images.length === 0) return null;
@@ -104,32 +104,6 @@ function ItemCard({
       <div className="card__info">
         <h2 className="card__title">{artItem.title}</h2>
         <ul className="card__details">
-          <li className="card__detail">
-            <label className="card__detail-label">
-              <div className="card__type-container">
-                <input
-                  type="radio"
-                  name={`version-${artItem._id}`}
-                  value="original"
-                  checked={selectedVersion === "original"}
-                  onChange={() => setSelectedVersion("original")}
-                  disabled={artItem.original.sold}
-                />
-                <h3 className="card__type">Original - </h3>
-                {artItem.original.sold ? (
-                  <p className="card__type card__type_sold">SOLD OUT</p>
-                ) : (
-                  <strong className="card__type card__type_price">
-                    ${artItem.original.price}.00
-                  </strong>
-                )}
-              </div>
-              <em className="card__type card__type_size">
-                Size {artItem.original.dimensions}
-              </em>
-            </label>
-          </li>
-
           {artItem.prints.map((print, index) => (
             <li key={index} className="card__detail">
               <label className="card__detail-label">
@@ -158,6 +132,31 @@ function ItemCard({
               </label>
             </li>
           ))}
+          <li className="card__detail">
+            <label className="card__detail-label">
+              <div className="card__type-container">
+                <input
+                  type="radio"
+                  name={`version-${artItem._id}`}
+                  value="original"
+                  checked={selectedVersion === "original"}
+                  onChange={() => setSelectedVersion("original")}
+                  disabled={artItem.original.sold}
+                />
+                <h3 className="card__type">Original - </h3>
+                {artItem.original.sold ? (
+                  <p className="card__type card__type_sold">SOLD OUT</p>
+                ) : (
+                  <strong className="card__type card__type_price">
+                    ${artItem.original.price}.00
+                  </strong>
+                )}
+              </div>
+              <em className="card__type card__type_size">
+                Size {artItem.original.dimensions}
+              </em>
+            </label>
+          </li>
         </ul>
       </div>
 
