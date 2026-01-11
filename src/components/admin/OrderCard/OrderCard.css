@@ -60,7 +60,7 @@
 .order-card__title {
   font-size: 18px;
   font-weight: 600;
-  margin: 8px 4px;
+  margin: 0 4px;
   color: #222;
   white-space: nowrap;
   overflow: hidden;
@@ -173,11 +173,25 @@
 .order-card__dates {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
   font-size: 14px;
   color: #555;
-  padding-top: 6px;
+  padding-top: 16px;
   border-top: 1px solid #ccc;
+}
+
+.order-card__delete-btn {
+  font-size: 18px;
+  padding: 0;
+  border: none;
+  color: rgb(255, 78, 78);
+  background-color: transparent;
+}
+
+.order-card__delete-btn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 450px) {

@@ -58,13 +58,11 @@ function Checkout({ cartList, onUpdateCart, handleRemove }) {
     }
 
     try {
-      await createOrder({
-        customerInfo: formData,
+      const response = await createCheckoutLink(
+        formData,
         cartList,
         discountValue,
-      });
-
-      const response = await createCheckoutLink(cartList, discountValue);
+      );
 
       if (!response || !response.url) {
         alert("Failed to start checkout. Please try again.");

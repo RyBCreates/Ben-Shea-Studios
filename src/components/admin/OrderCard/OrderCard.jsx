@@ -105,21 +105,19 @@ function OrderCard({ order, onStatusChange, handleDeleteOrderClick }) {
           </div>
 
           <div className="order-card__dates">
-            <div>
-              <p>
-                <strong>Created:</strong>
-                {new Date(order.createdAt).toLocaleString()}
-              </p>
-              <button
-                className="order-card__delete-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteOrderClick(order);
-                }}
-              >
-                Delete
-              </button>
-            </div>
+            <p>
+              <strong>Created:</strong>
+              {new Date(order.createdAt).toLocaleString()}
+            </p>
+            <button
+              className="order-card__delete-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeleteOrderClick(order);
+              }}
+            >
+              Delete
+            </button>
             <p>
               <strong>Updated:</strong>
               {new Date(order.updatedAt).toLocaleString()}
