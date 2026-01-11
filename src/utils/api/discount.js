@@ -23,9 +23,7 @@ export async function checkDiscountCode(code) {
       body: JSON.stringify({ code }),
     });
 
-    const data = await res.json();
-
-    return data;
+    return await res.json();
   } catch (error) {
     console.error("Discount code validation failed:", error);
     return { error: "Network error" };

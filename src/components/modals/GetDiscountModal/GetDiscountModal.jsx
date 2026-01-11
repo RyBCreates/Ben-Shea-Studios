@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { submitDiscountEmail } from "../../../utils/api/discount";
 
 import "./GetDiscountModal.css";
@@ -10,23 +9,27 @@ function GetDiscountModal({ activeModal, closeModal }) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [isAccepted, setIsAccepted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isAccepted) return;
 
-    const newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-    };
+    setIsSubmitting(true);
 
+    const newUser = { firstName, lastName, email };
     const response = await submitDiscountEmail(newUser);
 
-    if (response.message === "Email saved successfully") {
-      alert("Check your email for the discount code!");
+    setIsSubmitting(false);
+
+    alert(response.message || "Something went wrong.");
+
+    if (response.message?.includes("sent")) {
       closeModal();
-    } else {
-      alert(response.message || "Something went wrong.");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setIsAccepted(false);
     }
   };
 
@@ -35,12 +38,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
       className={`modal ${activeModal === "discount" ? "modal__opened" : ""}`}
     >
       <div className="modal__content">
-        <button
-          className="modal__close-button"
-          onClick={() => {
-            closeModal();
-          }}
-        >
+        <button className="modal__close-button" onClick={closeModal}>
           X
         </button>
         <h2 className="modal__title">Sign Up, Receive 25% Off!</h2>
@@ -49,12 +47,8 @@ function GetDiscountModal({ activeModal, closeModal }) {
           updated with new artwork, exclusive offers, and major updates — you
           won’t want to miss out.
         </p>
-        <form
-          className="modal__form"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
+
+        <form className="modal__form" onSubmit={handleSubmit}>
           <div className="modal__name-container">
             <label className="modal__label">
               First Name
@@ -63,12 +57,10 @@ function GetDiscountModal({ activeModal, closeModal }) {
                 type="text"
                 placeholder="First Name"
                 value={firstName}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                }}
-                required
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </label>
+
             <label className="modal__label">
               Last Name
               <input
@@ -76,13 +68,11 @@ function GetDiscountModal({ activeModal, closeModal }) {
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                }}
-                required
+                onChange={(e) => setLastName(e.target.value)}
               />
             </label>
           </div>
+
           <div className="modal__email-container">
             <label className="modal__label">
               Email
@@ -91,42 +81,36 @@ function GetDiscountModal({ activeModal, closeModal }) {
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </label>
           </div>
+
           <label className="modal__label modal__label_radio">
             <input
               className="modal__input modal__input_radio"
-              type="radio"
-              name="terms"
-              onChange={() => {
-                setIsAccepted(true);
-              }}
+              type="checkbox"
+              checked={isAccepted}
+              onChange={() => setIsAccepted(!isAccepted)}
               required
             />
-            Do you agree to receive automated emails to the provided email
-            address?
+            I agree to receive automated emails to the provided email address.
           </label>
+
           <div className="modal__buttons-container">
             <button
-              className={`modal__button ${
-                isAccepted ? "modal__button_submit" : "modal__button_disabled"
-              }`}
+              className={`modal__button modal__button_submit`}
               type="submit"
-              disabled={isAccepted === false}
+              disabled={!isAccepted || isSubmitting}
             >
-              Send me my code!
+              {isSubmitting ? "Sending..." : "Send me my code!"}
             </button>
+
             <button
               className="modal__button modal__button_cancel"
               type="button"
-              onClick={() => {
-                closeModal();
-              }}
+              onClick={closeModal}
             >
               Nevermind
             </button>
