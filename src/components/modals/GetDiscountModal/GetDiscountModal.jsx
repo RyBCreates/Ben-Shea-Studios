@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { submitDiscountEmail } from "../../../utils/api/discount";
 
@@ -11,26 +12,62 @@ function GetDiscountModal({ activeModal, closeModal }) {
   const [isAccepted, setIsAccepted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const resetForm = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setIsAccepted(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isAccepted) return;
+    if (!isAccepted || isSubmitting) return;
 
     setIsSubmitting(true);
 
-    const newUser = { firstName, lastName, email };
-    const response = await submitDiscountEmail(newUser);
+    try {
+      const response = await submitDiscountEmail({
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+      });
 
-    setIsSubmitting(false);
+      if (!response.discountCode) {
+        alert(response.error || response.message || "Something went wrong.");
+        return;
+      }
 
-    alert(response.message || "Something went wrong.");
+      try {
+        await sendDiscountEmail(response);
+        alert("Check your email for your discount code!");
+      } catch (emailErr) {
+        console.error("EmailJS failed:", emailErr);
+        alert(
+          "Your discount was created, but the email could not be sent. Please contact support."
+        );
+      }
 
-    if (response.message?.includes("sent")) {
       closeModal();
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setIsAccepted(false);
+      resetForm();
+    } catch (err) {
+      console.error(err);
+      alert("Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  const sendDiscountEmail = async ({ email, firstName, discountCode }) => {
+    return emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_DISCOUNT_TEMPLATE_ID,
+      {
+        email: email,
+        firstName: firstName || "there",
+        discountCode: discountCode,
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    );
   };
 
   return (
@@ -41,11 +78,11 @@ function GetDiscountModal({ activeModal, closeModal }) {
         <button className="modal__close-button" onClick={closeModal}>
           X
         </button>
+
         <h2 className="modal__title">Sign Up, Receive 25% Off!</h2>
+
         <p className="modal__description">
-          Sign up for our mailing list to receive 25% off your first order! Stay
-          updated with new artwork, exclusive offers, and major updates — you
-          won’t want to miss out.
+          Sign up for our mailing list to receive 25% off your first order!
         </p>
 
         <form className="modal__form" onSubmit={handleSubmit}>
@@ -53,9 +90,7 @@ function GetDiscountModal({ activeModal, closeModal }) {
             <label className="modal__label">
               First Name
               <input
-                className="modal__input modal__input_text"
-                type="text"
-                placeholder="First Name"
+                className="modal__input"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
@@ -64,52 +99,45 @@ function GetDiscountModal({ activeModal, closeModal }) {
             <label className="modal__label">
               Last Name
               <input
-                className="modal__input modal__input_text"
-                type="text"
-                placeholder="Last Name"
+                className="modal__input"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
             </label>
           </div>
 
-          <div className="modal__email-container">
-            <label className="modal__label">
-              Email
-              <input
-                className="modal__input modal__input_email"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </label>
-          </div>
+          <label className="modal__label">
+            Email
+            <input
+              className="modal__input"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
 
           <label className="modal__label modal__label_radio">
             <input
-              className="modal__input modal__input_radio"
               type="checkbox"
               checked={isAccepted}
               onChange={() => setIsAccepted(!isAccepted)}
               required
             />
-            I agree to receive automated emails to the provided email address.
+            I agree to receive automated emails.
           </label>
 
           <div className="modal__buttons-container">
             <button
-              className={`modal__button modal__button_submit`}
-              type="submit"
+              className="modal__button modal__button_submit"
               disabled={!isAccepted || isSubmitting}
             >
               {isSubmitting ? "Sending..." : "Send me my code!"}
             </button>
 
             <button
-              className="modal__button modal__button_cancel"
               type="button"
+              className="modal__button modal__button_cancel"
               onClick={closeModal}
             >
               Nevermind
