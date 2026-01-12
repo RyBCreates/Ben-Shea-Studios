@@ -84,7 +84,7 @@ function Admin() {
   const onAddArt = async (data) => {
     try {
       const newArtItem = await createArtItem(data);
-      setArtItems((prevItems) => [...prevItems, newArtItem]);
+      setArtItems((prevItems) => [newArtItem, ...prevItems]);
     } catch (err) {
       console.error("Failed to Create art item", err);
     }

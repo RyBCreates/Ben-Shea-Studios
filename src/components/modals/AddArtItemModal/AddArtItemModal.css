@@ -135,3 +135,21 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .art-form__checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .art-form__row {
+    flex-direction: column;
+  }
+
+  .art-form__url-input {
+    flex-direction: column;
+  }
+
+  .art-form__submit {
+    font-size: 16px;
+  }
+}

@@ -187,7 +187,7 @@ function App() {
       </div>
       {activeModal === "discount" && (
         <GetDiscountModal activeModal={activeModal} closeModal={closeModal} />
-      )}{" "}
+      )}
     </div>
   );
 }
@@ -195,5 +195,4 @@ function App() {
 export default App;
 
 // TODO:
-// For CDN use Cloudinary API so that Ben can use a form and it sends it to cloudinary
 // Add feature to get all emails
