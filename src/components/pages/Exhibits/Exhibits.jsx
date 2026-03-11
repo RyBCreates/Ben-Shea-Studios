@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchExhibits } from "../../../utils/api/index"; // your backend API call
+import { fetchExhibits } from "../../../utils/api/index";
 import ExhibitCard from "../../ExhibitCard/ExhibitCard";
 import "./Exhibits.css";
 
@@ -39,7 +39,7 @@ function Exhibits({ artItems }) {
               exhibit={exhibit}
               key={exhibit._id}
               variant="default"
-              artItems={artItems} // if needed
+              artItems={artItems}
             />
           ))}
         </ul>
